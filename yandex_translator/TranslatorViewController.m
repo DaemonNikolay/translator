@@ -6,13 +6,13 @@
 //  Copyright © 2019 Nikolay Eckert. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "TranslatorViewController.h"
 
-@interface FirstViewController ()
+@interface TranslatorViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation TranslatorViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

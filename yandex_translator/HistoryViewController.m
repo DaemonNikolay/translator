@@ -6,13 +6,13 @@
 //  Copyright © 2019 Nikolay Eckert. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "HistoryViewController.h"
 
-@interface SecondViewController ()
+@interface HistoryViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation HistoryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

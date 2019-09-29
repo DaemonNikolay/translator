@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		73C2B6D6233FBCB000058FC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6D5233FBCB000058FC2 /* AppDelegate.m */; };
 		73C2B6D9233FBCB000058FC2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6D8233FBCB000058FC2 /* SceneDelegate.m */; };
-		73C2B6DC233FBCB000058FC2 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6DB233FBCB000058FC2 /* FirstViewController.m */; };
-		73C2B6DF233FBCB000058FC2 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6DE233FBCB000058FC2 /* SecondViewController.m */; };
+		73C2B6DC233FBCB000058FC2 /* TranslatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6DB233FBCB000058FC2 /* TranslatorViewController.m */; };
+		73C2B6DF233FBCB000058FC2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6DE233FBCB000058FC2 /* HistoryViewController.m */; };
 		73C2B6E2233FBCB000058FC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C2B6E0233FBCB000058FC2 /* Main.storyboard */; };
 		73C2B6E4233FBCB100058FC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73C2B6E3233FBCB100058FC2 /* Assets.xcassets */; };
 		73C2B6E7233FBCB100058FC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C2B6E5233FBCB100058FC2 /* LaunchScreen.storyboard */; };
@@ -23,10 +23,10 @@
 		73C2B6D5233FBCB000058FC2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		73C2B6D7233FBCB000058FC2 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		73C2B6D8233FBCB000058FC2 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		73C2B6DA233FBCB000058FC2 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		73C2B6DB233FBCB000058FC2 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		73C2B6DD233FBCB000058FC2 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		73C2B6DE233FBCB000058FC2 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		73C2B6DA233FBCB000058FC2 /* TranslatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TranslatorViewController.h; sourceTree = "<group>"; };
+		73C2B6DB233FBCB000058FC2 /* TranslatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TranslatorViewController.m; sourceTree = "<group>"; };
+		73C2B6DD233FBCB000058FC2 /* HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		73C2B6DE233FBCB000058FC2 /* HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		73C2B6E1233FBCB000058FC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73C2B6E3233FBCB100058FC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73C2B6E6233FBCB100058FC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,10 +68,10 @@
 				73C2B6D5233FBCB000058FC2 /* AppDelegate.m */,
 				73C2B6D7233FBCB000058FC2 /* SceneDelegate.h */,
 				73C2B6D8233FBCB000058FC2 /* SceneDelegate.m */,
-				73C2B6DA233FBCB000058FC2 /* FirstViewController.h */,
-				73C2B6DB233FBCB000058FC2 /* FirstViewController.m */,
-				73C2B6DD233FBCB000058FC2 /* SecondViewController.h */,
-				73C2B6DE233FBCB000058FC2 /* SecondViewController.m */,
+				73C2B6DA233FBCB000058FC2 /* TranslatorViewController.h */,
+				73C2B6DB233FBCB000058FC2 /* TranslatorViewController.m */,
+				73C2B6DD233FBCB000058FC2 /* HistoryViewController.h */,
+				73C2B6DE233FBCB000058FC2 /* HistoryViewController.m */,
 				73C2B6E0233FBCB000058FC2 /* Main.storyboard */,
 				73C2B6E3233FBCB100058FC2 /* Assets.xcassets */,
 				73C2B6E5233FBCB100058FC2 /* LaunchScreen.storyboard */,
@@ -152,9 +152,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				73C2B6EA233FBCB100058FC2 /* main.m in Sources */,
-				73C2B6DF233FBCB000058FC2 /* SecondViewController.m in Sources */,
+				73C2B6DF233FBCB000058FC2 /* HistoryViewController.m in Sources */,
 				73C2B6D6233FBCB000058FC2 /* AppDelegate.m in Sources */,
-				73C2B6DC233FBCB000058FC2 /* FirstViewController.m in Sources */,
+				73C2B6DC233FBCB000058FC2 /* TranslatorViewController.m in Sources */,
 				73C2B6D9233FBCB000058FC2 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,7 +305,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "nikulux.yandex-translator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -323,7 +323,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "nikulux.yandex-translator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
