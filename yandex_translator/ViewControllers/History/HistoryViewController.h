@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  SecondViewController.h
 //  yandex_translator
 //
 //  Created by Nikolay Eckert on 28/09/2019.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TranslatorViewController : UIViewController
+@interface HistoryViewController : UIViewController <NSCoding>
+
 
 
 @end

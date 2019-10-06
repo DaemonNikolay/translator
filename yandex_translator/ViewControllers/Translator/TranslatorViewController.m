@@ -1,5 +1,5 @@
 //
-//  FirstViewController.m
+//  TranslatorViewController.m
 //  yandex_translator
 //
 //  Created by Nikolay Eckert on 28/09/2019.
@@ -7,6 +7,8 @@
 //
 
 #import "TranslatorViewController.h"
+#import "TranslatedContent.h"
+#import "Api.h"
 
 @interface TranslatorViewController ()
 
@@ -16,7 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [Api getListSupportedLanguages:@"ru"];
+    [Api translateText:@"привет" language:@"en"];
 }
 
 
