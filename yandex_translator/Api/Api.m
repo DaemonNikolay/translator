@@ -26,12 +26,9 @@ NSString *key = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a
     [url appendFormat:@"&text=%@", text];
     [url appendFormat:@"&lang=%@", lang];
     
-    NSLog(@"fdghfdsgr %@", url);
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:url]];
-
     
     NSURLResponse __block *resp;
     NSError __block *err = NULL;
@@ -73,8 +70,6 @@ NSString *key = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a
     BOOL __block reqProcessed = false;
     NSURLResponse __block *resp;
     
-    NSLog(@"rewr w %@", [request URL]);
-    
     [[[NSURLSession sharedSession] dataTaskWithRequest:request
                                      completionHandler:^(NSData * _Nullable _data,
                                                          NSURLResponse * _Nullable _response,
@@ -92,13 +87,9 @@ NSString *key = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a
     *response = resp;
     *error = err;
     
-    NSLog(@"%d", data == nil);
-    
     NSDictionary *json = [NSJSONSerialization
                           JSONObjectWithData:data
                           options:kNilOptions error:error];
-    
-    
     
     return json;
 }

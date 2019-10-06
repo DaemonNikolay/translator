@@ -18,8 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [Api getListSupportedLanguages:@"ru"];
-    [Api translateText:@"привет" language:@"en"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Api getListSupportedLanguages:@"ru"];
+        [Api translateText:@"привет" language:@"en"];
+    });
 }
 
 
