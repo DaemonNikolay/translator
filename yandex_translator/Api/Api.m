@@ -67,8 +67,7 @@ NSString *key = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a
 
 + (NSDictionary *)sendSynchronousRequest:(NSURLRequest *)request
                        returningResponse:(NSURLResponse **)response
-                                   error:(NSError **)error
-{
+                                   error:(NSError **)error {
     NSError __block *err = NULL;
     NSData __block *data;
     BOOL __block reqProcessed = false;

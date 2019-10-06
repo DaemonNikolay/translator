@@ -23,8 +23,6 @@
 		731473AC2340950B0025B1C1 /* TranslatedContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TranslatedContent.m; sourceTree = "<group>"; };
 		731473AE234096560025B1C1 /* TranslatedContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TranslatedContent.h; sourceTree = "<group>"; };
 		73642C332349B1B5004E98F1 /* Api.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Api.m; sourceTree = "<group>"; };
-		73642C4B2349D2D3004E98F1 /* TranslateText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TranslateText.h; sourceTree = "<group>"; };
-		73642C4C2349D2DE004E98F1 /* SupportLanguages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupportLanguages.h; sourceTree = "<group>"; };
 		73B49F342349B10C00704AA4 /* Api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
 		73C2B6D1233FBCB000058FC2 /* yandex_translator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yandex_translator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C2B6D4233FBCB000058FC2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,23 +87,6 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
-		73642C352349C9E2004E98F1 /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-				73642C362349C9E9004E98F1 /* Translate */,
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		73642C362349C9E9004E98F1 /* Translate */ = {
-			isa = PBXGroup;
-			children = (
-				73642C4B2349D2D3004E98F1 /* TranslateText.h */,
-				73642C4C2349D2DE004E98F1 /* SupportLanguages.h */,
-			);
-			path = Translate;
-			sourceTree = "<group>";
-		};
 		73B49F312349B0E900704AA4 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,7 +133,6 @@
 		73C2B6D3233FBCB000058FC2 /* yandex_translator */ = {
 			isa = PBXGroup;
 			children = (
-				73642C352349C9E2004E98F1 /* Interfaces */,
 				73B49F332349B10000704AA4 /* Api */,
 				731473B22340981C0025B1C1 /* Delegates */,
 				731473AF234097F70025B1C1 /* ViewControllers */,

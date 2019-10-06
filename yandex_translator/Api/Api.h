@@ -6,9 +6,6 @@
 //  Copyright © 2019 Nikolay Eckert. All rights reserved.
 //
 
-#import "SupportLanguages.h"
-#import "TranslateText.h"
-
 
 @interface Api : NSObject {
     NSString *key;

@@ -7,7 +7,6 @@
 //
 
 #import "TranslatorViewController.h"
-#import "TranslatedContent.h"
 #import "Api.h"
 
 @interface TranslatorViewController ()
