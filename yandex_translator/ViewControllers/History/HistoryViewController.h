@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HistoryViewController : UIViewController <NSCoding>
+@interface HistoryViewController : UIViewController <NSCoding, UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+- (IBAction)button_click:(id)sender;
 
 
 @end

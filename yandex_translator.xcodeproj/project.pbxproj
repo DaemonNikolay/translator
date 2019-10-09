@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		731473AD2340950B0025B1C1 /* TranslatedContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 731473AC2340950B0025B1C1 /* TranslatedContent.m */; };
 		73642C342349B1B5004E98F1 /* Api.m in Sources */ = {isa = PBXBuildFile; fileRef = 73642C332349B1B5004E98F1 /* Api.m */; };
+		73AB0F74234D61D800D4B4CE /* ChoiceLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AB0F73234D61D800D4B4CE /* ChoiceLanguageViewController.m */; };
 		73C2B6D6233FBCB000058FC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6D5233FBCB000058FC2 /* AppDelegate.m */; };
 		73C2B6D9233FBCB000058FC2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6D8233FBCB000058FC2 /* SceneDelegate.m */; };
 		73C2B6DC233FBCB000058FC2 /* TranslatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6DB233FBCB000058FC2 /* TranslatorViewController.m */; };
@@ -23,6 +24,8 @@
 		731473AC2340950B0025B1C1 /* TranslatedContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TranslatedContent.m; sourceTree = "<group>"; };
 		731473AE234096560025B1C1 /* TranslatedContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TranslatedContent.h; sourceTree = "<group>"; };
 		73642C332349B1B5004E98F1 /* Api.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Api.m; sourceTree = "<group>"; };
+		73AB0F72234D619600D4B4CE /* ChoiceLanguageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChoiceLanguageViewController.h; sourceTree = "<group>"; };
+		73AB0F73234D61D800D4B4CE /* ChoiceLanguageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChoiceLanguageViewController.m; sourceTree = "<group>"; };
 		73B49F342349B10C00704AA4 /* Api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
 		73C2B6D1233FBCB000058FC2 /* yandex_translator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yandex_translator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C2B6D4233FBCB000058FC2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		731473AF234097F70025B1C1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				73AB0F71234D617F00D4B4CE /* ChoiceLanguage */,
 				731473B12340980A0025B1C1 /* Translator */,
 				731473B0234098010025B1C1 /* History */,
 			);
@@ -85,6 +89,15 @@
 				73B49F312349B0E900704AA4 /* App */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		73AB0F71234D617F00D4B4CE /* ChoiceLanguage */ = {
+			isa = PBXGroup;
+			children = (
+				73AB0F72234D619600D4B4CE /* ChoiceLanguageViewController.h */,
+				73AB0F73234D61D800D4B4CE /* ChoiceLanguageViewController.m */,
+			);
+			path = ChoiceLanguage;
 			sourceTree = "<group>";
 		};
 		73B49F312349B0E900704AA4 /* App */ = {
@@ -219,6 +232,7 @@
 			files = (
 				731473AD2340950B0025B1C1 /* TranslatedContent.m in Sources */,
 				73C2B6EA233FBCB100058FC2 /* main.m in Sources */,
+				73AB0F74234D61D800D4B4CE /* ChoiceLanguageViewController.m in Sources */,
 				73642C342349B1B5004E98F1 /* Api.m in Sources */,
 				73C2B6DF233FBCB000058FC2 /* HistoryViewController.m in Sources */,
 				73C2B6D6233FBCB000058FC2 /* AppDelegate.m in Sources */,

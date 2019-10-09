@@ -40,7 +40,6 @@ NSString *key = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a
     return json;
 }
 
-
 + (NSDictionary *)getListSupportedLanguages:(NSString *)ui {
     NSMutableString *url = [NSMutableString string];
     [url appendString:baseUrl];

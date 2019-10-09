@@ -9,6 +9,14 @@
 #import "HistoryViewController.h"
 #import "TranslatedContent.h"
 
+@interface HistoryViewController() {
+    NSArray *names;
+    
+    NSInteger selectNumberElementOfPicker;
+}
+
+@end
+
 
 @implementation HistoryViewController
 
@@ -30,11 +38,36 @@
     [encoder encodeObject:content forKey:@"title"];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+
+    names = @[@"gfd", @"1234", @"uiytuyrt"];
+
+    self.pickerView.dataSource = self;
+    self.pickerView.delegate = self;
+}
+
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return names.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return names[row];
+}
+
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    selectNumberElementOfPicker = row;
+}
+
+- (IBAction)button_click:(id)sender {
+    NSLog(@"%@", names[selectNumberElementOfPicker]);
+    self.pickerView.hidden = true;
 }
 
 
