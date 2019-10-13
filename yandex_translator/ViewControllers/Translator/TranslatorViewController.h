@@ -13,13 +13,15 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textViewSourceContent;
 @property (weak, nonatomic) IBOutlet UITextView *textViewTranslateContent;
-
-@property(weak, nonatomic) NSString *testText;
-@property (weak, nonatomic) IBOutlet UIButton *buttonTest;
+@property (weak, nonatomic) IBOutlet UILabel *labelOfButtonTranslateFrom;
+@property (weak, nonatomic) IBOutlet UILabel *labelOfButtonTranslateTo;
 
 - (IBAction)buttonTranslationFrom_click:(id)sender;
 - (IBAction)buttonTranslationTo_click:(id)sender;
 - (IBAction)buttonTranslate_click:(id)sender;
+
+FOUNDATION_EXPORT NSString *const LangTranslationFrom;
+FOUNDATION_EXPORT NSString *const LangTranslationTo;
 
 @end
 
