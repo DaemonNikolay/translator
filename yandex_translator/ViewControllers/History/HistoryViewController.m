@@ -18,15 +18,28 @@
 
 @implementation HistoryViewController
 
+// MARK: -
+// MARK: Life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    sections = [@[] mutableCopy];
-    contents = [@[] mutableCopy];
+    [self initInfoOfTranslation];
     
     self.tableViewHistory.dataSource = self;
     self.tableViewHistory.delegate = self;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self initInfoOfTranslation];
+    
+    [self updateContentForTable];
+    [self.tableViewHistory reloadData];
+}
+
+
+// MARK: -
+// MARK: UITableView
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -53,15 +66,8 @@
     return sections.count;
 }
 
-- (NSArray *)extractionHistoryTranslates {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSArray *translates = [defaults objectForKey:@"history"];
-    
-    NSLog(@"%@", translates);
-    
-    return translates;
-}
+// MARK: -
+// MARK: Services
 
 - (void)updateContentForTable {
     NSArray *translates = [self extractionHistoryTranslates];
@@ -75,10 +81,16 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self updateContentForTable];
-    [self.tableViewHistory reloadData];
+- (NSArray *)extractionHistoryTranslates {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *translates = [defaults objectForKey:@"history"];
+    
+    return translates;
 }
 
+- (void)initInfoOfTranslation {
+    sections = [@[] mutableCopy];
+    contents = [@[] mutableCopy];
+}
 
 @end

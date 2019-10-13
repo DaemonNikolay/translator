@@ -11,7 +11,7 @@
 
 
 @interface TranslatorViewController () {
-    NSDictionary *names;
+    NSDictionary *languages;
     NSInteger selectNumberElementOfPicker;
 }
 
@@ -38,27 +38,8 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initButtonContentOfLabels];
-    [self extractionDirectionsOfTranslate];
-}
-
-// MARK: -
-// MARK: Coder
-
-- (id)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    if (!self) {
-        return nil;
-    }
-    
-    NSLog(@"%@", [coder decodeObjectForKey:@"title"]);
-    
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder {
-    NSString *content = @"this is title";
-    [encoder encodeObject:content forKey:@"title"];
+    [self initButtonTitleOfLabels];
+    [self extractionDirectionsOfTranslateAsync];
 }
 
 // MARK: -
@@ -69,11 +50,11 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return names.count;
+    return languages.count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [names allValues][row];
+    return [languages allValues][row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
@@ -113,7 +94,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action) {
-        NSString *languageName = [self->names allValues][self->selectNumberElementOfPicker];
+        NSString *languageName = [self->languages allValues][self->selectNumberElementOfPicker];
         
         [self saveLanguage:languageName langKey:LangTranslationFrom];
         
@@ -130,7 +111,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action) {
         
-        NSString *languageName = [self->names allValues][self->selectNumberElementOfPicker];
+        NSString *languageName = [self->languages allValues][self->selectNumberElementOfPicker];
         
         [self saveLanguage:languageName langKey:LangTranslationTo];
         
@@ -164,7 +145,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
             
             self.textViewTranslateContent.text = translationContent;
             
-            [self appendTranslateToFile:translationContent sourceText:textToTransalte];
+            [self saveToHistoryOfTranslate:translationContent sourceText:textToTransalte];
         } @catch (NSException *exception) {
             UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
             
@@ -178,36 +159,35 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 }
 
 // MARK: -
-// MARK: Services
+// MARK: Init content of UI elements
 
-- (void)initButtonContentOfLabels {
+- (void)initButtonTitleOfLabels {
+    self.labelOfButtonTranslateFrom.text = [self getLanguageTitle:LangTranslationFrom defaultLangName:@"Русский"];
+    self.labelOfButtonTranslateTo.text = [self getLanguageTitle:LangTranslationTo defaultLangName:@"English"];
+}
+
+- (NSString *)getLanguageTitle:(NSString *)languageName defaultLangName:(NSString *)defaultLanguageName {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if (![defaults objectForKey:LangTranslationFrom]) {
-        NSString *langName = @"Русский";
-        self.labelOfButtonTranslateFrom.text = langName;
+    if (![defaults objectForKey:languageName]) {
+        return defaultLanguageName;
     }
     else {
-        self.labelOfButtonTranslateFrom.text = [[defaults objectForKey:LangTranslationFrom] objectForKey:FullLangName];
-    }
-    
-    if (![defaults objectForKey:LangTranslationTo]) {
-        NSString *langName = @"English";
-        self.labelOfButtonTranslateTo.text = langName;
-    }
-    else {
-        self.labelOfButtonTranslateTo.text = [[defaults objectForKey:LangTranslationTo] objectForKey:FullLangName];
+        return [[defaults objectForKey:languageName] objectForKey:FullLangName];
     }
 }
 
-- (void)saveLanguage:(NSString *)languageName langKey:(NSString *)langKey {
+// MARK: -
+// MARK: Memory
+
+- (void)saveLanguage:(NSString *)languageName langKey:(NSString *)languageKey {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *shortNameLang;
     NSString *fullNameLang;
     
-    for (NSString *langKey in names) {
-        if([names objectForKey:langKey] == languageName) {
+    for (NSString *langKey in languages) {
+        if ([languages objectForKey:langKey] == languageName) {
             shortNameLang = langKey;
             fullNameLang = languageName;
             
@@ -215,42 +195,44 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
         }
     }
     
-    NSDictionary *lang = @{ ShortLangName : shortNameLang, FullLangName : fullNameLang};
+    NSDictionary *language = @{
+        ShortLangName : shortNameLang,
+        FullLangName : fullNameLang
+    };
     
-    [defaults setObject:lang forKey:langKey];
+    [defaults setObject:language forKey:languageKey];
 }
 
-- (void)appendTranslateToFile:(NSString *)textTranslate sourceText:(NSString *)sourceText {
-    NSMutableString *directionTranslate = [self extractionDirectTranslation];
+- (void)saveToHistoryOfTranslate:(NSString *)textTranslate sourceText:(NSString *)sourceText {
+    NSMutableString *directionTranslate = [self extractionDirectionTranslation];
     
-    NSLog(@"gfd %@", directionTranslate);
-    
-    NSDictionary *cont = @{
+    NSDictionary *infoOfTranslate = @{
         @"direction": directionTranslate,
         @"beforeTranslation": sourceText,
         @"afterTranslation": textTranslate
     };
     
-    NSArray *arr = @[cont];
-    
-    NSString *field = @"history";
+    NSString *keyHistory = @"history";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults objectForKey:field]) {
-        [defaults setObject:arr forKey:field];
+    NSArray *collectionInfoOfTranslate = @[infoOfTranslate];
+    
+    if (![defaults objectForKey:keyHistory]) {
+        [defaults setObject:collectionInfoOfTranslate forKey:keyHistory];
         return;
     }
     
-    NSMutableArray *content = [[defaults objectForKey:field] mutableCopy];
+    NSMutableArray *content = [[defaults objectForKey:keyHistory] mutableCopy];
     
-    [content addObject:cont];
+    [content addObject:infoOfTranslate];
     
-    [defaults setObject:content forKey:field];
-    
-    NSLog(@"rewrew %@", [defaults objectForKey:field]);
+    [defaults setObject:content forKey:keyHistory];
 }
 
-- (NSMutableString *)extractionDirectTranslation {
+// MARK: -
+// MARK: Extractions
+
+- (NSMutableString *)extractionDirectionTranslation {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableString *directionTranslate = [NSMutableString string];
     
@@ -270,10 +252,10 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     return directionTranslate;
 }
 
-- (void)extractionDirectionsOfTranslate {
+- (void)extractionDirectionsOfTranslateAsync {
     dispatch_async(dispatch_get_main_queue(), ^{
         @try {
-            self->names = [[Api getListSupportedLanguages:@"ru"] objectForKey:@"langs"];
+            self->languages = [[Api getListSupportedLanguages:@"ru"] objectForKey:@"langs"];
         } @catch (NSException *exception) {
             UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
             
@@ -281,7 +263,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction *action) {
                 
-                [self extractionDirectionsOfTranslate];
+                [self extractionDirectionsOfTranslateAsync];
             }]];
             
             [self presentViewController:alert animated:NO completion:nil];
