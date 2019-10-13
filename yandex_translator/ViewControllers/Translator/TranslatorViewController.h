@@ -20,13 +20,13 @@
 - (IBAction)buttonTranslationTo_click:(id)sender;
 - (IBAction)buttonTranslate_click:(id)sender;
 
-FOUNDATION_EXPORT NSString *const LangTranslationFrom;
-FOUNDATION_EXPORT NSString *const LangTranslationTo;
+extern NSString *const LangTranslationFrom;
+extern NSString *const LangTranslationTo;
 
-FOUNDATION_EXPORT NSString *const ShortLangName;
-FOUNDATION_EXPORT NSString *const FullLangName;
+extern NSString *const ShortLangName;
+extern NSString *const FullLangName;
 
-FOUNDATION_EXPORT NSString *const NameFileHistoryRequests;
+extern NSString *const NameFileHistoryRequests;
 
 @end
 

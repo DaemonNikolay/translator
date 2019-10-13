@@ -41,7 +41,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     [self initButtonContentOfLabels];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *langs = [[Api getListSupportedLanguages:@"ru"] objectForKey:@"langs"];
+        NSMutableDictionary *langs = [[Api getListSupportedLanguages:@"ru"] objectForKey:@"langs"];
         
         self->names = langs;
     });
@@ -170,9 +170,6 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 - (void)initButtonContentOfLabels {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //    NSString *langTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
-    
     if (![defaults objectForKey:LangTranslationFrom]) {
         NSString *langName = @"Русский";
         self.labelOfButtonTranslateFrom.text = langName;
@@ -211,30 +208,31 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 }
 
 - (void)appendTranslateToFile:(NSString *)textTranslate sourceText:(NSString *)sourceText {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     NSMutableString *directionTranslate = [self extractionDirectTranslation];
     
     NSLog(@"gfd %@", directionTranslate);
     
-    NSDictionary *cont = @{@"direction": directionTranslate, @"beforeTranslation": sourceText, @"afterTranslation": textTranslate};
+    NSDictionary *cont = @{
+        @"direction": directionTranslate,
+        @"beforeTranslation": sourceText,
+        @"afterTranslation": textTranslate
+    };
     
     NSArray *arr = @[cont];
     
     NSString *field = @"history";
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:field]) {
         [defaults setObject:arr forKey:field];
         return;
     }
+  
+    NSMutableArray *content = [[defaults objectForKey:field] mutableCopy];
     
-    NSArray *content = [defaults objectForKey:field];
-    NSMutableArray *arr1 = [@[content] mutableCopy];
+    [content addObject:cont];
     
-    [arr1 addObject:arr];
-    
-    [defaults setObject:arr1 forKey:field];
-    
+    [defaults setObject:content forKey:field];    
     
     NSLog(@"rewrew %@", [defaults objectForKey:field]);
 }

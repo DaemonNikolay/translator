@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		731473AD2340950B0025B1C1 /* TranslatedContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 731473AC2340950B0025B1C1 /* TranslatedContent.m */; };
 		73642C342349B1B5004E98F1 /* Api.m in Sources */ = {isa = PBXBuildFile; fileRef = 73642C332349B1B5004E98F1 /* Api.m */; };
 		73C2B6D6233FBCB000058FC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6D5233FBCB000058FC2 /* AppDelegate.m */; };
 		73C2B6D9233FBCB000058FC2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6D8233FBCB000058FC2 /* SceneDelegate.m */; };
@@ -20,8 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		731473AC2340950B0025B1C1 /* TranslatedContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TranslatedContent.m; sourceTree = "<group>"; };
-		731473AE234096560025B1C1 /* TranslatedContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TranslatedContent.h; sourceTree = "<group>"; };
 		73642C332349B1B5004E98F1 /* Api.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Api.m; sourceTree = "<group>"; };
 		73B49F342349B10C00704AA4 /* Api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
 		73C2B6D1233FBCB000058FC2 /* yandex_translator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yandex_translator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,8 +138,6 @@
 				73C2B6E5233FBCB100058FC2 /* LaunchScreen.storyboard */,
 				73C2B6E8233FBCB100058FC2 /* Info.plist */,
 				73C2B6E9233FBCB100058FC2 /* main.m */,
-				731473AC2340950B0025B1C1 /* TranslatedContent.m */,
-				731473AE234096560025B1C1 /* TranslatedContent.h */,
 			);
 			path = yandex_translator;
 			sourceTree = "<group>";
@@ -217,7 +212,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				731473AD2340950B0025B1C1 /* TranslatedContent.m in Sources */,
 				73C2B6EA233FBCB100058FC2 /* main.m in Sources */,
 				73642C342349B1B5004E98F1 /* Api.m in Sources */,
 				73C2B6DF233FBCB000058FC2 /* HistoryViewController.m in Sources */,

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HistoryViewController : UIViewController <NSCoding>
 
+@interface HistoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, UITabBarControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableViewHistory;
 
 @end
 
