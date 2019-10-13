@@ -24,16 +24,6 @@
     sections = [@[] mutableCopy];
     contents = [@[] mutableCopy];
     
-    //    NSArray *translates = [self extractionHistoryTranslates];
-    //
-    //    for (NSDictionary *elem in translates) {
-    //        NSString *sectionName = [elem objectForKey:@"direction"];
-    //        [sections addObject:sectionName];
-    //
-    //        NSMutableArray *contentTranslate = [@[[elem objectForKey:@"beforeTranslation"], [elem objectForKey:@"afterTranslation"]] mutableCopy];
-    //        [contents addObject:contentTranslate];
-    //    }
-    
     self.tableViewHistory.dataSource = self;
     self.tableViewHistory.delegate = self;
 }

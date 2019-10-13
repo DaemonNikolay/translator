@@ -16,9 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MF0-Of-8Tg">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MF0-Of-8Tg">
                                 <rect key="frame" x="20" y="44" width="374" height="748"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEU-cD-GeE" userLabel="ButtonTranslationFrom">
                                         <rect key="frame" x="8" y="54" width="140" height="52"/>
@@ -119,9 +118,19 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="374" id="Ctx-BN-9ei"/>
+                                    <constraint firstAttribute="height" constant="748" id="nVV-aJ-TY6"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="MF0-Of-8Tg" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="Faf-B7-sDx"/>
+                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="MF0-Of-8Tg" secondAttribute="trailing" constant="20" id="KWl-w2-lcI"/>
+                            <constraint firstItem="MF0-Of-8Tg" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="20" id="O1m-eh-NAe"/>
+                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="MF0-Of-8Tg" secondAttribute="bottom" constant="21" id="v5Z-ff-SlY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Translator" image="pencil.and.ellipsis.rectangle" catalog="system" landscapeImage="pencil.and.ellipsis.rectangle" largeContentSizeImage="pencil.and.ellipsis.rectangle" id="acW-dT-cKf"/>
@@ -144,13 +153,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qzp-Cb-QpJ" userLabel="TableViewHistory">
-                                <rect key="frame" x="20" y="44" width="374" height="769"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qzp-Cb-QpJ" userLabel="TableViewHistory">
+                                <rect key="frame" x="20" y="78" width="374" height="735"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Qzp-Cb-QpJ" firstAttribute="bottom" secondItem="O1u-W8-tvY" secondAttribute="bottom" id="8Ls-fu-66m"/>
+                            <constraint firstItem="Qzp-Cb-QpJ" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" constant="34" id="VPh-YE-e21"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="Qzp-Cb-QpJ" secondAttribute="trailing" constant="20" id="cVE-wQ-3Wm"/>
+                            <constraint firstItem="Qzp-Cb-QpJ" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="20" id="vgT-Tx-lVv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" image="book" catalog="system" landscapeImage="book" largeContentSizeImage="book" id="cPa-gy-q4n"/>
