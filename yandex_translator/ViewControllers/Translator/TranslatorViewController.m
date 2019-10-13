@@ -8,7 +8,6 @@
 
 #import "TranslatorViewController.h"
 #import "Api.h"
-#import "ChoiceLanguageViewController.h"
 
 
 @interface TranslatorViewController () {
@@ -40,7 +39,6 @@ NSString *const LangTranslationTo = @"LangTranslationTo";
     names = @[@"english", @"russian",@"sweden", @"deutsch", @"france"];
     
     NSError __block *err = NULL;
-    
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains
     (NSDocumentDirectory, NSUserDomainMask, YES);
