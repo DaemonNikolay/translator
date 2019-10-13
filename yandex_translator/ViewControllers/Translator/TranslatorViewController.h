@@ -26,5 +26,7 @@ FOUNDATION_EXPORT NSString *const LangTranslationTo;
 FOUNDATION_EXPORT NSString *const ShortLangName;
 FOUNDATION_EXPORT NSString *const FullLangName;
 
+FOUNDATION_EXPORT NSString *const NameFileHistoryRequests;
+
 @end
 

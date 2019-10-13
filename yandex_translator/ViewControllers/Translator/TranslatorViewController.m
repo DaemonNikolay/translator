@@ -29,6 +29,8 @@ NSString *const LangTranslationTo = @"langTranslationTo";
 NSString *const ShortLangName = @"shortLangName";
 NSString *const FullLangName = @"fullLangName";
 
+NSString *const NameFileHistoryRequests = @"textfile.txt";
+
 
 // MARK: -
 // MARK: Life cycle
@@ -36,43 +38,10 @@ NSString *const FullLangName = @"fullLangName";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"kgoprdfjhpofd");
-    
     [self initButtonContentOfLabels];
-    
-    NSError __block *err = NULL;
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains
-    (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    //make a file name to write the data to using the documents directory:
-    NSString *fileName = [NSString stringWithFormat:@"%@/textfile.txt",
-                          documentsDirectory];
-    
-    NSString* content1 = [NSString stringWithContentsOfFile:fileName
-                                                   encoding:NSUTF8StringEncoding
-                                                      error:NULL]; // its work
-    
-    NSLog(@"%@", content1);
-    
-    //create content - four lines of text
-    //    NSString *content = @"One\nTwo\nThree\nFour\nFive";
-    ////    //save content to the documents directory
-    //    [content writeToFile:fileName
-    //              atomically:NO
-    //                encoding:NSStringEncodingConversionAllowLossy
-    //                   error:nil];
-    //
-    //    NSLog(@"%@", fileName);
-    
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *langs = [[Api getListSupportedLanguages:@"ru"] objectForKey:@"langs"];
-        
-        for (NSString *keyLang in langs) {
-            NSLog(@"itre %@", keyLang);
-        }
         
         self->names = langs;
     });
@@ -180,10 +149,18 @@ NSString *const FullLangName = @"fullLangName";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *langTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
     
+    if (!langTo) {
+        langTo = @"en";
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *json = [Api translateText:textToTransalte language:langTo];
-
-        self.textViewTranslateContent.text = [json valueForKey:@"text"][0];
+        
+        NSString *translationContent = [json valueForKey:@"text"][0];
+        
+        self.textViewTranslateContent.text = translationContent;
+        
+        [self appendTranslateToFile:translationContent sourceText:textToTransalte];
     });
 }
 
@@ -193,15 +170,20 @@ NSString *const FullLangName = @"fullLangName";
 - (void)initButtonContentOfLabels {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    NSString *langTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
+    
     if (![defaults objectForKey:LangTranslationFrom]) {
-        self.labelOfButtonTranslateFrom.text = @"Русский";
+        NSString *langName = @"Русский";
+        self.labelOfButtonTranslateFrom.text = langName;
     }
     else {
         self.labelOfButtonTranslateFrom.text = [[defaults objectForKey:LangTranslationFrom] objectForKey:FullLangName];
     }
     
     if (![defaults objectForKey:LangTranslationTo]) {
-        self.labelOfButtonTranslateTo.text = @"English";
+        NSString *langName = @"English";
+        self.labelOfButtonTranslateTo.text = langName;
     }
     else {
         self.labelOfButtonTranslateTo.text = [[defaults objectForKey:LangTranslationTo] objectForKey:FullLangName];
@@ -225,9 +207,56 @@ NSString *const FullLangName = @"fullLangName";
     
     NSDictionary *lang = @{ ShortLangName : shortNameLang, FullLangName : fullNameLang};
     
-    NSLog(@"khgfp-d %@", lang);
-    
     [defaults setObject:lang forKey:langKey];
+}
+
+- (void)appendTranslateToFile:(NSString *)textTranslate sourceText:(NSString *)sourceText {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSMutableString *directionTranslate = [self extractionDirectTranslation];
+    
+    NSLog(@"gfd %@", directionTranslate);
+    
+    NSDictionary *cont = @{@"direction": directionTranslate, @"beforeTranslation": sourceText, @"afterTranslation": textTranslate};
+    
+    NSArray *arr = @[cont];
+    
+    NSString *field = @"history";
+    
+    if (![defaults objectForKey:field]) {
+        [defaults setObject:arr forKey:field];
+        return;
+    }
+    
+    NSArray *content = [defaults objectForKey:field];
+    NSMutableArray *arr1 = [@[content] mutableCopy];
+    
+    [arr1 addObject:arr];
+    
+    [defaults setObject:arr1 forKey:field];
+    
+    
+    NSLog(@"rewrew %@", [defaults objectForKey:field]);
+}
+
+- (NSMutableString *)extractionDirectTranslation {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableString *directionTranslate = [NSMutableString string];
+    
+    NSString *langTranslationFrom = [[defaults objectForKey:LangTranslationFrom] objectForKey:FullLangName];
+    NSString *langTranslationTo = [[defaults objectForKey:LangTranslationTo] objectForKey:FullLangName];
+    
+    if (!langTranslationFrom) {
+        langTranslationFrom = self.labelOfButtonTranslateFrom.text;
+    }
+    
+    if (!langTranslationTo) {
+        langTranslationTo = self.labelOfButtonTranslateTo.text;
+    }
+    
+    [directionTranslate appendFormat:@"%@->%@", langTranslationFrom, langTranslationTo];
+    
+    return directionTranslate;
 }
 
 @end
