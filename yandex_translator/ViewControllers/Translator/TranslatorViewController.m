@@ -11,7 +11,7 @@
 
 
 @interface TranslatorViewController () {
-    NSArray *names;
+    NSDictionary *names;
     NSInteger selectNumberElementOfPicker;
 }
 
@@ -23,8 +23,12 @@
 // MARK: -
 // MARK: Init propeties
 
-NSString *const LangTranslationFrom = @"LangTranslationFrom";
-NSString *const LangTranslationTo = @"LangTranslationTo";
+NSString *const LangTranslationFrom = @"langTranslationFrom";
+NSString *const LangTranslationTo = @"langTranslationTo";
+
+NSString *const ShortLangName = @"shortLangName";
+NSString *const FullLangName = @"fullLangName";
+
 
 // MARK: -
 // MARK: Life cycle
@@ -33,10 +37,8 @@ NSString *const LangTranslationTo = @"LangTranslationTo";
     [super viewDidLoad];
     
     NSLog(@"kgoprdfjhpofd");
-
+    
     [self initButtonContentOfLabels];
-        
-    names = @[@"english", @"russian",@"sweden", @"deutsch", @"france"];
     
     NSError __block *err = NULL;
     
@@ -65,10 +67,15 @@ NSString *const LangTranslationTo = @"LangTranslationTo";
     //    NSLog(@"%@", fileName);
     
     
-    //    dispatch_async(dispatch_get_main_queue(), ^{
-    //        [Api getListSupportedLanguages:@"ru"];
-    //        [Api translateText:@"привет" language:@"en"];
-    //    });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary *langs = [[Api getListSupportedLanguages:@"ru"] objectForKey:@"langs"];
+        
+        for (NSString *keyLang in langs) {
+            NSLog(@"itre %@", keyLang);
+        }
+        
+        self->names = langs;
+    });
 }
 
 // MARK: -
@@ -102,7 +109,7 @@ NSString *const LangTranslationTo = @"LangTranslationTo";
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return names[row];
+    return [names allValues][row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
@@ -136,7 +143,7 @@ NSString *const LangTranslationTo = @"LangTranslationTo";
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action) {
-        NSString *languageName = self->names[self->selectNumberElementOfPicker];
+        NSString *languageName = [self->names allValues][self->selectNumberElementOfPicker];
         
         [self saveLanguage:languageName langKey:LangTranslationFrom];
         
@@ -153,7 +160,7 @@ NSString *const LangTranslationTo = @"LangTranslationTo";
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action) {
         
-        NSString *languageName = self->names[self->selectNumberElementOfPicker];
+        NSString *languageName = [self->names allValues][self->selectNumberElementOfPicker];
         
         [self saveLanguage:languageName langKey:LangTranslationTo];
         
@@ -164,15 +171,18 @@ NSString *const LangTranslationTo = @"LangTranslationTo";
 }
 
 - (IBAction)buttonTranslate_click:(id)sender {
-    NSString *textToTransalte = _textViewSourceContent.text;
+    NSString *textToTransalte = self->_textViewSourceContent.text;
     
     if (textToTransalte == nil || [textToTransalte length] == 0) {
         return;
     }
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *langTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *json = [Api translateText:textToTransalte language:@"en"];
-        
+        NSDictionary *json = [Api translateText:textToTransalte language:langTo];
+
         self.textViewTranslateContent.text = [json valueForKey:@"text"][0];
     });
 }
@@ -187,20 +197,37 @@ NSString *const LangTranslationTo = @"LangTranslationTo";
         self.labelOfButtonTranslateFrom.text = @"Русский";
     }
     else {
-        self.labelOfButtonTranslateFrom.text = [defaults objectForKey:LangTranslationFrom];
+        self.labelOfButtonTranslateFrom.text = [[defaults objectForKey:LangTranslationFrom] objectForKey:FullLangName];
     }
     
     if (![defaults objectForKey:LangTranslationTo]) {
         self.labelOfButtonTranslateTo.text = @"English";
     }
     else {
-        self.labelOfButtonTranslateTo.text = [defaults objectForKey:LangTranslationTo];
+        self.labelOfButtonTranslateTo.text = [[defaults objectForKey:LangTranslationTo] objectForKey:FullLangName];
     }
 }
 
 - (void)saveLanguage:(NSString *)languageName langKey:(NSString *)langKey {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:languageName forKey:langKey];
+    
+    NSString *shortNameLang;
+    NSString *fullNameLang;
+    
+    for (NSString *langKey in names) {
+        if([names objectForKey:langKey] == languageName) {
+            shortNameLang = langKey;
+            fullNameLang = languageName;
+            
+            break;
+        }
+    }
+    
+    NSDictionary *lang = @{ ShortLangName : shortNameLang, FullLangName : fullNameLang};
+    
+    NSLog(@"khgfp-d %@", lang);
+    
+    [defaults setObject:lang forKey:langKey];
 }
 
 @end

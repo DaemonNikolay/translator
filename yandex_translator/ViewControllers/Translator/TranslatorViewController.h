@@ -23,5 +23,8 @@
 FOUNDATION_EXPORT NSString *const LangTranslationFrom;
 FOUNDATION_EXPORT NSString *const LangTranslationTo;
 
+FOUNDATION_EXPORT NSString *const ShortLangName;
+FOUNDATION_EXPORT NSString *const FullLangName;
+
 @end
 
