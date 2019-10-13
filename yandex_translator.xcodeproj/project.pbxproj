@@ -21,7 +21,7 @@
 /* Begin PBXFileReference section */
 		73642C332349B1B5004E98F1 /* Api.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Api.m; sourceTree = "<group>"; };
 		73B49F342349B10C00704AA4 /* Api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
-		73C2B6D1233FBCB000058FC2 /* yandex_translator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yandex_translator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		73C2B6D1233FBCB000058FC2 /* Yandex Translator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yandex Translator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C2B6D4233FBCB000058FC2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		73C2B6D5233FBCB000058FC2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		73C2B6D7233FBCB000058FC2 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		73C2B6D2233FBCB000058FC2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				73C2B6D1233FBCB000058FC2 /* yandex_translator.app */,
+				73C2B6D1233FBCB000058FC2 /* Yandex Translator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,7 +159,7 @@
 			);
 			name = yandex_translator;
 			productName = yandex_translator;
-			productReference = 73C2B6D1233FBCB000058FC2 /* yandex_translator.app */;
+			productReference = 73C2B6D1233FBCB000058FC2 /* Yandex Translator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -366,7 +366,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "nikulux.yandex-translator";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Yandex Translator";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -384,7 +384,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "nikulux.yandex-translator";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Yandex Translator";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

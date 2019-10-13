@@ -98,6 +98,8 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
         
         [self saveLanguage:languageName langKey:LangTranslationFrom];
         
+        [self extractionDirectionsOfTranslateAsync];
+        
         self.labelOfButtonTranslateFrom.text = languageName;
     }]];
     
@@ -139,7 +141,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
         NSDictionary *json;
         
         @try {
-            json = [Api translateText:textToTransalte language:langTo];
+            json = [Api translateText:textToTransalte lang:langTo];
             
             NSString *translationContent = [json valueForKey:@"text"][0];
             
@@ -163,7 +165,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 
 - (void)initButtonTitleOfLabels {
     self.labelOfButtonTranslateFrom.text = [self getLanguageTitle:LangTranslationFrom defaultLangName:@"Русский"];
-    self.labelOfButtonTranslateTo.text = [self getLanguageTitle:LangTranslationTo defaultLangName:@"English"];
+    self.labelOfButtonTranslateTo.text = [self getLanguageTitle:LangTranslationTo defaultLangName:@"Английский"];
 }
 
 - (NSString *)getLanguageTitle:(NSString *)languageName defaultLangName:(NSString *)defaultLanguageName {
@@ -236,16 +238,17 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableString *directionTranslate = [NSMutableString string];
     
-    NSString *langTranslationFrom = [[defaults objectForKey:LangTranslationFrom] objectForKey:FullLangName];
-    NSString *langTranslationTo = [[defaults objectForKey:LangTranslationTo] objectForKey:FullLangName];
+    NSString *shortLanguageNameFrom = [[defaults objectForKey:LangTranslationFrom] objectForKey:ShortLangName];
+    NSString *shortLanguageNameTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
     
-    if (!langTranslationFrom) {
-        langTranslationFrom = self.labelOfButtonTranslateFrom.text;
-    }
+    NSString *langTranslationFrom = [self->languages objectForKey:shortLanguageNameFrom];
+    NSString *langTranslationTo = [self->languages objectForKey:shortLanguageNameTo];
     
-    if (!langTranslationTo) {
-        langTranslationTo = self.labelOfButtonTranslateTo.text;
-    }
+    langTranslationFrom = self.labelOfButtonTranslateFrom.text;
+    
+    
+    langTranslationTo = self.labelOfButtonTranslateTo.text;
+    
     
     [directionTranslate appendFormat:@"%@->%@", langTranslationFrom, langTranslationTo];
     
@@ -254,8 +257,24 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 
 - (void)extractionDirectionsOfTranslateAsync {
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *shortLanguageNameFrom = [[defaults objectForKey:LangTranslationFrom] objectForKey:ShortLangName];
+        NSString *shortLanguageNameTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
+        
+        if (!shortLanguageNameFrom) {
+            shortLanguageNameFrom = @"ru";
+        }
+        if (!shortLanguageNameTo) {
+            shortLanguageNameTo = @"en";
+        }
+        
         @try {
-            self->languages = [[Api getListSupportedLanguages:@"ru"] objectForKey:@"langs"];
+            self->languages = [[Api getListSupportedLanguages:shortLanguageNameFrom] objectForKey:@"langs"];
+            
+            self.labelOfButtonTranslateFrom.text = [self->languages objectForKey:shortLanguageNameFrom];
+            self.labelOfButtonTranslateTo.text = [self->languages objectForKey:shortLanguageNameTo] ;
+            
         } @catch (NSException *exception) {
             UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
             
@@ -270,5 +289,6 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
         }
     });
 }
+
 
 @end

@@ -13,7 +13,7 @@
 
 
 + (NSDictionary *)getListSupportedLanguages:(NSString *)ui;
-+ (NSDictionary *)translateText:(NSString *)text language:(NSString *)lang;
++ (NSDictionary *)translateText:(NSString *)content lang:(NSString *)language;
 
 @end
 

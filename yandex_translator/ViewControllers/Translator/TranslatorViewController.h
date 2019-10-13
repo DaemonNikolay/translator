@@ -11,14 +11,23 @@
 
 @interface TranslatorViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
+// MARK: -
+// MARK: Properties
+
 @property (weak, nonatomic) IBOutlet UITextView *textViewSourceContent;
 @property (weak, nonatomic) IBOutlet UITextView *textViewTranslateContent;
 @property (weak, nonatomic) IBOutlet UILabel *labelOfButtonTranslateFrom;
 @property (weak, nonatomic) IBOutlet UILabel *labelOfButtonTranslateTo;
 
+// MARK: -
+// MARK: Actions
+
 - (IBAction)buttonTranslationFrom_click:(id)sender;
 - (IBAction)buttonTranslationTo_click:(id)sender;
 - (IBAction)buttonTranslate_click:(id)sender;
+
+// MARK: -
+// MARK: Constants
 
 extern NSString *const LangTranslationFrom;
 extern NSString *const LangTranslationTo;

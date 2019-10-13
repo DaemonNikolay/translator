@@ -13,18 +13,18 @@
 @implementation Api
 
 NSString *baseUrl = @"https://translate.yandex.net/api/v1.5/tr.json";
-NSString *key = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a0d6dfb330619ddf07a9389";
+NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a0d6dfb330619ddf07a9389";
 
 
-+ (NSDictionary *)translateText:(NSString *)text language:(NSString *)lang {
-    text = [text stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
++ (NSDictionary *)translateText:(NSString *)content lang:(NSString *)language {
+    content = [content stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
     
     NSMutableString *url = [NSMutableString string];
     [url appendString:baseUrl];
     [url appendString:@"/translate"];
-    [url appendFormat:@"?key=%@", key];
-    [url appendFormat:@"&text=%@", text];
-    [url appendFormat:@"&lang=%@", lang];
+    [url appendFormat:@"?key=%@", apiToken];
+    [url appendFormat:@"&text=%@", content];
+    [url appendFormat:@"&lang=%@", language];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
@@ -44,7 +44,7 @@ NSString *key = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a
     NSMutableString *url = [NSMutableString string];
     [url appendString:baseUrl];
     [url appendString:@"/getLangs"];
-    [url appendFormat:@"?key=%@", key];
+    [url appendFormat:@"?key=%@", apiToken];
     [url appendFormat:@"&ui=%@", ui];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
