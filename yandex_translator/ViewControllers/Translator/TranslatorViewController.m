@@ -20,8 +20,9 @@
 
 @implementation TranslatorViewController
 
-// MARK: -
-// MARK: Init propeties
+
+// MARK: --
+// MARK: Init Constants
 
 NSString *const LangTranslationFrom = @"langTranslationFrom";
 NSString *const LangTranslationTo = @"langTranslationTo";
@@ -32,7 +33,7 @@ NSString *const FullLangName = @"fullLangName";
 NSString *const NameFileHistoryRequests = @"textfile.txt";
 
 
-// MARK: -
+// MARK: --
 // MARK: Life cycle
 
 - (void)viewDidLoad {
@@ -43,7 +44,8 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     [self dismissKeyboardByClicking];
 }
 
-// MARK: -
+
+// MARK: --
 // MARK: PickerView
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -62,7 +64,8 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     selectNumberElementOfPicker = row;
 }
 
-// MARK: -
+
+// MARK: --
 // MARK: Additional UI
 
 - (UIAlertController *)createDialogForChoiceLanguage {
@@ -86,8 +89,9 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     return alert;
 }
 
-// MARK: -
-// MARK: Actions
+
+// MARK: --
+// MARK: Button actions
 
 - (IBAction)buttonTranslationFrom_click:(id)sender {
     [self dismissKeyboard];
@@ -168,7 +172,8 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     });
 }
 
-// MARK: -
+
+// MARK: --
 // MARK: Init content of UI elements
 
 - (void)initButtonTitleOfLabels {
@@ -190,7 +195,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     }
 }
 
-// MARK: -
+// MARK: --
 // MARK: Memory
 
 - (void)saveLanguage:(NSString *)languageName langKey:(NSString *)languageKey {
@@ -242,7 +247,8 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     [defaults setObject:content forKey:keyHistory];
 }
 
-// MARK: -
+
+// MARK: --
 // MARK: Extractions
 
 - (NSMutableString *)extractionDirectionTranslation {
