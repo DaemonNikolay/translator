@@ -87,8 +87,8 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
     *error = err;
     
     NSDictionary *json = [NSJSONSerialization
-                          JSONObjectWithData:data
-                          options:kNilOptions error:error];
+            JSONObjectWithData:data
+                       options:(NSJSONReadingOptions) kNilOptions error:error];
     
     return json;
 }
