@@ -40,6 +40,7 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 
     [self initButtonTitleOfLabels];
     [self extractionDirectionsOfTranslateAsync];
+    [self dismissKeyboardByClicking];
 }
 
 // MARK: -
@@ -89,6 +90,8 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 // MARK: Actions
 
 - (IBAction)buttonTranslationFrom_click:(id)sender {
+    [self dismissKeyboard];
+
     UIAlertController *alert = [self createDialogForChoiceLanguage];
 
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
@@ -101,15 +104,14 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
                                                 [self extractionDirectionsOfTranslateAsync];
 
                                                 [[self buttonTranslationFrom] setTitle:languageName forState:UIControlStateNormal];
-
-//                                                self.labelOfButtonTranslateFrom.text = languageName;
-//                                                self.buttonTranslationFrom.titleLabel.text = languageName;
                                             }]];
 
     [self presentViewController:alert animated:NO completion:nil];
 }
 
 - (IBAction)buttonTranslationTo_click:(id)sender {
+    [self dismissKeyboard];
+
     UIAlertController *alert = [self createDialogForChoiceLanguage];
 
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
@@ -121,13 +123,14 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
                                                 [self saveLanguage:languageName langKey:LangTranslationTo];
 
                                                 [[self buttonTranslationTo] setTitle:languageName forState:UIControlStateNormal];
-//                                                self.labelOfButtonTranslateTo.text = languageName;
                                             }]];
 
     [self presentViewController:alert animated:NO completion:nil];
 }
 
 - (IBAction)buttonTranslate_click:(id)sender {
+    [self dismissKeyboard];
+
     NSString *textToTransalte = self->_textViewSourceContent.text;
 
     if (textToTransalte == nil || [textToTransalte length] == 0) {
@@ -175,9 +178,6 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
 
     [[self buttonTranslationFrom] setTitle:languageTitleFrom forState:UIControlStateNormal];
     [[self buttonTranslationTo] setTitle:languageTitleTo forState:UIControlStateNormal];
-
-//    self.labelOfButtonTranslateFrom.text =
-//            self.labelOfButtonTranslateTo.text =
 }
 
 - (NSString *)getLanguageTitle:(NSString *)languageName defaultLangName:(NSString *)defaultLanguageName {
@@ -252,21 +252,8 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     NSString *shortLanguageNameFrom = [[defaults objectForKey:LangTranslationFrom] objectForKey:ShortLangName];
     NSString *shortLanguageNameTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
 
-//    NSString *langTranslationFrom = [self->languages objectForKey:shortLanguageNameFrom];
-//    NSString *langTranslationTo = [self->languages objectForKey:shortLanguageNameTo];
-
-
     NSString *langTranslationFrom = [[self buttonTranslationFrom] currentTitle];
     NSString *langTranslationTo = [[self buttonTranslationTo] currentTitle];
-
-
-
-
-//    langTranslationFrom = self.labelOfButtonTranslateFrom.text;
-//
-//
-//    langTranslationTo = self.labelOfButtonTranslateTo.text;
-
 
     [directionTranslate appendFormat:@"%@->%@", langTranslationFrom, langTranslationTo];
 
@@ -288,16 +275,13 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
         }
 
         @try {
-            self->languages = [[Api getListSupportedLanguages:shortLanguageNameFrom] objectForKey:@"langs"];
+            self->languages = [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
 
-            NSString *titleTranslationFrom = [self->languages objectForKey:shortLanguageNameFrom];
-            NSString *titleTranslationTo = [self->languages objectForKey:shortLanguageNameTo];
+            NSString *titleTranslationFrom = self->languages[shortLanguageNameFrom];
+            NSString *titleTranslationTo = self->languages[shortLanguageNameTo];
 
             [[self buttonTranslationFrom] setTitle:titleTranslationFrom forState:UIControlStateNormal];
             [[self buttonTranslationTo] setTitle:titleTranslationTo forState:UIControlStateNormal];
-
-//            self.labelOfButtonTranslateFrom.text =
-//            self.labelOfButtonTranslateTo.text = [self->languages objectForKey:shortLanguageNameTo];
 
         } @catch (NSException *exception) {
             UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
@@ -314,5 +298,19 @@ NSString *const NameFileHistoryRequests = @"textfile.txt";
     });
 }
 
+
+// Mark: --
+// Mark: Services
+
+- (void)dismissKeyboardByClicking {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismissKeyboard)];
+
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
 
 @end
