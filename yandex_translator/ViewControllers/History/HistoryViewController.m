@@ -9,74 +9,77 @@
 #import "HistoryViewController.h"
 
 
-@interface HistoryViewController() {
+@interface HistoryViewController () {
     NSMutableArray *sections;
     NSMutableArray<NSMutableArray *> *contents;
 }
 
 @end
 
+
 @implementation HistoryViewController
 
-// MARK: -
+// MARK: --
 // MARK: Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self initInfoOfTranslation];
-    
+
     self.tableViewHistory.dataSource = self;
     self.tableViewHistory.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self initInfoOfTranslation];
-    
+
     [self updateContentForTable];
     [self.tableViewHistory reloadData];
 }
 
 
-// MARK: -
+// MARK: --
 // MARK: UITableView
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    
+
     cell.textLabel.numberOfLines = 0;
-    
-    cell.textLabel.text = contents[indexPath.section][indexPath.row];
-    
+
+    NSUInteger sectionIndex = (NSUInteger) indexPath.section;
+    NSUInteger rowIndex = (NSUInteger) indexPath.row;
+    cell.textLabel.text = contents[sectionIndex][rowIndex];
+
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[contents objectAtIndex:0] count];
+    return [contents[0] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return sections[section];
+    return sections[(NSUInteger) section];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return sections.count;
 }
 
-// MARK: -
+// MARK: --
 // MARK: Services
 
 - (void)updateContentForTable {
     NSArray *translates = [self extractionHistoryTranslates];
-    
+
     for (NSDictionary *elem in translates) {
-        NSString *sectionName = [elem objectForKey:@"direction"];
+        NSString *sectionName = elem[@"direction"];
         [sections addObject:sectionName];
-        
-        NSMutableArray *contentTranslate = [@[[elem objectForKey:@"beforeTranslation"], [elem objectForKey:@"afterTranslation"]] mutableCopy];
+
+        NSMutableArray *contentTranslate = [@[elem[@"beforeTranslation"], elem[@"afterTranslation"]] mutableCopy];
         [contents addObject:contentTranslate];
     }
 }
@@ -84,7 +87,7 @@
 - (NSArray *)extractionHistoryTranslates {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *translates = [defaults objectForKey:@"history"];
-    
+
     return translates;
 }
 

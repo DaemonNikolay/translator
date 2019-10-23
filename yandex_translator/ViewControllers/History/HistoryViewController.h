@@ -11,10 +11,11 @@
 
 @interface HistoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, UITabBarControllerDelegate>
 
-// MARK: -
-// MARK: Properties
+// MARK: --
+// MARK: IBOutlets
 
 @property (weak, nonatomic) IBOutlet UITableView *tableViewHistory;
+
 
 @end
 
