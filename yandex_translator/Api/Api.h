@@ -7,10 +7,7 @@
 //
 
 
-@interface Api : NSObject {
-    NSString *key;
-}
-
+@interface Api : NSObject
 
 + (NSDictionary *)getListSupportedLanguages:(NSString *)ui;
 + (NSDictionary *)translateText:(NSString *)content lang:(NSString *)language;

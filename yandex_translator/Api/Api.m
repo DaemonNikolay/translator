@@ -18,25 +18,25 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
 
 + (NSDictionary *)translateText:(NSString *)content lang:(NSString *)language {
     content = [content stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-    
+
     NSMutableString *url = [NSMutableString string];
     [url appendString:baseUrl];
     [url appendString:@"/translate"];
     [url appendFormat:@"?key=%@", apiToken];
     [url appendFormat:@"&text=%@", content];
     [url appendFormat:@"&lang=%@", language];
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:url]];
-    
+
     NSURLResponse __block *resp;
     NSError __block *err = NULL;
-    
+
     NSDictionary *json = [self sendSynchronousRequest:request returningResponse:&resp error:&err];
-    
-    NSLog(@"RESULt /translate: \n %@", json);
-    
+
+    NSLog(@"RESULT /translate: \n %@", json);
+
     return json;
 }
 
@@ -46,18 +46,18 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
     [url appendString:@"/getLangs"];
     [url appendFormat:@"?key=%@", apiToken];
     [url appendFormat:@"&ui=%@", ui];
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:url]];
-    
+
     NSURLResponse __block *resp;
     NSError __block *err = NULL;
-    
+
     NSDictionary *json = [self sendSynchronousRequest:request returningResponse:&resp error:&err];
-    
-    NSLog(@"RESULt /getLangs: \n %@", json);
-    
+
+    NSLog(@"RESULT /getLangs: \n %@", json);
+
     return json;
 }
 
@@ -68,7 +68,7 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
     NSData __block *data;
     BOOL __block reqProcessed = false;
     NSURLResponse __block *resp;
-    
+
     [[[NSURLSession sharedSession] dataTaskWithRequest:request
                                      completionHandler:^(NSData * _Nullable _data,
                                                          NSURLResponse * _Nullable _response,
@@ -78,18 +78,18 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
         data = _data;
         reqProcessed = true;
     }] resume];
-    
+
     while (!reqProcessed) {
         [NSThread sleepForTimeInterval:0];
     }
-    
+
     *response = resp;
     *error = err;
-    
+
     NSDictionary *json = [NSJSONSerialization
             JSONObjectWithData:data
                        options:(NSJSONReadingOptions) kNilOptions error:error];
-    
+
     return json;
 }
 
