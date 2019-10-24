@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EnumAttributeNames.h"
 
 
 typedef NS_ENUM(NSUInteger, EnumAttributesTranslationDirections) {
@@ -11,7 +12,7 @@ typedef NS_ENUM(NSUInteger, EnumAttributesTranslationDirections) {
 };
 
 
-@interface EnumTranslationDirections : NSObject
+@interface EnumTranslationDirections : NSObject <EnumAttributeNames>
 
 + (NSString *)getAttributeTranslationDirections:(EnumAttributesTranslationDirections)attributeName;
 

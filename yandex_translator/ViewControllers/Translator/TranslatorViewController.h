@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Api.h"
 #import "CoreDataManaged.h"
-#import "../../Enums/EnumTranslationDirections.h"
+#import "EnumTranslationDirections.h"
 
 
 @interface TranslatorViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>

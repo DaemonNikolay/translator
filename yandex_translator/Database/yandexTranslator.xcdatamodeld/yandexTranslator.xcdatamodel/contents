@@ -3,7 +3,14 @@
     <entity name="TranslationDirections" representedClassName="TranslationDirections" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String"/>
     </entity>
+    <entity name="TranslationHistory" representedClassName="TranslationHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="contentSource" attributeType="String"/>
+        <attribute name="directionTranslateFrom" attributeType="String"/>
+        <attribute name="directionTranslateTo" attributeType="String"/>
+        <attribute name="translationContents" attributeType="String"/>
+    </entity>
     <elements>
         <element name="TranslationDirections" positionX="-63" positionY="-18" width="128" height="58"/>
+        <element name="TranslationHistory" positionX="-54" positionY="0" width="128" height="103"/>
     </elements>
 </model>

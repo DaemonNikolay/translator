@@ -17,7 +17,8 @@
 		73C2B6E4233FBCB100058FC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73C2B6E3233FBCB100058FC2 /* Assets.xcassets */; };
 		73C2B6E7233FBCB100058FC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C2B6E5233FBCB100058FC2 /* LaunchScreen.storyboard */; };
 		73C2B6EA233FBCB100058FC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6E9233FBCB100058FC2 /* main.m */; };
-		7434FD87A3B34D378ABB2695 /* EnumTranslationDirections.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F52CC2A43224A31B0B94 /* EnumTranslationDirections.m */; };
+		7434F04A10E1F101D7754C3F /* EnumTranslationHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F408751DD720E18DB787 /* EnumTranslationHistory.m */; };
+		7434FE11647C2ABB27FC4D73 /* EnumTranslationDirections.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F070AB41E958939547BD /* EnumTranslationDirections.m */; };
 		7434FFF102BF4043BCF4207F /* CoreDataManaged.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F533DC3E60353BC8A2F8 /* CoreDataManaged.m */; };
 /* End PBXBuildFile section */
 
@@ -64,10 +65,13 @@
 		73C2B6E6233FBCB100058FC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73C2B6E8233FBCB100058FC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73C2B6E9233FBCB100058FC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7434F52CC2A43224A31B0B94 /* EnumTranslationDirections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationDirections.m; sourceTree = "<group>"; };
+		7434F070AB41E958939547BD /* EnumTranslationDirections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationDirections.m; sourceTree = "<group>"; };
+		7434F408751DD720E18DB787 /* EnumTranslationHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationHistory.m; sourceTree = "<group>"; };
 		7434F533DC3E60353BC8A2F8 /* CoreDataManaged.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManaged.m; sourceTree = "<group>"; };
-		7434F83D7F017D97686A7190 /* EnumTranslationDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationDirections.h; sourceTree = "<group>"; };
+		7434F8896CB97E2AA15904C8 /* EnumTranslationHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationHistory.h; sourceTree = "<group>"; };
+		7434FE0B699A1965CA42C281 /* EnumTranslationDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationDirections.h; sourceTree = "<group>"; };
 		7434FE7F26E1997000D15A70 /* CoreDataManaged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManaged.h; sourceTree = "<group>"; };
+		7434FFB20DF086D2C762B32E /* EnumAttributeNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumAttributeNames.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +98,9 @@
 		730CBA742360F105006475E1 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				7434F52CC2A43224A31B0B94 /* EnumTranslationDirections.m */,
-				7434F83D7F017D97686A7190 /* EnumTranslationDirections.h */,
+				7434F3725F38A62A9A8D649D /* TranslationDirections */,
+				7434F2EBF89DCD47E1616BAC /* TranslationHistory */,
+				7434FFB20DF086D2C762B32E /* EnumAttributeNames.h */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -196,6 +201,24 @@
 			path = yandex_translator;
 			sourceTree = "<group>";
 		};
+		7434F2EBF89DCD47E1616BAC /* TranslationHistory */ = {
+			isa = PBXGroup;
+			children = (
+				7434F408751DD720E18DB787 /* EnumTranslationHistory.m */,
+				7434F8896CB97E2AA15904C8 /* EnumTranslationHistory.h */,
+			);
+			path = TranslationHistory;
+			sourceTree = "<group>";
+		};
+		7434F3725F38A62A9A8D649D /* TranslationDirections */ = {
+			isa = PBXGroup;
+			children = (
+				7434FE0B699A1965CA42C281 /* EnumTranslationDirections.h */,
+				7434F070AB41E958939547BD /* EnumTranslationDirections.m */,
+			);
+			path = TranslationDirections;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -276,7 +299,8 @@
 				73C2B6DC233FBCB000058FC2 /* TranslatorViewController.m in Sources */,
 				73C2B6D9233FBCB000058FC2 /* SceneDelegate.m in Sources */,
 				7434FFF102BF4043BCF4207F /* CoreDataManaged.m in Sources */,
-				7434FD87A3B34D378ABB2695 /* EnumTranslationDirections.m in Sources */,
+				7434FE11647C2ABB27FC4D73 /* EnumTranslationDirections.m in Sources */,
+				7434F04A10E1F101D7754C3F /* EnumTranslationHistory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
