@@ -44,10 +44,13 @@ NSString *const FullLangName = @"fullLangName";
     CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
 
     NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirections:name];
+    NSString *entityName = [EnumEntities getEntityName:(EnumEntityNames) TranslationDirections];
 
-    [coreDataManaged saveValue:@"My name is Joke" entity:@"TranslationDirections" attribute:attributeName];
+    [coreDataManaged saveValue:@"My name is Jokefds" entity:entityName attribute:attributeName];
 
-    NSLog(@"ikgui %@", [coreDataManaged getValues:@"TranslationDirections" attribute:attributeName]);
+    NSLog(@"gdrfop %@", [coreDataManaged getValues:entityName attribute:attributeName]);
+
+    NSLog(@"ikgui %@", entityName);
 }
 
 

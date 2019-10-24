@@ -14,4 +14,6 @@
 
 - (NSArray<NSString *> *)getValues:(NSString *)entity attribute:(NSString *)attributeName;
 
+- (NSUInteger)countElements:(NSString *)entityName attribute:(NSString *)attributeName;
+
 @end

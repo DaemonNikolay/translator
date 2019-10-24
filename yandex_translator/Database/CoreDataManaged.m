@@ -3,7 +3,6 @@
 // Copyright (c) 2019 Nikolay Eckert. All rights reserved.
 //
 
-
 #import "CoreDataManaged.h"
 
 
@@ -45,5 +44,10 @@
     return [results valueForKey:attributeName];
 }
 
+- (NSUInteger)countElements:(NSString *)entityName attribute:(NSString *)attributeName {
+    return [self getValues:entityName attribute:attributeName].count;
+}
+
 
 @end
+

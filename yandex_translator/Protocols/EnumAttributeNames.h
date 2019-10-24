@@ -5,8 +5,9 @@
 
 #import <Foundation/Foundation.h>
 
+
 @protocol EnumAttributeNames <NSObject>
 
-+ (NSDictionary *)attributeNamesTranslation;
++ (NSDictionary *)nameCollection;
 
 @end

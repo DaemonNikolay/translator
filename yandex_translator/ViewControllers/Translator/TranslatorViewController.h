@@ -10,6 +10,7 @@
 #import "Api.h"
 #import "CoreDataManaged.h"
 #import "EnumTranslationDirections.h"
+#import "EnumEntities.h"
 
 
 @interface TranslatorViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>

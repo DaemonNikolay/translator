@@ -8,14 +8,14 @@
 
 @implementation EnumTranslationDirections
 
-+ (NSDictionary *)attributeNamesTranslation {
++ (NSDictionary *)nameCollection {
     return @{
             @(name): @"name"
     };
 }
 
 + (NSString *)getAttributeTranslationDirections:(EnumAttributesTranslationDirections)attributeName {
-    return [EnumTranslationDirections attributeNamesTranslation][@(attributeName)];
+    return [EnumTranslationDirections nameCollection][@(attributeName)];
 }
 
 

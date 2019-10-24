@@ -8,7 +8,7 @@
 
 @implementation EnumTranslationHistory
 
-+ (NSDictionary *)attributeNamesTranslation {
++ (NSDictionary *)nameCollection {
     return @{
             @(translationContents): @"translationContents",
             @(contentSource): @"contentSource",
@@ -18,7 +18,7 @@
 }
 
 + (NSString *)getAttributeTranslationHistories:(EnumAttributesTranslationHistory)attributeName {
-    return [EnumTranslationHistory attributeNamesTranslation][@(attributeName)];
+    return [EnumTranslationHistory nameCollection][@(attributeName)];
 }
 
 

@@ -18,6 +18,7 @@
 		73C2B6E7233FBCB100058FC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C2B6E5233FBCB100058FC2 /* LaunchScreen.storyboard */; };
 		73C2B6EA233FBCB100058FC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6E9233FBCB100058FC2 /* main.m */; };
 		7434F04A10E1F101D7754C3F /* EnumTranslationHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F408751DD720E18DB787 /* EnumTranslationHistory.m */; };
+		7434FBE371458A1272403942 /* EnumEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F9D11F0B3841B825BCAD /* EnumEntities.m */; };
 		7434FE11647C2ABB27FC4D73 /* EnumTranslationDirections.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F070AB41E958939547BD /* EnumTranslationDirections.m */; };
 		7434FFF102BF4043BCF4207F /* CoreDataManaged.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F533DC3E60353BC8A2F8 /* CoreDataManaged.m */; };
 /* End PBXBuildFile section */
@@ -66,10 +67,12 @@
 		73C2B6E8233FBCB100058FC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73C2B6E9233FBCB100058FC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7434F070AB41E958939547BD /* EnumTranslationDirections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationDirections.m; sourceTree = "<group>"; };
+		7434F10B5DA5A59A669A03A6 /* EnumEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumEntities.h; sourceTree = "<group>"; };
 		7434F408751DD720E18DB787 /* EnumTranslationHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationHistory.m; sourceTree = "<group>"; };
 		7434F533DC3E60353BC8A2F8 /* CoreDataManaged.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManaged.m; sourceTree = "<group>"; };
 		7434F8896CB97E2AA15904C8 /* EnumTranslationHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationHistory.h; sourceTree = "<group>"; };
 		7434F97DA5A2C96431858C35 /* EnumAttributeNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumAttributeNames.h; sourceTree = "<group>"; };
+		7434F9D11F0B3841B825BCAD /* EnumEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumEntities.m; sourceTree = "<group>"; };
 		7434FE0B699A1965CA42C281 /* EnumTranslationDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationDirections.h; sourceTree = "<group>"; };
 		7434FE7F26E1997000D15A70 /* CoreDataManaged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManaged.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +103,7 @@
 			children = (
 				7434F3725F38A62A9A8D649D /* TranslationDirections */,
 				7434F2EBF89DCD47E1616BAC /* TranslationHistory */,
+				7434F38D2C3A62CB7D40101C /* Enities */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -219,6 +223,15 @@
 			path = TranslationDirections;
 			sourceTree = "<group>";
 		};
+		7434F38D2C3A62CB7D40101C /* Enities */ = {
+			isa = PBXGroup;
+			children = (
+				7434F9D11F0B3841B825BCAD /* EnumEntities.m */,
+				7434F10B5DA5A59A669A03A6 /* EnumEntities.h */,
+			);
+			path = Enities;
+			sourceTree = "<group>";
+		};
 		7434FC28637873A0C88F0741 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +322,7 @@
 				7434FFF102BF4043BCF4207F /* CoreDataManaged.m in Sources */,
 				7434FE11647C2ABB27FC4D73 /* EnumTranslationDirections.m in Sources */,
 				7434F04A10E1F101D7754C3F /* EnumTranslationHistory.m in Sources */,
+				7434FBE371458A1272403942 /* EnumEntities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
