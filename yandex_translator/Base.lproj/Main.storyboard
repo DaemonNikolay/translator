@@ -134,11 +134,37 @@
                         <outlet property="buttonTranslationTo" destination="V9q-Nm-9Q8" id="lea-FI-LDe"/>
                         <outlet property="textViewSourceContent" destination="OLV-Yx-WHA" id="O2K-PO-LFC"/>
                         <outlet property="textViewTranslateContent" destination="MTl-oP-XU2" id="XWj-Ux-AeB"/>
+                        <segue destination="pkY-AB-2DD" kind="presentation" identifier="chooseLanguage" id="29N-K5-PDc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.27536231884062" y="-320.08928571428572"/>
+        </scene>
+        <!--Translate Directions View Controller-->
+        <scene sceneID="eSQ-V4-SGP">
+            <objects>
+                <viewController id="pkY-AB-2DD" customClass="TranslateDirectionsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h0P-jL-ydu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QxY-pr-HNv" userLabel="Table view translate directions">
+                                <rect key="frame" x="20" y="44" width="381" height="818"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="F8T-F7-Zvl"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableViewDirections" destination="QxY-pr-HNv" id="PbS-s8-bfO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iow-cu-bx3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1727.536231884058" y="-320.08928571428572"/>
         </scene>
         <!--History-->
         <scene sceneID="wg7-f3-ORb">

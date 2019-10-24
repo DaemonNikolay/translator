@@ -105,20 +105,25 @@ NSString *const FullLangName = @"fullLangName";
 - (IBAction)buttonTranslationFrom_click:(id)sender {
     [self dismissKeyboard];
 
-    UIAlertController *alert = [self createDialogForChoiceLanguage];
+    [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
 
-    [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
-                                              style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction *action) {
-                                                NSUInteger numberSelectedElement = (NSUInteger) self->selectNumberElementOfPicker;
-                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
 
-                                                [self saveLanguage:languageName langKey:LangTranslationFrom];
-                                                [self extractionDirectionsOfTranslateAsync];
-                                                [[self buttonTranslationFrom] setTitle:languageName forState:UIControlStateNormal];
-                                            }]];
 
-    [self presentViewController:alert animated:NO completion:nil];
+
+//    UIAlertController *alert = [self createDialogForChoiceLanguage];
+//
+//    [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
+//                                              style:UIAlertActionStyleDefault
+//                                            handler:^(UIAlertAction *action) {
+//                                                NSUInteger numberSelectedElement = (NSUInteger) self->selectNumberElementOfPicker;
+//                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
+//
+//                                                [self saveLanguage:languageName langKey:LangTranslationFrom];
+//                                                [self extractionDirectionsOfTranslateAsync];
+//                                                [[self buttonTranslationFrom] setTitle:languageName forState:UIControlStateNormal];
+//                                            }]];
+//
+//    [self presentViewController:alert animated:NO completion:nil];
 }
 
 - (IBAction)buttonTranslationTo_click:(id)sender {
