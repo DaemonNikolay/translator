@@ -12,8 +12,10 @@
 
 - (void)saveValue:(NSString *)value entity:(NSString *)entityName attribute:(NSString *)attributeName;
 
-- (NSArray<NSString *> *)getValues:(NSString *)entity attribute:(NSString *)attributeName;
+- (NSArray<NSDictionary *> *)getValues:(NSString *)entity attribute:(NSString *)attributeName;
 
 - (NSUInteger)countElements:(NSString *)entityName attribute:(NSString *)attributeName;
+
+- (void)clearEntity:(NSString *)entityName;
 
 @end

@@ -4,20 +4,18 @@
 //
 
 #import "ExtractForTranslate.h"
+#import "Api.h"
 
 
 @implementation ExtractForTranslate
 
 - (void)extractionDirectionsOfTranslateAsync {
-    dispatch_async(dispatch_get_main_queue(), ^{
-
+    dispatch_async(dispatch_get_main_queue(), (dispatch_block_t) ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
 
         NSString *langTranslationFrom = [EnumConstants getConstant:LangTranslationFrom];
         NSString *langTranslationTo = [EnumConstants getConstant:LangTranslationTo];
         NSString *shortLangName = [EnumConstants getConstant:ShortLangName];
-
 
         NSString *shortLanguageNameFrom = [[defaults objectForKey:langTranslationFrom] objectForKey:shortLangName];
         NSString *shortLanguageNameTo = [[defaults objectForKey:langTranslationTo] objectForKey:shortLangName];
@@ -30,23 +28,21 @@
         }
 
         @try {
-            self->languages = [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
+            CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
 
-            NSString *titleTranslationFrom = self->languages[shortLanguageNameFrom];
-            NSString *titleTranslationTo = self->languages[shortLanguageNameTo];
+            NSDictionary *languages = [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
+            NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
+            NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirection:name];
 
-            [[self buttonTranslationFrom] setTitle:titleTranslationFrom forState:UIControlStateNormal];
-            [[self buttonTranslationTo] setTitle:titleTranslationTo forState:UIControlStateNormal];
+            [coreDataManaged clearEntity:entityName];
+            for (NSString *language in languages) {
+                NSString *fullNameLang = languages[language];
+                [coreDataManaged saveValue:fullNameLang entity:entityName attribute:attributeName];
+                [coreDataManaged saveValue:language entity:entityName attribute:attributeName]; //TODO нужно поле под короткое имя
+            }
 
         } @catch (NSException *exception) {
-            UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
-
-            [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction *action) {
-                                                    }]];
-
-            [self presentViewController:alert animated:NO completion:nil];
+            [NSException raise:@"error extraction languages" format:@""];
         }
     });
 }

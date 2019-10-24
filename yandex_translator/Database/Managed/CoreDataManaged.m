@@ -37,7 +37,7 @@
     [appDelegate saveContext];
 }
 
-- (NSArray<NSString *> *)getValues:(NSString *)entityName attribute:(NSString *)attributeName {
+- (NSArray<NSDictionary *> *)getValues:(NSString *)entityName attribute:(NSString *)attributeName {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
     NSArray *results = [context executeFetchRequest:request error:nil];
 
@@ -46,6 +46,13 @@
 
 - (NSUInteger)countElements:(NSString *)entityName attribute:(NSString *)attributeName {
     return [self getValues:entityName attribute:attributeName].count;
+}
+
+- (void)clearEntity:(NSString *)entityName {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:entityName];
+    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+
+    [context executeRequest:delete error:nil];
 }
 
 

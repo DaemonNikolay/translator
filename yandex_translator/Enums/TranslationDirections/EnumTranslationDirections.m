@@ -14,7 +14,7 @@
     };
 }
 
-+ (NSString *)getAttributeTranslationDirections:(EnumAttributesTranslationDirections)attributeName {
++ (NSString *)getAttributeTranslationDirection:(EnumAttributesTranslationDirections)attributeName {
     return [EnumTranslationDirections nameCollection][@(attributeName)];
 }
 

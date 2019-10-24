@@ -23,11 +23,11 @@
 // MARK: --
 // MARK: Init EnumConstants
 
-NSString *const LangTranslationFrom = @"langTranslationFrom";
-NSString *const LangTranslationTo = @"langTranslationTo";
-
-NSString *const ShortLangName = @"shortLangName";
-NSString *const FullLangName = @"fullLangName";
+//NSString *const LangTranslationFrom = @"langTranslationFrom";
+//NSString *const LangTranslationTo = @"langTranslationTo";
+//
+//NSString *const ShortLangName = @"shortLangName";
+//NSString *const FullLangName = @"fullLangName";
 
 
 // MARK: --
@@ -37,20 +37,16 @@ NSString *const FullLangName = @"fullLangName";
     [super viewDidLoad];
 
     [self initButtonTitleOfLabels];
-    [self extractionDirectionsOfTranslateAsync];
     [self dismissKeyboardByClicking];
 
 
     CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
 
-    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirections:name];
+    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirection:name];
     NSString *entityName = [EnumEntities getEntityName:(EnumEntityNames) TranslationDirections];
 
-    [coreDataManaged saveValue:@"My name is Jokefds" entity:entityName attribute:attributeName];
 
     NSLog(@"gdrfop %@", [coreDataManaged getValues:entityName attribute:attributeName]);
-
-    NSLog(@"ikgui %@", entityName);
 }
 
 
@@ -105,6 +101,9 @@ NSString *const FullLangName = @"fullLangName";
 - (IBAction)buttonTranslationFrom_click:(id)sender {
     [self dismissKeyboard];
 
+    ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
+    [extractForTranslate extractionDirectionsOfTranslateAsync];
+
     [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
 
 
@@ -129,18 +128,18 @@ NSString *const FullLangName = @"fullLangName";
 - (IBAction)buttonTranslationTo_click:(id)sender {
     [self dismissKeyboard];
 
-    UIAlertController *alert = [self createDialogForChoiceLanguage];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
-                                              style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction *action) {
-                                                NSUInteger numberSelectedElement = (NSUInteger) self->selectNumberElementOfPicker;
-                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
-
-                                                [self saveLanguage:languageName langKey:LangTranslationTo];
-                                                [[self buttonTranslationTo] setTitle:languageName forState:UIControlStateNormal];
-                                            }]];
-
-    [self presentViewController:alert animated:NO completion:nil];
+//    UIAlertController *alert = [self createDialogForChoiceLanguage];
+//    [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
+//                                              style:UIAlertActionStyleDefault
+//                                            handler:^(UIAlertAction *action) {
+//                                                NSUInteger numberSelectedElement = (NSUInteger) self->selectNumberElementOfPicker;
+//                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
+//
+//                                                [self saveLanguage:languageName langKey:LangTranslationTo];
+//                                                [[self buttonTranslationTo] setTitle:languageName forState:UIControlStateNormal];
+//                                            }]];
+//
+//    [self presentViewController:alert animated:NO completion:nil];
 }
 
 - (IBAction)buttonTranslate_click:(id)sender {
@@ -152,7 +151,7 @@ NSString *const FullLangName = @"fullLangName";
     }
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *langTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
+    NSString *langTo = [[defaults objectForKey:[EnumConstants getConstant:LangTranslationTo]] objectForKey:[EnumConstants getConstant:ShortLangName]];
     if (!langTo) {
         langTo = @"en";
     }
@@ -186,8 +185,11 @@ NSString *const FullLangName = @"fullLangName";
 // MARK: Init content of UI elements
 
 - (void)initButtonTitleOfLabels {
-    NSString *languageTitleFrom = [self getLanguageTitle:LangTranslationFrom defaultLangName:@"Русский"];
-    NSString *languageTitleTo = [self getLanguageTitle:LangTranslationTo defaultLangName:@"Английский"];
+    NSString *langTranslationFrom = [EnumConstants getConstant:LangTranslationFrom];
+    NSString *langTranslationTo = [EnumConstants getConstant:LangTranslationTo];
+
+    NSString *languageTitleFrom = [self getLanguageTitle:langTranslationFrom defaultLangName:@"Русский"];
+    NSString *languageTitleTo = [self getLanguageTitle:langTranslationTo defaultLangName:@"Английский"];
 
     [[self buttonTranslationFrom] setTitle:languageTitleFrom forState:UIControlStateNormal];
     [[self buttonTranslationTo] setTitle:languageTitleTo forState:UIControlStateNormal];
@@ -199,7 +201,7 @@ NSString *const FullLangName = @"fullLangName";
     if (![defaults objectForKey:languageName]) {
         return defaultLanguageName;
     } else {
-        return [[defaults objectForKey:languageName] objectForKey:FullLangName];
+        return [[defaults objectForKey:languageName] objectForKey:[EnumConstants getConstant:FullLangName]];
     }
 }
 
@@ -222,8 +224,8 @@ NSString *const FullLangName = @"fullLangName";
     }
 
     NSDictionary *language = @{
-            ShortLangName: shortNameLang,
-            FullLangName: fullNameLang
+            [EnumConstants getConstant:ShortLangName]: shortNameLang,
+            [EnumConstants getConstant:FullLangName]: fullNameLang
     };
 
     [defaults setObject:language forKey:languageKey];

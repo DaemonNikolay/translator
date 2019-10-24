@@ -4,7 +4,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CoreDataManaged.h"
+
 #import "EnumConstants.h"
+#import "EnumEntities.h"
+#import "EnumTranslationDirections.h"
 
 
 @interface ExtractForTranslate : NSObject

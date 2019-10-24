@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Api.h"
 #import "CoreDataManaged.h"
+#import "ExtractForTranslate.h"
+
 #import "EnumTranslationDirections.h"
 #import "EnumEntities.h"
 
@@ -37,11 +39,11 @@
 // MARK: -
 // MARK: EnumConstants
 
-extern NSString *const LangTranslationFrom;
-extern NSString *const LangTranslationTo;
-
-extern NSString *const ShortLangName;
-extern NSString *const FullLangName;
+//extern NSString *const LangTranslationFrom;
+//extern NSString *const LangTranslationTo;
+//
+//extern NSString *const ShortLangName;
+//extern NSString *const FullLangName;
 
 extern NSString *const NameFileHistoryRequests;
 

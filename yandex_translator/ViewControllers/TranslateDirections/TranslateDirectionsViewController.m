@@ -10,7 +10,7 @@
 
 
 @interface TranslateDirectionsViewController () {
-    NSArray<NSString *> *languages;
+    NSArray<NSDictionary *> *languages;
 }
 
 @end
@@ -26,10 +26,11 @@
     CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
 
     NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
-    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirections:name];
+    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirection:name];
 
     languages = [coreDataManaged getValues:entityName attribute:attributeName];
 
+    NSLog(@"fdsfsd %@", languages[0]);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -37,7 +38,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", languages[(NSUInteger) indexPath.item]);
+    NSString *languageName = languages[indexPath.item];
+
+    NSLog(@"%@", languageName);
+
+    UserDefaults *userDefaults = [[UserDefaults alloc] init];
+    [userDefaults saveLanguage:languageName langKey:[EnumConstants getConstant:LangTranslationFrom] languages:languages];
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -50,7 +56,9 @@
 
     cell.textLabel.numberOfLines = 0;
 
-    cell.textLabel.text = languages[(NSUInteger) indexPath.item];
+
+    cell.textLabel.text = languages[indexPath.item];
+
 
     return cell;
 }

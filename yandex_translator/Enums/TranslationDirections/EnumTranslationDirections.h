@@ -14,6 +14,6 @@ typedef NS_ENUM(NSUInteger, EnumAttributesTranslationDirections) {
 
 @interface EnumTranslationDirections : NSObject <EnumAttributeNames>
 
-+ (NSString *)getAttributeTranslationDirections:(EnumAttributesTranslationDirections)attributeName;
++ (NSString *)getAttributeTranslationDirection:(EnumAttributesTranslationDirections)attributeName;
 
 @end
