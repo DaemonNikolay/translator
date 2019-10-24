@@ -69,9 +69,9 @@
 		7434F408751DD720E18DB787 /* EnumTranslationHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationHistory.m; sourceTree = "<group>"; };
 		7434F533DC3E60353BC8A2F8 /* CoreDataManaged.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManaged.m; sourceTree = "<group>"; };
 		7434F8896CB97E2AA15904C8 /* EnumTranslationHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationHistory.h; sourceTree = "<group>"; };
+		7434F97DA5A2C96431858C35 /* EnumAttributeNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumAttributeNames.h; sourceTree = "<group>"; };
 		7434FE0B699A1965CA42C281 /* EnumTranslationDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationDirections.h; sourceTree = "<group>"; };
 		7434FE7F26E1997000D15A70 /* CoreDataManaged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManaged.h; sourceTree = "<group>"; };
-		7434FFB20DF086D2C762B32E /* EnumAttributeNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumAttributeNames.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,6 @@
 			children = (
 				7434F3725F38A62A9A8D649D /* TranslationDirections */,
 				7434F2EBF89DCD47E1616BAC /* TranslationHistory */,
-				7434FFB20DF086D2C762B32E /* EnumAttributeNames.h */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -197,6 +196,7 @@
 				73C2B6E5233FBCB100058FC2 /* LaunchScreen.storyboard */,
 				73C2B6E8233FBCB100058FC2 /* Info.plist */,
 				73C2B6E9233FBCB100058FC2 /* main.m */,
+				7434FC28637873A0C88F0741 /* Protocols */,
 			);
 			path = yandex_translator;
 			sourceTree = "<group>";
@@ -217,6 +217,14 @@
 				7434F070AB41E958939547BD /* EnumTranslationDirections.m */,
 			);
 			path = TranslationDirections;
+			sourceTree = "<group>";
+		};
+		7434FC28637873A0C88F0741 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7434F97DA5A2C96431858C35 /* EnumAttributeNames.h */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
