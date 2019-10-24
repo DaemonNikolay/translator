@@ -35,7 +35,7 @@
 
 
 // MARK: -
-// MARK: Constants
+// MARK: EnumConstants
 
 extern NSString *const LangTranslationFrom;
 extern NSString *const LangTranslationTo;

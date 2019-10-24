@@ -9,7 +9,9 @@
 #import "TranslateDirectionsViewController.h"
 
 
-@interface TranslateDirectionsViewController ()
+@interface TranslateDirectionsViewController () {
+    NSArray<NSString *> *languages;
+}
 
 @end
 
@@ -20,10 +22,24 @@
 
     self.tableViewDirections.dataSource = self;
     self.tableViewDirections.delegate = self;
+
+    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
+
+    NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
+    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirections:name];
+
+    languages = [coreDataManaged getValues:entityName attribute:attributeName];
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return languages.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%@", languages[(NSUInteger) indexPath.item]);
+
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -34,7 +50,7 @@
 
     cell.textLabel.numberOfLines = 0;
 
-    cell.textLabel.text = @"tt43";
+    cell.textLabel.text = languages[(NSUInteger) indexPath.item];
 
     return cell;
 }
