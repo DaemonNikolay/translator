@@ -43,10 +43,10 @@ NSString *const FullLangName = @"fullLangName";
     [self dismissKeyboardByClicking];
 
 
-//    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
-//    [coreDataManaged saveValue:@"My name is Joke" entity:@"TranslationDirections" attribute:@"name"];
-//
-//    NSLog(@"ikgui %@", [coreDataManaged getValues:@"TranslationDirections" attribute:@"name"]);
+    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
+    [coreDataManaged saveValue:@"My name is Joke" entity:@"TranslationDirections" attribute:@"name"];
+
+    NSLog(@"ikgui %@", [coreDataManaged getValues:@"TranslationDirections" attribute:@"name"]);
 }
 
 

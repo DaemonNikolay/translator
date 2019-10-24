@@ -3,9 +3,9 @@
 // Copyright (c) 2019 Nikolay Eckert. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
+
 #import "CoreDataManaged.h"
-#import "AppDelegate.h"
+
 
 @interface CoreDataManaged () {
     AppDelegate *appDelegate;
