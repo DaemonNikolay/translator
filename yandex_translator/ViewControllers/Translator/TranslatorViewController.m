@@ -7,8 +7,6 @@
 //
 
 #import "TranslatorViewController.h"
-#import "Api.h"
-#import "CoreDataManaged.h"
 
 
 @interface TranslatorViewController () {
@@ -44,9 +42,12 @@ NSString *const FullLangName = @"fullLangName";
 
 
     CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
-    [coreDataManaged saveValue:@"My name is Joke" entity:@"TranslationDirections" attribute:@"name"];
 
-    NSLog(@"ikgui %@", [coreDataManaged getValues:@"TranslationDirections" attribute:@"name"]);
+    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirections:name];
+
+    [coreDataManaged saveValue:@"My name is Joke" entity:@"TranslationDirections" attribute:attributeName];
+
+    NSLog(@"ikgui %@", [coreDataManaged getValues:@"TranslationDirections" attribute:attributeName]);
 }
 
 
