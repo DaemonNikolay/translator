@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataManaged.h"
 #import "UserDefaults.h"
+#import "ExtractForTranslate.h"
 
 #import "EnumEntities.h"
 #import "EnumTranslationDirections.h"

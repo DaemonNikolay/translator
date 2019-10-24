@@ -30,10 +30,13 @@
     NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
     NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
 
-    NSArray *languagesCoreData = [coreDataManaged getValues:entityName attribute:attributeFullName];
+    NSArray *languagesCoreData = [coreDataManaged getValues:entityName];
 
-    languagesFullNames = [languagesCoreData valueForKey:attributeFullName];
-    languagesShortNames = [languagesCoreData valueForKey:attributeShortName];
+    NSArray *sourceLanguageFullNames = [languagesCoreData valueForKey:attributeFullName];
+    languagesFullNames = [ExtractForTranslate clean:sourceLanguageFullNames];
+
+    NSArray *sourceLanguageShortNames = [languagesCoreData valueForKey:attributeShortName];
+    languagesShortNames = [ExtractForTranslate clean:sourceLanguageShortNames];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -60,5 +63,6 @@
 
     return cell;
 }
+
 
 @end

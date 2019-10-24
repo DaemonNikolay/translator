@@ -15,4 +15,6 @@
 
 - (void)extractionDirectionsOfTranslate;
 
++ (NSArray *)clean:(NSArray *)value;
+
 @end

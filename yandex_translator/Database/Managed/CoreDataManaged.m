@@ -40,15 +40,15 @@
     [appDelegate saveContext];
 }
 
-- (NSArray *)getValues:(NSString *)entityName attribute:(NSString *)attributeName {
+- (NSArray *)getValues:(NSString *)entityName {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
     NSArray *results = [context executeFetchRequest:request error:nil];
 
     return results;
 }
 
-- (NSUInteger)countElements:(NSString *)entityName attribute:(NSString *)attributeName {
-    return [self getValues:entityName attribute:attributeName].count;
+- (NSUInteger)countElements:(NSString *)entityName {
+    return [self getValues:entityName].count;
 }
 
 - (void)clearEntity:(NSString *)entityName {

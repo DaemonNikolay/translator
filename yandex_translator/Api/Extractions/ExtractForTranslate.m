@@ -18,11 +18,17 @@
         NSString *shortLangName = [EnumConstants getConstant:ShortLangName];
 
         NSString *shortLanguageNameFrom = [[defaults objectForKey:langTranslationFrom] objectForKey:shortLangName];
-        NSString *shortLanguageNameTo = [[defaults objectForKey:langTranslationTo] objectForKey:shortLangName];
+        if (shortLanguageNameFrom == nil) {
+            shortLanguageNameFrom = @"en";
+        }
 
         NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
-        CoreDataManaged *coreDataManaged2 = [[CoreDataManaged alloc] init:entityName];
-        [coreDataManaged2 clearEntity:entityName];
+
+        CoreDataManaged *coreDataManagedClear = [[CoreDataManaged alloc] init:entityName];
+        NSInteger count = [coreDataManagedClear countElements:entityName];
+        if (count > 2) {
+            [coreDataManagedClear clearEntity:entityName];
+        }
 
         @try {
             NSDictionary *languages = [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
@@ -32,6 +38,9 @@
 
             for (NSString *language in languages) {
                 NSString *fullNameLang = languages[language];
+
+                NSLog(@"treg %@", fullNameLang);
+
                 CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
 
                 [coreDataManaged addValue:fullNameLang entity:entityName attribute:attributeFullName];
@@ -44,5 +53,19 @@
     });
 }
 
++ (NSArray *)clean:(NSArray *)value {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    if ([value count] == 0) {
+        return result;
+    }
+
+    for (NSString *elem in value) {
+        if (![elem isEqual:[NSNull null]]) {
+            [result addObject:elem];
+        }
+    }
+
+    return result;
+}
 
 @end
