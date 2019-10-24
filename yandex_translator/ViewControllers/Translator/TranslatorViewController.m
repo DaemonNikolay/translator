@@ -8,6 +8,7 @@
 
 #import "TranslatorViewController.h"
 #import "Api.h"
+#import "CoreDataManaged.h"
 
 
 @interface TranslatorViewController () {
@@ -40,6 +41,12 @@ NSString *const FullLangName = @"fullLangName";
     [self initButtonTitleOfLabels];
     [self extractionDirectionsOfTranslateAsync];
     [self dismissKeyboardByClicking];
+
+
+//    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
+//    [coreDataManaged saveValue:@"My name is Joke" entity:@"TranslationDirections" attribute:@"name"];
+//
+//    NSLog(@"ikgui %@", [coreDataManaged getValues:@"TranslationDirections" attribute:@"name"]);
 }
 
 
@@ -99,12 +106,11 @@ NSString *const FullLangName = @"fullLangName";
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action) {
-                                                NSString *languageName = [self->languages allValues][(NSUInteger) self->selectNumberElementOfPicker];
+                                                NSUInteger numberSelectedElement = (NSUInteger) self->selectNumberElementOfPicker;
+                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
 
                                                 [self saveLanguage:languageName langKey:LangTranslationFrom];
-
                                                 [self extractionDirectionsOfTranslateAsync];
-
                                                 [[self buttonTranslationFrom] setTitle:languageName forState:UIControlStateNormal];
                                             }]];
 
@@ -115,14 +121,13 @@ NSString *const FullLangName = @"fullLangName";
     [self dismissKeyboard];
 
     UIAlertController *alert = [self createDialogForChoiceLanguage];
-
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action) {
-                                                NSString *languageName = [self->languages allValues][(NSUInteger) self->selectNumberElementOfPicker];
+                                                NSUInteger numberSelectedElement = (NSUInteger) self->selectNumberElementOfPicker;
+                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
 
                                                 [self saveLanguage:languageName langKey:LangTranslationTo];
-
                                                 [[self buttonTranslationTo] setTitle:languageName forState:UIControlStateNormal];
                                             }]];
 
@@ -281,11 +286,9 @@ NSString *const FullLangName = @"fullLangName";
         } @catch (NSException *exception) {
             UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
 
-            [alert addAction:[UIAlertAction actionWithTitle:@"Reload"
+            [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction *action) {
-
-                                                        [self extractionDirectionsOfTranslateAsync];
                                                     }]];
 
             [self presentViewController:alert animated:NO completion:nil];
