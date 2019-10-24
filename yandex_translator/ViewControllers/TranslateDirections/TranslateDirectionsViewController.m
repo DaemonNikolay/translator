@@ -10,7 +10,8 @@
 
 
 @interface TranslateDirectionsViewController () {
-    NSArray<NSDictionary *> *languages;
+    NSArray *languagesFullNames;
+    NSArray *languagesShortNames;
 }
 
 @end
@@ -23,27 +24,27 @@
     self.tableViewDirections.dataSource = self;
     self.tableViewDirections.delegate = self;
 
-    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
-
     NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
-    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirection:name];
+    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
 
-    languages = [coreDataManaged getValues:entityName attribute:attributeName];
+    NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
+    NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
 
-    NSLog(@"fdsfsd %@", languages[0]);
+    NSArray *languagesCoreData = [coreDataManaged getValues:entityName attribute:attributeFullName];
+
+    languagesFullNames = [languagesCoreData valueForKey:attributeFullName];
+    languagesShortNames = [languagesCoreData valueForKey:attributeShortName];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return languages.count;
+    return languagesFullNames.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *languageName = languages[indexPath.item];
-
-    NSLog(@"%@", languageName);
+    NSString *languageShortName = languagesShortNames[(NSUInteger) indexPath.item];
 
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
-    [userDefaults saveLanguage:languageName langKey:[EnumConstants getConstant:LangTranslationFrom] languages:languages];
+    [userDefaults saveLanguage:languageShortName];
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -55,10 +56,7 @@
     }
 
     cell.textLabel.numberOfLines = 0;
-
-
-    cell.textLabel.text = languages[indexPath.item];
-
+    cell.textLabel.text = languagesFullNames[(NSUInteger) indexPath.item];
 
     return cell;
 }

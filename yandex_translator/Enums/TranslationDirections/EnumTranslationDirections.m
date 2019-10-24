@@ -10,7 +10,8 @@
 
 + (NSDictionary *)nameCollection {
     return @{
-            @(name): @"name"
+            @(fullName): @"fullName",
+            @(shortName): @"shortName"
     };
 }
 

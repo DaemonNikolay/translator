@@ -10,12 +10,16 @@
 
 @interface CoreDataManaged : NSObject
 
-- (void)saveValue:(NSString *)value entity:(NSString *)entityName attribute:(NSString *)attributeName;
+- (instancetype)init:(NSString *)entityName;
 
-- (NSArray<NSDictionary *> *)getValues:(NSString *)entity attribute:(NSString *)attributeName;
+- (void)addValue:(NSString *)value entity:(NSString *)entityName attribute:(NSString *)attributeName;
+
+- (NSArray *)getValues:(NSString *)entity attribute:(NSString *)attributeName;
 
 - (NSUInteger)countElements:(NSString *)entityName attribute:(NSString *)attributeName;
 
 - (void)clearEntity:(NSString *)entityName;
+
+- (void)save;
 
 @end

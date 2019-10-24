@@ -9,6 +9,6 @@
 
 @interface UserDefaults : NSObject
 
-- (void)saveLanguage:(NSString *)languageName langKey:(NSString *)languageKey languages:(NSArray <NSDictionary *> *)languages;
+- (void)saveLanguage:(NSString *)languageName;
 
 @end

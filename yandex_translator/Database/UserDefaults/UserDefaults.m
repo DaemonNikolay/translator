@@ -8,30 +8,10 @@
 
 @implementation UserDefaults
 
-- (void)saveLanguage:(NSString *)languageName langKey:(NSString *)languageKey languages:(NSArray <NSString *> *)languages {
+- (void)saveLanguage:(NSString *)languageName {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    NSString *shortNameLang;
-    NSString *fullNameLang;
-
-//    for ( *langKey in languages) {
-//
-//        NSLog(@"%@", langKey);
-//
-//        if ( == languageName) {
-//            shortNameLang = langKey;
-//            fullNameLang = languageName;
-//
-//            break;
-//        }
-//    }
-
-    NSDictionary *language = @{
-            [EnumConstants getConstant:ShortLangName]: shortNameLang,
-            [EnumConstants getConstant:FullLangName]: fullNameLang
-    };
-
-    [defaults setObject:language forKey:languageKey];
+    [defaults setObject:languageName forKey:[EnumConstants getConstant:ShortLangName]];
 }
 
 @end

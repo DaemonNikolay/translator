@@ -40,13 +40,13 @@
     [self dismissKeyboardByClicking];
 
 
-    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
+//    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
+//
+//    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
+//    NSString *entityName = [EnumEntities getEntityName:(EnumEntityNames) TranslationDirections];
 
-    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirection:name];
-    NSString *entityName = [EnumEntities getEntityName:(EnumEntityNames) TranslationDirections];
 
-
-    NSLog(@"gdrfop %@", [coreDataManaged getValues:entityName attribute:attributeName]);
+//    NSLog(@"gdrfop %@", [coreDataManaged getValues:entityName attribute:attributeName]);
 }
 
 
@@ -102,7 +102,7 @@
     [self dismissKeyboard];
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-    [extractForTranslate extractionDirectionsOfTranslateAsync];
+    [extractForTranslate extractionDirectionsOfTranslate];
 
     [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
 
@@ -118,7 +118,7 @@
 //                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
 //
 //                                                [self saveLanguage:languageName langKey:LangTranslationFrom];
-//                                                [self extractionDirectionsOfTranslateAsync];
+//                                                [self extractionDirectionsOfTranslate];
 //                                                [[self buttonTranslationFrom] setTitle:languageName forState:UIControlStateNormal];
 //                                            }]];
 //
@@ -271,7 +271,7 @@
     return directionTranslate;
 }
 
-//- (void)extractionDirectionsOfTranslateAsync {
+//- (void)extractionDirectionsOfTranslate {
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //
 //        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

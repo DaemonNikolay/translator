@@ -8,7 +8,8 @@
 
 
 typedef NS_ENUM(NSUInteger, EnumAttributesTranslationDirections) {
-    name = 0
+    fullName = 0,
+    shortName = 1
 };
 
 

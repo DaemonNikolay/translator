@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="TranslationDirections" representedClassName="TranslationDirections" syncable="YES" codeGenerationType="class">
-        <attribute name="name" attributeType="String"/>
+        <attribute name="fullName" attributeType="String"/>
+        <attribute name="shortName" attributeType="String"/>
     </entity>
     <entity name="TranslationHistory" representedClassName="TranslationHistory" syncable="YES" codeGenerationType="class">
         <attribute name="contentSource" attributeType="String"/>
@@ -10,7 +11,7 @@
         <attribute name="translationContents" attributeType="String"/>
     </entity>
     <elements>
-        <element name="TranslationDirections" positionX="-63" positionY="-18" width="128" height="58"/>
+        <element name="TranslationDirections" positionX="-63" positionY="-18" width="128" height="73"/>
         <element name="TranslationHistory" positionX="-54" positionY="0" width="128" height="103"/>
     </elements>
 </model>

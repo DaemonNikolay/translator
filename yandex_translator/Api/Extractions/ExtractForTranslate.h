@@ -13,6 +13,6 @@
 
 @interface ExtractForTranslate : NSObject
 
-- (void)extractionDirectionsOfTranslateAsync;
+- (void)extractionDirectionsOfTranslate;
 
 @end
