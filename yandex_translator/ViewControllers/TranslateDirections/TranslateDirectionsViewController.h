@@ -15,10 +15,9 @@
 #import "EnumTranslationDirections.h"
 
 
+@interface TranslateDirectionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@interface TranslateDirectionsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
-
-@property (weak, nonatomic) IBOutlet UITableView *tableViewDirections;
+@property(weak, nonatomic) IBOutlet UITableView *tableViewDirections;
 
 @end
 

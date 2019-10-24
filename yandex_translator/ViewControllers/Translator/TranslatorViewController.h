@@ -15,7 +15,7 @@
 #import "EnumEntities.h"
 
 
-@interface TranslatorViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface TranslatorViewController : UIViewController
 
 
 // MARK: -
@@ -31,21 +31,11 @@
 // MARK: -
 // MARK: Actions
 
+@property(nonatomic, strong) id name;
+
 - (IBAction)buttonTranslationFrom_click:(id)sender;
 - (IBAction)buttonTranslationTo_click:(id)sender;
 - (IBAction)buttonTranslate_click:(id)sender;
-
-
-// MARK: -
-// MARK: EnumConstants
-
-//extern NSString *const LangTranslationFrom;
-//extern NSString *const LangTranslationTo;
-//
-//extern NSString *const ShortLangName;
-//extern NSString *const FullLangName;
-
-extern NSString *const NameFileHistoryRequests;
 
 
 @end

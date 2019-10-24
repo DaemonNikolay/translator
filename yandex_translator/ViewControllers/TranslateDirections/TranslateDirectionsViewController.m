@@ -18,6 +18,10 @@
 
 @implementation TranslateDirectionsViewController
 
+
+// MARK: --
+// MARK: Life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -39,15 +43,21 @@
     languagesShortNames = [ExtractForTranslate clean:sourceLanguageShortNames];
 }
 
+
+// MARK: --
+// MARK: Table view
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return languagesFullNames.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *languageShortName = languagesShortNames[(NSUInteger) indexPath.item];
+    NSString *languageFullName = languagesFullNames[(NSUInteger) indexPath.item];
 
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
-    [userDefaults saveLanguage:languageShortName];
+    [userDefaults setShortLanguageNameFrom:languageShortName];
+    [userDefaults setFullNameLanguageFrom:languageFullName];
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }

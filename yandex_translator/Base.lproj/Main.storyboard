@@ -166,6 +166,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F8T-F7-Zvl"/>
                     </view>
+                    <navigationItem key="navigationItem" id="AqF-fq-ZNQ"/>
                     <connections>
                         <outlet property="tableViewDirections" destination="QxY-pr-HNv" id="PbS-s8-bfO"/>
                     </connections>

@@ -10,47 +10,35 @@
 @implementation ExtractForTranslate
 
 - (void)extractionDirectionsOfTranslate {
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    UserDefaults *userDefaults = [[UserDefaults alloc] init];
+    NSString *shortLanguageNameFrom = [userDefaults getShortLanguageNameFrom];
+    if (shortLanguageNameFrom == nil) {
+        shortLanguageNameFrom = @"ru";
+    }
 
-        NSString *langTranslationFrom = [EnumConstants getConstant:LangTranslationFrom];
-        NSString *langTranslationTo = [EnumConstants getConstant:LangTranslationTo];
-        NSString *shortLangName = [EnumConstants getConstant:ShortLangName];
+    NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
 
-        NSString *shortLanguageNameFrom = [[defaults objectForKey:langTranslationFrom] objectForKey:shortLangName];
-        if (shortLanguageNameFrom == nil) {
-            shortLanguageNameFrom = @"en";
+    CoreDataManaged *coreDataManagedClear = [[CoreDataManaged alloc] init:entityName];
+    [coreDataManagedClear clearEntity:entityName];
+
+    @try {
+        NSDictionary *languages = [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
+
+        NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
+        NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
+
+        for (NSString *language in languages) {
+            NSString *fullNameLang = languages[language];
+
+            CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
+
+            [coreDataManaged addValue:fullNameLang entity:entityName attribute:attributeFullName];
+            [coreDataManaged addValue:language entity:entityName attribute:attributeShortName];
+            [coreDataManaged save];
         }
-
-        NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
-
-        CoreDataManaged *coreDataManagedClear = [[CoreDataManaged alloc] init:entityName];
-        NSInteger count = [coreDataManagedClear countElements:entityName];
-        if (count > 2) {
-            [coreDataManagedClear clearEntity:entityName];
-        }
-
-        @try {
-            NSDictionary *languages = [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
-
-            NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
-            NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
-
-            for (NSString *language in languages) {
-                NSString *fullNameLang = languages[language];
-
-                NSLog(@"treg %@", fullNameLang);
-
-                CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
-
-                [coreDataManaged addValue:fullNameLang entity:entityName attribute:attributeFullName];
-                [coreDataManaged addValue:language entity:entityName attribute:attributeShortName];
-                [coreDataManaged save];
-            }
-        } @catch (NSException *exception) {
-            [NSException raise:@"error extraction languages" format:@"%@", exception];
-        }
-    });
+    } @catch (NSException *exception) {
+        [NSException raise:@"error extraction languages" format:@"%@", exception];
+    }
 }
 
 + (NSArray *)clean:(NSArray *)value {

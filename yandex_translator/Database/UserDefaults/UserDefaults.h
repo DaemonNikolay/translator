@@ -9,6 +9,20 @@
 
 @interface UserDefaults : NSObject
 
-- (void)saveLanguage:(NSString *)languageName;
+- (void)setShortLanguageNameFrom:(NSString *)languageName;
+
+- (void)setShortLanguageNameTo:(NSString *)languageName;
+
+- (void)setFullNameLanguageFrom:(NSString *)languageName;
+
+- (void)setFullNameLanguageTo:(NSString *)languageName;
+
+- (NSString *)getShortLanguageNameFrom;
+
+- (NSString *)getShortLanguageNameTo;
+
+- (NSString *)getFullLanguageNameFrom;
+
+- (NSString *)getFullLanguageNameTo;
 
 @end

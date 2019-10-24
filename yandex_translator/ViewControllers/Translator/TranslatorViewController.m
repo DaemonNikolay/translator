@@ -9,25 +9,7 @@
 #import "TranslatorViewController.h"
 
 
-@interface TranslatorViewController () {
-    NSDictionary *languages;
-    NSInteger selectNumberElementOfPicker;
-}
-
-@end
-
-
 @implementation TranslatorViewController
-
-
-// MARK: --
-// MARK: Init EnumConstants
-
-//NSString *const LangTranslationFrom = @"langTranslationFrom";
-//NSString *const LangTranslationTo = @"langTranslationTo";
-//
-//NSString *const ShortLangName = @"shortLangName";
-//NSString *const FullLangName = @"fullLangName";
 
 
 // MARK: --
@@ -36,55 +18,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self initButtonTitleOfLabels];
+    [self initButtonsTitle];
     [self dismissKeyboardByClicking];
 
+    [self addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 
-//    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
-//
-//    NSString *attributeName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
-//    NSString *entityName = [EnumEntities getEntityName:(EnumEntityNames) TranslationDirections];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults addObserver:self
+               forKeyPath:[EnumConstants getConstant:FullLangNameFrom]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
 
 
-//    NSLog(@"gdrfop %@", [coreDataManaged getValues:entityName attribute:attributeName]);
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 
-// MARK: --
-// MARK: PickerView
+    NSLog(@"kg[pfdskgsdf");
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
+    if ([keyPath isEqualToString:[EnumConstants getConstant:FullLangNameFrom]]) {
+        NSLog(@"The name of the FIRST child was changed.");
+        NSLog(@"%@", change);
+
+        [self initButtonsTitle];
+    }
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return languages.count;
+- (void)viewDidDisappear:(BOOL)animated {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObserver:self
+                  forKeyPath:[EnumTranslationDirections
+                          getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameFrom]
+    ];
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [languages allValues][(NSUInteger) row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    selectNumberElementOfPicker = row;
-}
 
 
 // MARK: --
 // MARK: Additional UI
-
-- (UIAlertController *)createDialogForChoiceLanguage {
-    UIAlertController *alert = [self createAlertDialog:@"Choice lang\n\n\n\n\n\n\n"];
-
-    UIPickerView *picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 0.0, 270.0, 200.0)];
-
-    picker.dataSource = self;
-    picker.delegate = self;
-
-    [alert.view addSubview:picker];
-
-    return alert;
-}
 
 - (UIAlertController *)createAlertDialog:(NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
@@ -104,42 +75,13 @@
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
     [extractForTranslate extractionDirectionsOfTranslate];
 
+    self.name = @"kgf[pdk";
+
     [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
-
-
-
-
-//    UIAlertController *alert = [self createDialogForChoiceLanguage];
-//
-//    [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
-//                                              style:UIAlertActionStyleDefault
-//                                            handler:^(UIAlertAction *action) {
-//                                                NSUInteger numberSelectedElement = (NSUInteger) self->selectNumberElementOfPicker;
-//                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
-//
-//                                                [self saveLanguage:languageName langKey:LangTranslationFrom];
-//                                                [self extractionDirectionsOfTranslate];
-//                                                [[self buttonTranslationFrom] setTitle:languageName forState:UIControlStateNormal];
-//                                            }]];
-//
-//    [self presentViewController:alert animated:NO completion:nil];
 }
 
 - (IBAction)buttonTranslationTo_click:(id)sender {
     [self dismissKeyboard];
-
-//    UIAlertController *alert = [self createDialogForChoiceLanguage];
-//    [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
-//                                              style:UIAlertActionStyleDefault
-//                                            handler:^(UIAlertAction *action) {
-//                                                NSUInteger numberSelectedElement = (NSUInteger) self->selectNumberElementOfPicker;
-//                                                NSString *languageName = [self->languages allValues][numberSelectedElement];
-//
-//                                                [self saveLanguage:languageName langKey:LangTranslationTo];
-//                                                [[self buttonTranslationTo] setTitle:languageName forState:UIControlStateNormal];
-//                                            }]];
-//
-//    [self presentViewController:alert animated:NO completion:nil];
 }
 
 - (IBAction)buttonTranslate_click:(id)sender {
@@ -151,7 +93,7 @@
     }
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *langTo = [[defaults objectForKey:[EnumConstants getConstant:LangTranslationTo]] objectForKey:[EnumConstants getConstant:ShortLangName]];
+    NSString *langTo = [[defaults objectForKey:[EnumConstants getConstant:LangTranslationTo]] objectForKey:[EnumConstants getConstant:ShortLangNameFrom]];
     if (!langTo) {
         langTo = @"en";
     }
@@ -184,128 +126,45 @@
 // MARK: --
 // MARK: Init content of UI elements
 
-- (void)initButtonTitleOfLabels {
-    NSString *langTranslationFrom = [EnumConstants getConstant:LangTranslationFrom];
-    NSString *langTranslationTo = [EnumConstants getConstant:LangTranslationTo];
-
-    NSString *languageTitleFrom = [self getLanguageTitle:langTranslationFrom defaultLangName:@"Русский"];
-    NSString *languageTitleTo = [self getLanguageTitle:langTranslationTo defaultLangName:@"Английский"];
+- (void)initButtonsTitle {
+    UserDefaults *userDefaults = [[UserDefaults alloc] init];
+    NSString *languageTitleFrom = [userDefaults getFullLanguageNameFrom];
+    NSString *languageTitleTo = [userDefaults getFullLanguageNameTo];
 
     [[self buttonTranslationFrom] setTitle:languageTitleFrom forState:UIControlStateNormal];
     [[self buttonTranslationTo] setTitle:languageTitleTo forState:UIControlStateNormal];
 }
 
-- (NSString *)getLanguageTitle:(NSString *)languageName defaultLangName:(NSString *)defaultLanguageName {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    if (![defaults objectForKey:languageName]) {
-        return defaultLanguageName;
-    } else {
-        return [[defaults objectForKey:languageName] objectForKey:[EnumConstants getConstant:FullLangName]];
-    }
-}
 
 // MARK: --
 // MARK: Memory
 
-- (void)saveLanguage:(NSString *)languageName langKey:(NSString *)languageKey {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    NSString *shortNameLang;
-    NSString *fullNameLang;
-
-    for (NSString *langKey in languages) {
-        if (languages[langKey] == languageName) {
-            shortNameLang = langKey;
-            fullNameLang = languageName;
-
-            break;
-        }
-    }
-
-    NSDictionary *language = @{
-            [EnumConstants getConstant:ShortLangName]: shortNameLang,
-            [EnumConstants getConstant:FullLangName]: fullNameLang
-    };
-
-    [defaults setObject:language forKey:languageKey];
-}
-
 - (void)saveToHistoryOfTranslate:(NSString *)textTranslate sourceText:(NSString *)sourceText {
-    NSMutableString *directionTranslate = [self extractionDirectionTranslation];
+//    NSMutableString *directionTranslate = [self extractionDirectionTranslation];
+//
+//    NSDictionary *infoOfTranslate = @{
+//            @"direction": directionTranslate,
+//            @"beforeTranslation": sourceText,
+//            @"afterTranslation": textTranslate
+//    };
+//
+//    NSString *keyHistory = @"history";
+//
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSArray *collectionInfoOfTranslate = @[infoOfTranslate];
+//
+//    if (![defaults objectForKey:keyHistory]) {
+//        [defaults setObject:collectionInfoOfTranslate forKey:keyHistory];
+//        return;
+//    }
+//
+//    NSMutableArray *content = [[defaults objectForKey:keyHistory] mutableCopy];
+//
+//    [content addObject:infoOfTranslate];
+//    [defaults setObject:content forKey:keyHistory];
 
-    NSDictionary *infoOfTranslate = @{
-            @"direction": directionTranslate,
-            @"beforeTranslation": sourceText,
-            @"afterTranslation": textTranslate
-    };
-
-    NSString *keyHistory = @"history";
-
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *collectionInfoOfTranslate = @[infoOfTranslate];
-
-    if (![defaults objectForKey:keyHistory]) {
-        [defaults setObject:collectionInfoOfTranslate forKey:keyHistory];
-        return;
-    }
-
-    NSMutableArray *content = [[defaults objectForKey:keyHistory] mutableCopy];
-
-    [content addObject:infoOfTranslate];
-    [defaults setObject:content forKey:keyHistory];
+// TODO FIXXX
 }
-
-
-// MARK: --
-// MARK: Extractions
-
-- (NSMutableString *)extractionDirectionTranslation {
-    NSMutableString *directionTranslate = [NSMutableString string];
-
-    NSString *langTranslationFrom = [[self buttonTranslationFrom] currentTitle];
-    NSString *langTranslationTo = [[self buttonTranslationTo] currentTitle];
-
-    [directionTranslate appendFormat:@"%@->%@", langTranslationFrom, langTranslationTo];
-
-    return directionTranslate;
-}
-
-//- (void)extractionDirectionsOfTranslate {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        NSString *shortLanguageNameFrom = [[defaults objectForKey:LangTranslationFrom] objectForKey:ShortLangName];
-//        NSString *shortLanguageNameTo = [[defaults objectForKey:LangTranslationTo] objectForKey:ShortLangName];
-//
-//        if (!shortLanguageNameFrom) {
-//            shortLanguageNameFrom = @"ru";
-//        }
-//        if (!shortLanguageNameTo) {
-//            shortLanguageNameTo = @"en";
-//        }
-//
-//        @try {
-//            self->languages = [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
-//
-//            NSString *titleTranslationFrom = self->languages[shortLanguageNameFrom];
-//            NSString *titleTranslationTo = self->languages[shortLanguageNameTo];
-//
-//            [[self buttonTranslationFrom] setTitle:titleTranslationFrom forState:UIControlStateNormal];
-//            [[self buttonTranslationTo] setTitle:titleTranslationTo forState:UIControlStateNormal];
-//
-//        } @catch (NSException *exception) {
-//            UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
-//
-//            [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
-//                                                      style:UIAlertActionStyleDefault
-//                                                    handler:^(UIAlertAction *action) {
-//                                                    }]];
-//
-//            [self presentViewController:alert animated:NO completion:nil];
-//        }
-//    });
-//}
 
 
 // Mark: --

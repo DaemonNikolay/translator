@@ -52,12 +52,6 @@
 }
 
 - (void)clearEntity:(NSString *)entityName {
-//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:entityName];
-//    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
-//
-//    [context executeRequest:delete error:nil];
-
-
     NSFetchRequest *allCars = [[NSFetchRequest alloc] init];
     [allCars setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:context]];
     [allCars setIncludesPropertyValues:NO];

@@ -10,8 +10,12 @@
 typedef NS_ENUM(NSUInteger, Constants) {
     LangTranslationFrom = 0,
     LangTranslationTo = 1,
-    ShortLangName = 2,
-    FullLangName = 3
+
+    ShortLangNameFrom = 2,
+    ShortLangNameTo = 3,
+
+    FullLangNameFrom = 4,
+    FullLangNameTo = 5
 };
 
 @interface EnumConstants : NSObject <EnumAttributeNames>

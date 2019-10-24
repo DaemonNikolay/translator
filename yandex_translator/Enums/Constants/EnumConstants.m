@@ -12,8 +12,10 @@
     return @{
             @(LangTranslationFrom): @"LangTranslationFrom",
             @(LangTranslationTo): @"LangTranslationTo",
-            @(ShortLangName): @"ShortLangName",
-            @(FullLangName): @"FullLangName"
+            @(ShortLangNameFrom): @"ShortLangNameFrom",
+            @(ShortLangNameTo): @"ShortLangNameTo",
+            @(FullLangNameFrom): @"FullLangNameFrom",
+            @(FullLangNameTo): @"FullLangNameTo"
     };
 }
 

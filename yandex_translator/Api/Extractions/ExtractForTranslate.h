@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CoreDataManaged.h"
+#import "UserDefaults.h"
 
 #import "EnumConstants.h"
 #import "EnumEntities.h"
