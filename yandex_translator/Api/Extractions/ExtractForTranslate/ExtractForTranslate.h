@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 #import "CoreDataManaged.h"
 #import "UserDefaults.h"
+#import "ExtractNameFromLangsApi.h"
 
 #import "EnumConstants.h"
 #import "EnumEntities.h"
@@ -14,7 +15,7 @@
 
 @interface ExtractForTranslate : NSObject
 
-- (void)extractionDirectionsOfTranslate;
+- (void)extractionDirectionsOfTranslate:(Boolean)withUpdate;
 
 + (NSArray *)clean:(NSArray *)value;
 

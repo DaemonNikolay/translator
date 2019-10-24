@@ -21,37 +21,38 @@
     [self initButtonsTitle];
     [self dismissKeyboardByClicking];
 
-    [self addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults addObserver:self
-               forKeyPath:[EnumConstants getConstant:FullLangNameFrom]
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-
-
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-
-    NSLog(@"kg[pfdskgsdf");
-
-    if ([keyPath isEqualToString:[EnumConstants getConstant:FullLangNameFrom]]) {
-        NSLog(@"The name of the FIRST child was changed.");
-        NSLog(@"%@", change);
-
-        [self initButtonsTitle];
-    }
+    [self observingOnChangeLanguageTitles];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     [defaults removeObserver:self
                   forKeyPath:[EnumTranslationDirections
                           getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameFrom]
     ];
+
+    [defaults removeObserver:self
+                  forKeyPath:[EnumTranslationDirections
+                          getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameTo]
+    ];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+
+    NSString *fullLangNameFrom = [EnumConstants getConstant:FullLangNameFrom];
+    NSString *fullLangNameTo = [EnumConstants getConstant:FullLangNameTo];
+
+    if ([keyPath isEqualToString:fullLangNameFrom] || [keyPath isEqualToString:fullLangNameTo]) {
+        ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
+        [extractForTranslate extractionDirectionsOfTranslate:NO];
+
+        [self initButtonsTitle];
+    }
+}
 
 
 // MARK: --
@@ -73,9 +74,7 @@
     [self dismissKeyboard];
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-    [extractForTranslate extractionDirectionsOfTranslate];
-
-    self.name = @"kgf[pdk";
+    [extractForTranslate extractionDirectionsOfTranslate:YES];
 
     [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
 }
@@ -180,5 +179,20 @@
 - (void)dismissKeyboard {
     [self.view endEditing:YES];
 }
+
+- (void)observingOnChangeLanguageTitles {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    [defaults addObserver:self
+               forKeyPath:[EnumConstants getConstant:FullLangNameFrom]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+
+    [defaults addObserver:self
+               forKeyPath:[EnumConstants getConstant:FullLangNameTo]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+}
+
 
 @end
