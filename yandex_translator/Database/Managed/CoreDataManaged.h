@@ -10,13 +10,12 @@
 
 @interface CoreDataManaged : NSObject
 
+
 - (instancetype)init:(NSString *)entityName;
 
 - (void)addValue:(NSString *)value entity:(NSString *)entityName attribute:(NSString *)attributeName;
 
 - (NSArray *)getValues:(NSString *)entity;
-
-- (NSUInteger)countElements:(NSString *)entityName;
 
 - (void)clearEntity:(NSString *)entityName;
 

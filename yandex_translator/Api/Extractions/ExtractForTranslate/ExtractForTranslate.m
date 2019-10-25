@@ -28,6 +28,7 @@
         NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
         NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
 
+
         for (NSString *language in languages) {
             NSString *fullNameLang = languages[language];
 
@@ -37,6 +38,7 @@
             [coreDataManaged addValue:language entity:entityName attribute:attributeShortName];
             [coreDataManaged save];
         }
+
     } @catch (NSException *exception) {
         [NSException raise:@"error extraction languages" format:@"%@", exception];
     }
@@ -58,27 +60,7 @@
 }
 
 - (NSDictionary *)getLanguagesList:(NSString *)shortLanguageNameFrom {
-//    if (withUpdate) {
     return [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
-//    }
-
-//    NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
-//
-//    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
-//    NSArray *langs = [coreDataManaged getValues:entityName];
-//
-//    NSString *keyFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
-//    NSString *keyShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
-//
-//    NSMutableDictionary *mergeShortAndFullNames = [[NSMutableDictionary alloc] init];
-//    for (int i = 0; i < [langs count]; ++i) {
-//        NSString *shortNameLang = [[langs valueForKey:keyShortName] objectAtIndex:(NSUInteger) i];
-//        NSString *fullNameLang = [[langs valueForKey:keyFullName] objectAtIndex:(NSUInteger) i];
-//
-//        mergeShortAndFullNames[shortNameLang] = fullNameLang;
-//    }
-//
-//    return mergeShortAndFullNames;
 }
 
 - (NSString *)getNewFullLangName:(NSString *)shortLangName languages:(NSDictionary *)languages {

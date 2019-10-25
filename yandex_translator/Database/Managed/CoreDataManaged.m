@@ -51,20 +51,16 @@
     return results;
 }
 
-- (NSUInteger)countElements:(NSString *)entityName {
-    return [self getValues:entityName].count;
-}
-
 - (void)clearEntity:(NSString *)entityName {
-    NSFetchRequest *allCars = [[NSFetchRequest alloc] init];
-    [allCars setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:context]];
-    [allCars setIncludesPropertyValues:NO];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:context]];
+    [request setIncludesPropertyValues:NO];
 
     NSError *error = nil;
-    NSArray *cars = [context executeFetchRequest:allCars error:&error];
+    NSArray *elements = [context executeFetchRequest:request error:&error];
 
-    for (NSManagedObject *car in cars) {
-        [context deleteObject:car];
+    for (NSManagedObject *element in elements) {
+        [context deleteObject:element];
     }
 
     NSError *saveError = nil;

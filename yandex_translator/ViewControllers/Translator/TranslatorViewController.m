@@ -42,8 +42,15 @@
 
     if ([keyPath isEqualToString:fullLangNameFrom]) {
         ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-        [extractForTranslate extractionDirectionsOfTranslate];
-        [self initButtonsTitle];
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            [extractForTranslate extractionDirectionsOfTranslate];
+
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [extractForTranslate extractionDirectionsOfTranslate];
+                [self initButtonsTitle];
+            });
+        });
     }
 }
 
@@ -67,51 +74,56 @@
     [self dismissKeyboard];
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-    [extractForTranslate extractionDirectionsOfTranslate];
 
-    [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
-}
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [extractForTranslate extractionDirectionsOfTranslate];
 
-- (IBAction)buttonTranslationTo_click:(id)sender {
-    [self dismissKeyboard];
-}
-
-- (IBAction)buttonTranslate_click:(id)sender {
-    [self dismissKeyboard];
-
-    NSString *textToTranslate = self->_textViewSourceContent.text;
-    if (textToTranslate == nil || [textToTranslate length] == 0) {
-        return;
-    }
-
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *langTo = [[defaults objectForKey:[EnumConstants getConstant:LangTranslationTo]] objectForKey:[EnumConstants getConstant:ShortLangNameFrom]];
-    if (!langTo) {
-        langTo = @"en";
-    }
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *json;
-
-        @try {
-            json = [Api translateText:textToTranslate lang:langTo];
-
-            NSString *translationContent = [json valueForKey:@"text"][0];
-
-            self.textViewTranslateContent.text = translationContent;
-
-            [self saveToHistoryOfTranslate:translationContent sourceText:textToTranslate];
-        } @catch (NSException *exception) {
-            UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
-
-            [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction *action) {
-                                                    }]];
-
-            [self presentViewController:alert animated:NO completion:nil];
-        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
+        });
     });
+}
+
+- (IBAction)buttonTranslationTo_click:(id)sender { // TODO FIXXX
+    [self dismissKeyboard];
+}
+
+- (IBAction)buttonTranslate_click:(id)sender {  // TODO FIXXX
+    [self dismissKeyboard];
+
+//    NSString *textToTranslate = self->_textViewSourceContent.text;
+//    if (textToTranslate == nil || [textToTranslate length] == 0) {
+//        return;
+//    }
+//
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *langTo = [[defaults objectForKey:[EnumConstants getConstant:LangTranslationTo]] objectForKey:[EnumConstants getConstant:ShortLangNameFrom]];
+//    if (!langTo) {
+//        langTo = @"en";
+//    }
+//
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        NSDictionary *json;
+//
+//        @try {
+//            json = [Api translateText:textToTranslate lang:langTo];
+//
+//            NSString *translationContent = [json valueForKey:@"text"][0];
+//
+//            self.textViewTranslateContent.text = translationContent;
+//
+//            [self saveToHistoryOfTranslate:translationContent sourceText:textToTranslate];
+//        } @catch (NSException *exception) {
+//            UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
+//
+//            [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
+//                                                      style:UIAlertActionStyleDefault
+//                                                    handler:^(UIAlertAction *action) {
+//                                                    }]];
+//
+//            [self presentViewController:alert animated:NO completion:nil];
+//        }
+//    });
 }
 
 
@@ -122,9 +134,12 @@
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
     NSString *languageTitleFrom = [userDefaults getFullLanguageNameFrom];
     NSString *languageTitleTo = [userDefaults getFullLanguageNameTo];
-
-    [[self buttonTranslationFrom] setTitle:languageTitleFrom forState:UIControlStateNormal];
-    [[self buttonTranslationTo] setTitle:languageTitleTo forState:UIControlStateNormal];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [[self buttonTranslationFrom] setTitle:languageTitleFrom forState:UIControlStateNormal];
+            [[self buttonTranslationTo] setTitle:languageTitleTo forState:UIControlStateNormal];
+        });
+    });
 }
 
 
