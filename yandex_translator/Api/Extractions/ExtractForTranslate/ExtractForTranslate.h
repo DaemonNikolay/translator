@@ -17,6 +17,8 @@
 
 - (void)extractionDirectionsOfTranslate;
 
+- (NSString *)extractionTranslatedContent:(NSString *)sourceContent shortLangName:(NSString *)shortLangName;
+
 + (NSArray *)clean:(NSArray *)value;
 
 @end

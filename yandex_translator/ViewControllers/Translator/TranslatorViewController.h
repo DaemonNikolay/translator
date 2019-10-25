@@ -28,6 +28,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonTranslationTo;
 @property (weak, nonatomic) IBOutlet UIButton *buttonTranslationFrom;
+@property(weak, nonatomic) IBOutlet UIButton *buttonTranslate;
 
 
 // MARK: -

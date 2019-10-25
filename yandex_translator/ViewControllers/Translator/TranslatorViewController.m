@@ -68,6 +68,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
         });
     } else if ([keyPath isEqualToString:fullLangNameTo]) {
         [self initButtonsTitle];
+        [[self buttonTranslate] sendActionsForControlEvents:UIControlEventTouchUpInside];
     }
 }
 
@@ -98,6 +99,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
 - (IBAction)buttonTranslationFrom_click:(id)sender {
     [self dismissKeyboard];
+
     isLanguageFrom = YES;
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
@@ -121,10 +123,29 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 - (IBAction)buttonTranslate_click:(id)sender {  // TODO FIXXX
     [self dismissKeyboard];
 
-//    NSString *textToTranslate = self->_textViewSourceContent.text;
-//    if (textToTranslate == nil || [textToTranslate length] == 0) {
-//        return;
-//    }
+    NSString *textToTranslate = self->_textViewSourceContent.text;
+    if (textToTranslate == nil || [textToTranslate length] == 0) {
+        return;
+    }
+
+    UserDefaults *userDefaults = [[UserDefaults alloc] init];
+    NSString *shortLangName = [userDefaults getShortLanguageNameTo];
+
+    ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *translatedContent = [extractForTranslate extractionTranslatedContent:textToTranslate
+                                                                         shortLangName:shortLangName];
+
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.textViewTranslateContent.text = translatedContent;
+        });
+    });
+
+
+
+
+
 //
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    NSString *langTo = [[defaults objectForKey:[EnumConstants getConstant:LangTranslationTo]] objectForKey:[EnumConstants getConstant:ShortLangNameFrom]];
@@ -230,6 +251,10 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
                forKeyPath:[EnumConstants getConstant:FullLangNameTo]
                   options:NSKeyValueObservingOptionNew
                   context:NULL];
+}
+
+- (void)clearTranslatedTextView {
+    self.textViewTranslateContent.text = @"";
 }
 
 

@@ -42,6 +42,18 @@
     }
 }
 
+- (NSString *)extractionTranslatedContent:(NSString *)sourceContent
+                            shortLangName:(NSString *)shortLangName {
+
+    NSDictionary *json = [self translate:sourceContent shortLangName:shortLangName];
+    NSString *translatedContent = json[@"text"][0];
+    if (json == nil || !translatedContent) {
+        return @"";
+    }
+
+    return translatedContent;
+}
+
 + (NSArray *)clean:(NSArray *)value {
     NSMutableArray *result = [[NSMutableArray alloc] init];
     if ([value count] == 0) {
@@ -82,6 +94,10 @@
 
 - (NSDictionary *)getLanguagesList:(NSString *)shortLanguageNameFrom {
     return [Api getListSupportedLanguages:shortLanguageNameFrom][@"langs"];
+}
+
+- (NSDictionary *)translate:(NSString *)sourceContent shortLangName:(NSString *)shortLanguageName {
+    return [Api translateText:sourceContent lang:shortLanguageName];
 }
 
 - (NSString *)getNewFullLangName:(NSString *)shortLangName languages:(NSDictionary *)languages {

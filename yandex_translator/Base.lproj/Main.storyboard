@@ -132,6 +132,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Translator" image="pencil.and.ellipsis.rectangle" catalog="system" landscapeImage="pencil.and.ellipsis.rectangle" largeContentSizeImage="pencil.and.ellipsis.rectangle" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="buttonTranslate" destination="zu2-5j-CM9" id="r3C-r4-YED"/>
                         <outlet property="buttonTranslationFrom" destination="eEU-cD-GeE" id="Dqx-dB-wCc"/>
                         <outlet property="buttonTranslationTo" destination="V9q-Nm-9Q8" id="lea-FI-LDe"/>
                         <outlet property="textViewSourceContent" destination="OLV-Yx-WHA" id="O2K-PO-LFC"/>
