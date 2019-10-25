@@ -15,7 +15,7 @@
 
 @interface ExtractForTranslate : NSObject
 
-- (void)extractionDirectionsOfTranslate:(Boolean)withUpdate;
+- (void)extractionDirectionsOfTranslate;
 
 + (NSArray *)clean:(NSArray *)value;
 

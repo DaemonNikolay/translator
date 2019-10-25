@@ -31,11 +31,6 @@
                   forKeyPath:[EnumTranslationDirections
                           getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameFrom]
     ];
-
-    [defaults removeObserver:self
-                  forKeyPath:[EnumTranslationDirections
-                          getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameTo]
-    ];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -43,13 +38,11 @@
                         change:(NSDictionary *)change
                        context:(void *)context {
 
-    NSString *fullLangNameFrom = [EnumConstants getConstant:FullLangNameFrom];
-    NSString *fullLangNameTo = [EnumConstants getConstant:FullLangNameTo];
+    NSString *fullLangNameFrom = [EnumConstants getConstant:FullLangNameFrom];;
 
-    if ([keyPath isEqualToString:fullLangNameFrom] || [keyPath isEqualToString:fullLangNameTo]) {
+    if ([keyPath isEqualToString:fullLangNameFrom]) {
         ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-        [extractForTranslate extractionDirectionsOfTranslate:NO];
-
+        [extractForTranslate extractionDirectionsOfTranslate];
         [self initButtonsTitle];
     }
 }
@@ -74,7 +67,7 @@
     [self dismissKeyboard];
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-    [extractForTranslate extractionDirectionsOfTranslate:YES];
+    [extractForTranslate extractionDirectionsOfTranslate];
 
     [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
 }
@@ -185,11 +178,6 @@
 
     [defaults addObserver:self
                forKeyPath:[EnumConstants getConstant:FullLangNameFrom]
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-
-    [defaults addObserver:self
-               forKeyPath:[EnumConstants getConstant:FullLangNameTo]
                   options:NSKeyValueObservingOptionNew
                   context:NULL];
 }

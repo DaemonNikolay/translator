@@ -22,8 +22,8 @@
     if (self) {
         appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
         context = appDelegate.persistentContainer.viewContext;
-        entityObj = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:(id) context];
     }
+
     return self;
 }
 
@@ -31,6 +31,10 @@
 - (void)addValue:(NSString *)value entity:(NSString *)entityName attribute:(NSString *)attributeName {
     if (entityName == nil || attributeName == nil) {
         return;
+    }
+
+    if (entityObj == nil) {
+        entityObj = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:(id) context];
     }
 
     [entityObj setValue:value forKey:attributeName];
