@@ -24,7 +24,9 @@
                                     <constraint firstAttribute="width" constant="140" id="bgC-k5-kAz"/>
                                 </constraints>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" title=" "/>
+                                <state key="normal" title=" ">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="5"/>
@@ -43,7 +45,7 @@
                                 </constraints>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

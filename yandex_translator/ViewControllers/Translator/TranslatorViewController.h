@@ -14,6 +14,8 @@
 #import "EnumTranslationDirections.h"
 #import "EnumEntities.h"
 
+#import "TranslateDirectionsViewController.h"
+
 
 @interface TranslatorViewController : UIViewController
 

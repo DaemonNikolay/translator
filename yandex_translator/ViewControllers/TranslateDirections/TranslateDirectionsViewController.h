@@ -19,5 +19,7 @@
 
 @property(weak, nonatomic) IBOutlet UITableView *tableViewDirections;
 
+@property Boolean isLanguageFrom;
+
 @end
 

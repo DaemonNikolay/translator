@@ -52,7 +52,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
     NSString *languageShortName = languagesShortNames[(NSUInteger) indexPath.item];
     NSString *languageFullName = languagesFullNames[(NSUInteger) indexPath.item];
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
@@ -62,8 +61,15 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         });
 
-        [userDefaults setShortLanguageNameFrom:languageShortName];
-        [userDefaults setFullNameLanguageFrom:languageFullName];
+        if ([self isLanguageFrom]) {
+            [userDefaults setShortLanguageNameFrom:languageShortName];
+            [userDefaults setFullNameLanguageFrom:languageFullName];
+
+            return;
+        }
+
+        [userDefaults setShortLanguageNameTo:languageShortName];
+        [userDefaults setFullNameLanguageTo:languageFullName];
     });
 }
 

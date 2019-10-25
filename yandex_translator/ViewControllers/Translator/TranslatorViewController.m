@@ -8,8 +8,19 @@
 
 #import "TranslatorViewController.h"
 
+@interface TranslatorViewController () {
+    Boolean isLanguageFrom;
+}
+
+@end
+
 
 @implementation TranslatorViewController
+
+// MARK: --
+// MARK: Constants
+
+const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
 
 // MARK: --
@@ -31,6 +42,11 @@
                   forKeyPath:[EnumTranslationDirections
                           getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameFrom]
     ];
+
+    [defaults removeObserver:self
+                  forKeyPath:[EnumTranslationDirections
+                          getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameTo]
+    ];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -38,7 +54,8 @@
                         change:(NSDictionary *)change
                        context:(void *)context {
 
-    NSString *fullLangNameFrom = [EnumConstants getConstant:FullLangNameFrom];;
+    NSString *fullLangNameFrom = [EnumConstants getConstant:FullLangNameFrom];
+    NSString *fullLangNameTo = [EnumConstants getConstant:FullLangNameTo];
 
     if ([keyPath isEqualToString:fullLangNameFrom]) {
         ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
@@ -49,6 +66,15 @@
                 [self initButtonsTitle];
             });
         });
+    } else if ([keyPath isEqualToString:fullLangNameTo]) {
+        [self initButtonsTitle];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:(NSString *) IDENTIFIER_SEGUE_CHOOSE_LANGUAGE]) {
+        TranslateDirectionsViewController *translateDirectionsViewController = [segue destinationViewController];
+        translateDirectionsViewController.isLanguageFrom = isLanguageFrom;
     }
 }
 
@@ -65,11 +91,14 @@
 }
 
 
+
+
 // MARK: --
 // MARK: Button actions
 
 - (IBAction)buttonTranslationFrom_click:(id)sender {
     [self dismissKeyboard];
+    isLanguageFrom = YES;
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
 
@@ -84,6 +113,9 @@
 
 - (IBAction)buttonTranslationTo_click:(id)sender { // TODO FIXXX
     [self dismissKeyboard];
+    isLanguageFrom = NO;
+
+    [self performSegueWithIdentifier:(NSString *) IDENTIFIER_SEGUE_CHOOSE_LANGUAGE sender:nil];
 }
 
 - (IBAction)buttonTranslate_click:(id)sender {  // TODO FIXXX
@@ -191,6 +223,11 @@
 
     [defaults addObserver:self
                forKeyPath:[EnumConstants getConstant:FullLangNameFrom]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+
+    [defaults addObserver:self
+               forKeyPath:[EnumConstants getConstant:FullLangNameTo]
                   options:NSKeyValueObservingOptionNew
                   context:NULL];
 }
