@@ -110,10 +110,12 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
 
+    [[self activityIndicator] setHidden:NO];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [extractForTranslate extractionDirectionsOfTranslate];
 
         dispatch_sync(dispatch_get_main_queue(), ^{
+            [[self activityIndicator] setHidden:YES];
             [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
         });
     });

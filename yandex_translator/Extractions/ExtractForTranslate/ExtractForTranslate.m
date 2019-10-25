@@ -36,7 +36,6 @@
                                     entityName:entityName
                             attributeShortName:attributeShortName
                              attributeFullName:attributeFullName];
-
     } @catch (NSException *exception) {
         [NSException raise:@"error extraction languages" format:@"%@", exception];
     }

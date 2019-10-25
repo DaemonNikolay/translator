@@ -105,6 +105,10 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="editable" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </textView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="foS-CD-6Ha">
+                                <rect key="frame" x="20" y="250" width="374" height="397"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -132,6 +136,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Translator" image="pencil.and.ellipsis.rectangle" catalog="system" landscapeImage="pencil.and.ellipsis.rectangle" largeContentSizeImage="pencil.and.ellipsis.rectangle" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="foS-CD-6Ha" id="cT4-8h-sC1"/>
                         <outlet property="buttonTranslate" destination="zu2-5j-CM9" id="r3C-r4-YED"/>
                         <outlet property="buttonTranslationFrom" destination="eEU-cD-GeE" id="Dqx-dB-wCc"/>
                         <outlet property="buttonTranslationTo" destination="V9q-Nm-9Q8" id="lea-FI-LDe"/>
