@@ -9,6 +9,10 @@
 
 @implementation ExtractForTranslate
 
+
+// MARK: --
+// MARK: Public methods
+
 - (void)extractionDirectionsOfTranslate {
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
     NSString *shortLanguageNameFrom = [userDefaults getShortLanguageNameFrom];
@@ -28,18 +32,10 @@
         NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
         NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
 
-        @synchronized (self) {
-            for (NSString *language in languages) {
-                NSString *fullNameLang = languages[language];
-
-                CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
-
-                [coreDataManaged addValue:fullNameLang entity:entityName attribute:attributeFullName];
-                [coreDataManaged addValue:language entity:entityName attribute:attributeShortName];
-
-                [coreDataManaged save];
-            }
-        }
+        [self saveLanguageDirectionsToCoreData:languages
+                                    entityName:entityName
+                            attributeShortName:attributeShortName
+                             attributeFullName:attributeFullName];
 
     } @catch (NSException *exception) {
         [NSException raise:@"error extraction languages" format:@"%@", exception];
@@ -59,6 +55,29 @@
     }
 
     return result;
+}
+
+
+// MARK: --
+// MARK: Private methods
+
+- (void)saveLanguageDirectionsToCoreData:(NSDictionary *)languages
+                              entityName:(NSString *)entityName
+                      attributeShortName:(NSString *)attributeShortName
+                       attributeFullName:(NSString *)attributeFullName {
+
+    @synchronized (self) {
+        for (NSString *language in languages) {
+            NSString *fullNameLang = languages[language];
+
+            CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
+
+            [coreDataManaged addValue:fullNameLang entity:entityName attribute:attributeFullName];
+            [coreDataManaged addValue:language entity:entityName attribute:attributeShortName];
+
+            [coreDataManaged save];
+        }
+    }
 }
 
 - (NSDictionary *)getLanguagesList:(NSString *)shortLanguageNameFrom {
