@@ -68,8 +68,10 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [extractForTranslate extractionDirectionsOfTranslate];
-                [self initButtonsTitle];
+                @synchronized (self) {
+                    [extractForTranslate extractionDirectionsOfTranslate];
+                    [self initButtonsTitle];
+                }
             });
         });
     } else if ([keyPath isEqualToString:fullLangNameTo]) {
@@ -112,7 +114,9 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
     [[self activityIndicator] setHidden:NO];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [extractForTranslate extractionDirectionsOfTranslate];
+        @synchronized (self) {
+            [extractForTranslate extractionDirectionsOfTranslate];
+        }
 
         dispatch_sync(dispatch_get_main_queue(), ^{
             [[self activityIndicator] setHidden:YES];
