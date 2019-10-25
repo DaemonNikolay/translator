@@ -28,15 +28,17 @@
         NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
         NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
 
+        @synchronized (self) {
+            for (NSString *language in languages) {
+                NSString *fullNameLang = languages[language];
 
-        for (NSString *language in languages) {
-            NSString *fullNameLang = languages[language];
+                CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
 
-            CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
+                [coreDataManaged addValue:fullNameLang entity:entityName attribute:attributeFullName];
+                [coreDataManaged addValue:language entity:entityName attribute:attributeShortName];
 
-            [coreDataManaged addValue:fullNameLang entity:entityName attribute:attributeFullName];
-            [coreDataManaged addValue:language entity:entityName attribute:attributeShortName];
-            [coreDataManaged save];
+                [coreDataManaged save];
+            }
         }
 
     } @catch (NSException *exception) {
