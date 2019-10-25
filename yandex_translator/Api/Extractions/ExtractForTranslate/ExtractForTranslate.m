@@ -20,7 +20,7 @@
 
     NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
 
-    CoreDataManaged *coreDataManagedClear = [[CoreDataManaged alloc] init:entityName];
+    CoreDataManaged *coreDataManagedClear = [[CoreDataManaged alloc] init];
     [coreDataManagedClear clearEntity:entityName];
 
     @try {
@@ -42,14 +42,19 @@
     }
 }
 
-- (NSString *)extractionTranslatedContent:(NSString *)sourceContent
-                            shortLangName:(NSString *)shortLangName {
+- (NSString *)extractionTranslatedContent:(NSString *)sourceContent {
+    UserDefaults *userDefaults = [[UserDefaults alloc] init];
+    NSString *shortLangName = [userDefaults getShortLanguageNameTo];
 
     NSDictionary *json = [self translate:sourceContent shortLangName:shortLangName];
     NSString *translatedContent = json[@"text"][0];
     if (json == nil || !translatedContent) {
         return @"";
     }
+
+    [self saveTranslationHistoryToCoreData:sourceContent
+                         translatedContent:translatedContent
+                              userDefaults:userDefaults];
 
     return translatedContent;
 }
@@ -82,7 +87,7 @@
         for (NSString *language in languages) {
             NSString *fullNameLang = languages[language];
 
-            CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
+            CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
 
             [coreDataManaged addValue:fullNameLang entity:entityName attribute:attributeFullName];
             [coreDataManaged addValue:language entity:entityName attribute:attributeShortName];
@@ -105,6 +110,36 @@
                                                                            langs:languages];
 
     return newFullLangName;
+}
+
+- (void)saveTranslationHistoryToCoreData:(NSString *)sourceContent
+                       translatedContent:(NSString *)translatedContent
+                            userDefaults:(UserDefaults *)userDefaults {
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
+        NSString *entityName = [EnumEntities getEntityName:TranslationHistory];
+
+        [coreDataManaged addValue:sourceContent entity:entityName
+                        attribute:[EnumTranslationHistory
+                                getAttributeTranslationHistories:(EnumAttributesTranslationHistory) contentSource]];
+
+        [coreDataManaged addValue:translatedContent entity:entityName
+                        attribute:[EnumTranslationHistory
+                                getAttributeTranslationHistories:(EnumAttributesTranslationHistory) translationContents]];
+
+        NSString *fullLanguageFrom = [userDefaults getFullLanguageNameFrom];
+        [coreDataManaged addValue:fullLanguageFrom entity:entityName
+                        attribute:[EnumTranslationHistory
+                                getAttributeTranslationHistories:(EnumAttributesTranslationHistory) directionTranslateFrom]];
+
+        NSString *fullLanguageTo = [userDefaults getFullLanguageNameTo];
+        [coreDataManaged addValue:fullLanguageTo entity:entityName
+                        attribute:[EnumTranslationHistory
+                                getAttributeTranslationHistories:(EnumAttributesTranslationHistory) directionTranslateTo]];
+
+        [coreDataManaged save];
+    });
 }
 
 @end

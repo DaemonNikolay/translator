@@ -11,7 +11,7 @@
 @interface CoreDataManaged : NSObject
 
 
-- (instancetype)init:(NSString *)entityName;
+- (instancetype)init;
 
 - (void)addValue:(NSString *)value entity:(NSString *)entityName attribute:(NSString *)attributeName;
 

@@ -11,13 +11,14 @@
 #import "EnumConstants.h"
 #import "EnumEntities.h"
 #import "EnumTranslationDirections.h"
+#import "EnumTranslationHistory.h"
 
 
 @interface ExtractForTranslate : NSObject
 
 - (void)extractionDirectionsOfTranslate;
 
-- (NSString *)extractionTranslatedContent:(NSString *)sourceContent shortLangName:(NSString *)shortLangName;
+- (NSString *)extractionTranslatedContent:(NSString *)sourceContent;
 
 + (NSArray *)clean:(NSArray *)value;
 

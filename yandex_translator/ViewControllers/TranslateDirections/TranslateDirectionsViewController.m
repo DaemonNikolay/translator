@@ -28,12 +28,12 @@
     self.tableViewDirections.dataSource = self;
     self.tableViewDirections.delegate = self;
 
-    NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
-    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init:entityName];
+    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
 
     NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
     NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
 
+    NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
     NSArray *languagesCoreData = [coreDataManaged getValues:entityName];
 
     NSArray *sourceLanguageFullNames = [languagesCoreData valueForKey:attributeFullName];

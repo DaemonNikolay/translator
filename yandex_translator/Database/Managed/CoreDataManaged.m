@@ -17,11 +17,16 @@
 
 @implementation CoreDataManaged
 
-- (instancetype)init:(NSString *)entityName {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-        context = appDelegate.persistentContainer.viewContext;
+        if (!appDelegate) {
+            appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+        }
+
+        if (!context) {
+            context = appDelegate.persistentContainer.viewContext;
+        }
     }
 
     return self;
@@ -34,7 +39,8 @@
     }
 
     if (entityObj == nil) {
-        entityObj = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:(id) context];
+        entityObj = [NSEntityDescription insertNewObjectForEntityForName:entityName
+                                                  inManagedObjectContext:(id) context];
     }
 
     [entityObj setValue:value forKey:attributeName];

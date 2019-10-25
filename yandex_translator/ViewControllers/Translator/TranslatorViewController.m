@@ -128,14 +128,9 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
         return;
     }
 
-    UserDefaults *userDefaults = [[UserDefaults alloc] init];
-    NSString *shortLangName = [userDefaults getShortLanguageNameTo];
-
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *translatedContent = [extractForTranslate extractionTranslatedContent:textToTranslate
-                                                                         shortLangName:shortLangName];
+        NSString *translatedContent = [extractForTranslate extractionTranslatedContent:textToTranslate];
 
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.textViewTranslateContent.text = translatedContent;
