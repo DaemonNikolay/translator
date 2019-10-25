@@ -105,15 +105,18 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="editable" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </textView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="foS-CD-6Ha">
-                                <rect key="frame" x="20" y="250" width="374" height="397"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="foS-CD-6Ha">
+                                <rect key="frame" x="20" y="249.5" width="374" height="397"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="foS-CD-6Ha" secondAttribute="height" multiplier="374:397" id="agn-Aa-l3g"/>
+                                </constraints>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="MTl-oP-XU2" secondAttribute="bottom" constant="15" id="1be-Vz-6IY"/>
                             <constraint firstItem="V9q-Nm-9Q8" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="1qH-6k-OtO"/>
+                            <constraint firstItem="foS-CD-6Ha" firstAttribute="leading" secondItem="OLV-Yx-WHA" secondAttribute="leading" id="Aq7-ER-qsH"/>
                             <constraint firstItem="OLV-Yx-WHA" firstAttribute="top" secondItem="zu2-5j-CM9" secondAttribute="bottom" constant="5" id="Bhj-Jo-l8Q"/>
                             <constraint firstItem="zu2-5j-CM9" firstAttribute="centerY" secondItem="V9q-Nm-9Q8" secondAttribute="centerY" id="DBe-mW-eZG"/>
                             <constraint firstItem="V9q-Nm-9Q8" firstAttribute="width" secondItem="eEU-cD-GeE" secondAttribute="width" id="IkB-MI-W2e"/>
@@ -127,7 +130,9 @@
                             <constraint firstItem="eEU-cD-GeE" firstAttribute="top" secondItem="V9q-Nm-9Q8" secondAttribute="top" id="gLJ-Uz-VcL"/>
                             <constraint firstItem="MTl-oP-XU2" firstAttribute="width" secondItem="OLV-Yx-WHA" secondAttribute="width" id="gLS-qn-S1M"/>
                             <constraint firstItem="V9q-Nm-9Q8" firstAttribute="leading" secondItem="zu2-5j-CM9" secondAttribute="trailing" constant="19" id="lyZ-4L-Thf"/>
+                            <constraint firstItem="foS-CD-6Ha" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="m7m-XQ-YbK"/>
                             <constraint firstItem="V9q-Nm-9Q8" firstAttribute="leading" secondItem="eEU-cD-GeE" secondAttribute="trailing" constant="94" id="nfU-FC-1LU"/>
+                            <constraint firstItem="foS-CD-6Ha" firstAttribute="trailing" secondItem="OLV-Yx-WHA" secondAttribute="trailing" id="rft-6R-s9a"/>
                             <constraint firstItem="OLV-Yx-WHA" firstAttribute="centerX" secondItem="zu2-5j-CM9" secondAttribute="centerX" id="tx4-uI-1UL"/>
                             <constraint firstItem="eEU-cD-GeE" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="xPE-Tu-1LX"/>
                             <constraint firstItem="eEU-cD-GeE" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="30" id="z6v-Gx-4zW"/>
