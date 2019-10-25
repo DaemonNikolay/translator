@@ -18,13 +18,14 @@
 		73C2B6EA233FBCB100058FC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6E9233FBCB100058FC2 /* main.m */; };
 		73E863662361759400BAC81B /* TranslateDirectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E863652361759400BAC81B /* TranslateDirectionsViewController.m */; };
 		7434F04A10E1F101D7754C3F /* EnumTranslationHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F408751DD720E18DB787 /* EnumTranslationHistory.m */; };
-		7434F112396B14895AD9886A /* ExtractNameFromLangsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F2FFAB1129CD8C321E10 /* ExtractNameFromLangsApi.m */; };
 		7434F4049042B80619C8F2F6 /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F34C892B3C1F447DDF47 /* UserDefaults.m */; };
-		7434F652A4F4E57CF80061FC /* ExtractForTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F5C6A574F60651F6EC08 /* ExtractForTranslate.m */; };
 		7434F7BEC65F66EF18D699D9 /* EnumEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F4CECB2B75B1EDF43002 /* EnumEntities.m */; };
+		7434F81CC14A1A8CE4DB47C8 /* ExtractForTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F4DD4968EB6B02C1F795 /* ExtractForTranslate.m */; };
 		7434F9AB97AC7DD39631A7E3 /* EnumConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434FFA888F13067B439309C /* EnumConstants.m */; };
 		7434FB9C11B1BB9D104A9EA4 /* Api.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F79E3368B29733400746 /* Api.m */; };
+		7434FD34DF2450C4C56A8D46 /* ExtractNameFromLangsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434FD727C8C4CBBC1142FD9 /* ExtractNameFromLangsApi.m */; };
 		7434FE11647C2ABB27FC4D73 /* EnumTranslationDirections.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F070AB41E958939547BD /* EnumTranslationDirections.m */; };
+		7434FE2512582805981A7E62 /* ExtractHistoryTranslations.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F55C358A5A5A006118A6 /* ExtractHistoryTranslations.m */; };
 		7434FFF102BF4043BCF4207F /* CoreDataManaged.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F533DC3E60353BC8A2F8 /* CoreDataManaged.m */; };
 /* End PBXBuildFile section */
 
@@ -72,23 +73,25 @@
 		73E863642361759400BAC81B /* TranslateDirectionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TranslateDirectionsViewController.h; sourceTree = "<group>"; };
 		73E863652361759400BAC81B /* TranslateDirectionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TranslateDirectionsViewController.m; sourceTree = "<group>"; };
 		7434F070AB41E958939547BD /* EnumTranslationDirections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationDirections.m; sourceTree = "<group>"; };
+		7434F166BA4A403D430DE323 /* ExtractNameFromLangsApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractNameFromLangsApi.h; sourceTree = "<group>"; };
 		7434F2BBE4737716FCD87308 /* Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
-		7434F2FFAB1129CD8C321E10 /* ExtractNameFromLangsApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractNameFromLangsApi.m; sourceTree = "<group>"; };
 		7434F34C892B3C1F447DDF47 /* UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaults.m; sourceTree = "<group>"; };
 		7434F3D51E7DB73C230C90D2 /* EnumEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumEntities.h; sourceTree = "<group>"; };
 		7434F408751DD720E18DB787 /* EnumTranslationHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationHistory.m; sourceTree = "<group>"; };
 		7434F4CECB2B75B1EDF43002 /* EnumEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumEntities.m; sourceTree = "<group>"; };
+		7434F4DD4968EB6B02C1F795 /* ExtractForTranslate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractForTranslate.m; sourceTree = "<group>"; };
 		7434F533DC3E60353BC8A2F8 /* CoreDataManaged.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManaged.m; sourceTree = "<group>"; };
-		7434F5C6A574F60651F6EC08 /* ExtractForTranslate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractForTranslate.m; sourceTree = "<group>"; };
+		7434F55C358A5A5A006118A6 /* ExtractHistoryTranslations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractHistoryTranslations.m; sourceTree = "<group>"; };
+		7434F573815C15DEEC04D0E5 /* ExtractHistoryTranslations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractHistoryTranslations.h; sourceTree = "<group>"; };
 		7434F79E3368B29733400746 /* Api.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Api.m; sourceTree = "<group>"; };
 		7434F8896CB97E2AA15904C8 /* EnumTranslationHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationHistory.h; sourceTree = "<group>"; };
-		7434F90C033F5D5C64CCE3AD /* ExtractNameFromLangsApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractNameFromLangsApi.h; sourceTree = "<group>"; };
 		7434F97DA5A2C96431858C35 /* EnumAttributeNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumAttributeNames.h; sourceTree = "<group>"; };
 		7434FC5A7EFF897512699871 /* EnumConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumConstants.h; sourceTree = "<group>"; };
+		7434FCA38B07DD41C6E5F4C1 /* ExtractForTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractForTranslate.h; sourceTree = "<group>"; };
 		7434FCE6A5C1F2254B175CC2 /* UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaults.h; sourceTree = "<group>"; };
+		7434FD727C8C4CBBC1142FD9 /* ExtractNameFromLangsApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractNameFromLangsApi.m; sourceTree = "<group>"; };
 		7434FE0B699A1965CA42C281 /* EnumTranslationDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumTranslationDirections.h; sourceTree = "<group>"; };
 		7434FE7F26E1997000D15A70 /* CoreDataManaged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManaged.h; sourceTree = "<group>"; };
-		7434FE98C6C9FF1DCB73615B /* ExtractForTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractForTranslate.h; sourceTree = "<group>"; };
 		7434FFA888F13067B439309C /* EnumConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				7434FCB4572B0D3B19E32ED4 /* Api */,
-				7434F2564A09996D2AF1E0A9 /* Extractions */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -218,6 +220,7 @@
 				73C2B6E8233FBCB100058FC2 /* Info.plist */,
 				73C2B6E9233FBCB100058FC2 /* main.m */,
 				7434FC28637873A0C88F0741 /* Protocols */,
+				7434F397867D74CB38E8BA6D /* Extractions */,
 			);
 			path = yandex_translator;
 			sourceTree = "<group>";
@@ -248,31 +251,13 @@
 			path = Managed;
 			sourceTree = "<group>";
 		};
-		7434F0137B992CDBC83CB495 /* ExtractForTranslate */ = {
+		7434F16D02AE4EC711522FF8 /* ExtractForTranslate */ = {
 			isa = PBXGroup;
 			children = (
-				7434FE98C6C9FF1DCB73615B /* ExtractForTranslate.h */,
-				7434F5C6A574F60651F6EC08 /* ExtractForTranslate.m */,
+				7434FCA38B07DD41C6E5F4C1 /* ExtractForTranslate.h */,
+				7434F4DD4968EB6B02C1F795 /* ExtractForTranslate.m */,
 			);
 			path = ExtractForTranslate;
-			sourceTree = "<group>";
-		};
-		7434F1CC522E7E378D814D68 /* ExtractNameFromLangsApi */ = {
-			isa = PBXGroup;
-			children = (
-				7434F2FFAB1129CD8C321E10 /* ExtractNameFromLangsApi.m */,
-				7434F90C033F5D5C64CCE3AD /* ExtractNameFromLangsApi.h */,
-			);
-			path = ExtractNameFromLangsApi;
-			sourceTree = "<group>";
-		};
-		7434F2564A09996D2AF1E0A9 /* Extractions */ = {
-			isa = PBXGroup;
-			children = (
-				7434F0137B992CDBC83CB495 /* ExtractForTranslate */,
-				7434F1CC522E7E378D814D68 /* ExtractNameFromLangsApi */,
-			);
-			path = Extractions;
 			sourceTree = "<group>";
 		};
 		7434F2EBF89DCD47E1616BAC /* TranslationHistory */ = {
@@ -302,6 +287,16 @@
 			path = Enities;
 			sourceTree = "<group>";
 		};
+		7434F397867D74CB38E8BA6D /* Extractions */ = {
+			isa = PBXGroup;
+			children = (
+				7434F16D02AE4EC711522FF8 /* ExtractForTranslate */,
+				7434FAB61254095FA4D58877 /* ExtractNameFromLangsApi */,
+				7434F898A1D835C054799929 /* ExtractHistoryTranslations */,
+			);
+			path = Extractions;
+			sourceTree = "<group>";
+		};
 		7434F77AD1786CA620D0F581 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +304,24 @@
 				7434FCE6A5C1F2254B175CC2 /* UserDefaults.h */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		7434F898A1D835C054799929 /* ExtractHistoryTranslations */ = {
+			isa = PBXGroup;
+			children = (
+				7434F55C358A5A5A006118A6 /* ExtractHistoryTranslations.m */,
+				7434F573815C15DEEC04D0E5 /* ExtractHistoryTranslations.h */,
+			);
+			path = ExtractHistoryTranslations;
+			sourceTree = "<group>";
+		};
+		7434FAB61254095FA4D58877 /* ExtractNameFromLangsApi */ = {
+			isa = PBXGroup;
+			children = (
+				7434FD727C8C4CBBC1142FD9 /* ExtractNameFromLangsApi.m */,
+				7434F166BA4A403D430DE323 /* ExtractNameFromLangsApi.h */,
+			);
+			path = ExtractNameFromLangsApi;
 			sourceTree = "<group>";
 		};
 		7434FC28637873A0C88F0741 /* Protocols */ = {
@@ -423,8 +436,9 @@
 				7434FB9C11B1BB9D104A9EA4 /* Api.m in Sources */,
 				7434F9AB97AC7DD39631A7E3 /* EnumConstants.m in Sources */,
 				7434F4049042B80619C8F2F6 /* UserDefaults.m in Sources */,
-				7434F652A4F4E57CF80061FC /* ExtractForTranslate.m in Sources */,
-				7434F112396B14895AD9886A /* ExtractNameFromLangsApi.m in Sources */,
+				7434F81CC14A1A8CE4DB47C8 /* ExtractForTranslate.m in Sources */,
+				7434FD34DF2450C4C56A8D46 /* ExtractNameFromLangsApi.m in Sources */,
+				7434FE2512582805981A7E62 /* ExtractHistoryTranslations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

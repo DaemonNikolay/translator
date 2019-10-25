@@ -32,6 +32,12 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     [self initButtonsTitle];
     [self dismissKeyboardByClicking];
 
+    CGColorRef colorGray = [[UIColor grayColor] CGColor];
+    self.textViewSourceContent.layer.borderColor = colorGray;
+    self.textViewTranslateContent.layer.borderColor = colorGray;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     [self observingOnChangeLanguageTitles];
 }
 
@@ -39,13 +45,13 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     [defaults removeObserver:self
-                  forKeyPath:[EnumTranslationDirections
-                          getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameFrom]
+                  forKeyPath:[EnumConstants getConstant:FullLangNameFrom]
+                     context:NULL
     ];
 
     [defaults removeObserver:self
-                  forKeyPath:[EnumTranslationDirections
-                          getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameTo]
+                  forKeyPath:[EnumConstants getConstant:FullLangNameTo]
+                     context:NULL
     ];
 }
 

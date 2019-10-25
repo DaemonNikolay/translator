@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExtractHistoryTranslations.h"
+
+#import "EnumTranslationHistory.h"
 
 
 @interface HistoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, UITabBarControllerDelegate>

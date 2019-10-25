@@ -11,7 +11,7 @@
 
 @interface HistoryViewController () {
     NSMutableArray *sections;
-    NSMutableArray<NSMutableArray *> *contents;
+    NSMutableArray *contents;
 }
 
 @end
@@ -52,6 +52,9 @@
 
     NSUInteger sectionIndex = (NSUInteger) indexPath.section;
     NSUInteger rowIndex = (NSUInteger) indexPath.row;
+
+    NSString *cc = contents[sectionIndex][rowIndex];
+
     cell.textLabel.text = contents[sectionIndex][rowIndex];
 
     return cell;
@@ -62,10 +65,14 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *fds = sections[(NSUInteger) section];
+
     return sections[(NSUInteger) section];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger hghgh = sections.count;
+
     return sections.count;
 }
 
@@ -74,23 +81,48 @@
 // MARK: Services
 
 - (void)updateContentForTable {
-    NSArray *translates = [self extractionHistoryTranslates];
+    ExtractHistoryTranslations *extractHistoryTranslations = [[ExtractHistoryTranslations alloc] init];
 
-    for (NSDictionary *elem in translates) {
-        NSString *sectionName = elem[@"direction"];
-        [sections addObject:sectionName];
+    NSArray *history = [extractHistoryTranslations extractionHistoryTranslates];
 
-        NSMutableArray *contentTranslate = [@[elem[@"beforeTranslation"], elem[@"afterTranslation"]] mutableCopy];
+    NSArray *historySourceContents = [history valueForKey:[EnumTranslationHistory getAttributeTranslationHistories:contentSource]];
+    NSArray *historyTranslatedContents = [history valueForKey:[EnumTranslationHistory getAttributeTranslationHistories:translationContents]];
+    NSArray *historyDirectionTranslateFrom = [history valueForKey:[EnumTranslationHistory getAttributeTranslationHistories:directionTranslateFrom]];
+    NSArray *historyDirectionTranslateTo = [history valueForKey:[EnumTranslationHistory getAttributeTranslationHistories:directionTranslateTo]];
+
+
+    for (int i = 0; i < [historyDirectionTranslateFrom count]; ++i) {
+
+        NSString *directionTranslateFrom = historyDirectionTranslateFrom[(NSUInteger) i];
+        NSString *directionTranslateTo = historyDirectionTranslateTo[(NSUInteger) i];
+
+        NSMutableString *direction = [[NSMutableString alloc] init];
+        [direction appendString:directionTranslateFrom];
+        [direction appendString:@" -> "];
+        [direction appendString:directionTranslateTo];
+
+        [sections addObject:direction];
+
+
+        NSString *sourceContent = historySourceContents[(NSUInteger) i];
+        NSString *translatedContent = historyTranslatedContents[(NSUInteger) i];
+
+        NSMutableArray *contentTranslate = [@[sourceContent, translatedContent] mutableCopy];
+
         [contents addObject:contentTranslate];
     }
 }
 
-- (NSArray *)extractionHistoryTranslates {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *translates = [defaults objectForKey:@"history"];
-
-    return translates;
-}
+//- (NSArray *)extractionHistoryTranslates {
+////    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+////    NSArray *translates = [defaults objectForKey:@"history"];
+////
+////    return translates;
+//
+//
+//    Core
+//
+//}
 
 - (void)initInfoOfTranslation {
     sections = [@[] mutableCopy];
