@@ -124,7 +124,8 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 - (IBAction)buttonTranslate_click:(id)sender {  // TODO FIXXX
     [self dismissKeyboard];
 
-    NSString *textToTranslate = self->_textViewSourceContent.text;
+    NSCharacterSet *whiteSpace = [NSCharacterSet whitespaceCharacterSet];
+    NSString *textToTranslate = [self->_textViewSourceContent.text stringByTrimmingCharactersInSet:whiteSpace];
     if (textToTranslate == nil || [textToTranslate length] == 0) {
         return;
     }
@@ -141,40 +142,6 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
             self.textViewTranslateContent.text = translatedContent;
         });
     });
-
-
-
-
-
-//
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSString *langTo = [[defaults objectForKey:[EnumConstants getConstant:LangTranslationTo]] objectForKey:[EnumConstants getConstant:ShortLangNameFrom]];
-//    if (!langTo) {
-//        langTo = @"en";
-//    }
-//
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        NSDictionary *json;
-//
-//        @try {
-//            json = [Api translateText:textToTranslate lang:langTo];
-//
-//            NSString *translationContent = [json valueForKey:@"text"][0];
-//
-//            self.textViewTranslateContent.text = translationContent;
-//
-//            [self saveToHistoryOfTranslate:translationContent sourceText:textToTranslate];
-//        } @catch (NSException *exception) {
-//            UIAlertController *alert = [self createAlertDialog:@"Network error\n"];
-//
-//            [alert addAction:[UIAlertAction actionWithTitle:@"Ok"
-//                                                      style:UIAlertActionStyleDefault
-//                                                    handler:^(UIAlertAction *action) {
-//                                                    }]];
-//
-//            [self presentViewController:alert animated:NO completion:nil];
-//        }
-//    });
 }
 
 
