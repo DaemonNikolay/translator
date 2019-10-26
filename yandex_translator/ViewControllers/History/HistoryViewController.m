@@ -71,8 +71,6 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger hghgh = sections.count;
-
     return sections.count;
 }
 

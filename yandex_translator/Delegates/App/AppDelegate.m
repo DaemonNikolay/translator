@@ -57,34 +57,38 @@
             }];
         }
     }
+
     return _persistentContainer;
 }
 
 #pragma mark - Core Data Saving support
 
-- (void)saveContext {
-    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+- (void)saveContext:(NSManagedObjectContext *)context {
     NSError *error = nil;
 
     if ([context hasChanges] && ![context save:&error]) {
-        [self saveContext];
+        [self saveContext:context];
     }
 }
 
 
 - (NSManagedObjectContext *)mainQueueContext {
-    if (!_context) {
-        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        _context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator;
+    @synchronized (self) {
+        if (!_context) {
+            _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+            _context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator;
+        }
     }
 
     return _context;
 }
 
 - (NSManagedObjectContext *)privateQueueContext {
-    if (!_context) {
-        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        _context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator;
+    @synchronized (self) {
+        if (!_context) {
+            _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+            _context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator;
+        }
     }
 
     return _context;

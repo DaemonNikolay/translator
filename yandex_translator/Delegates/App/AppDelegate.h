@@ -16,7 +16,7 @@
 @property(readwrite, strong) NSPersistentContainer *persistentContainer;
 @property(readwrite, strong) NSManagedObjectContext *context;
 
-- (void)saveContext;
+- (void)saveContext:(NSManagedObjectContext *)context;
 
 - (NSManagedObjectContext *)mainQueueContext;
 

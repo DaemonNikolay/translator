@@ -25,6 +25,7 @@
         }
 
         if (!context) {
+//            context = appDelegate.persistentContainer.viewContext;
             context = appDelegate.privateQueueContext;
         }
     }
@@ -47,7 +48,7 @@
 }
 
 - (void)save {
-    [appDelegate saveContext];
+    [appDelegate saveContext:context];
 }
 
 - (NSArray *)getValues:(NSString *)entityName {
