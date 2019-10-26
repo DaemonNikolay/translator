@@ -58,6 +58,15 @@
     return translatedContent;
 }
 
++ (NSUInteger)directionsCount {
+    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
+
+    NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
+    NSUInteger count = [coreDataManaged getValues:entityName].count;
+
+    return count;
+}
+
 + (NSArray *)clean:(NSArray *)value {
     NSMutableArray *result = [[NSMutableArray alloc] init];
     if ([value count] == 0) {

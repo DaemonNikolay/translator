@@ -22,4 +22,6 @@
 
 + (NSArray *)clean:(NSArray *)value;
 
++ (NSUInteger)directionsCount;
+
 @end

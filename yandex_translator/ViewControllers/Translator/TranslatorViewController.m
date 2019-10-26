@@ -110,28 +110,15 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
     isLanguageFrom = YES;
 
-    ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-
-    [self showActivityIndicator];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @synchronized (self) {
-            [extractForTranslate extractionDirectionsOfTranslate];
-        }
-
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self hideActivityIndicator];
-
-            [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
-        });
-    });
+    [self movementChooseLanguageWithUpdateDirections];
 }
 
 - (IBAction)buttonTranslationTo_click:(id)sender { // TODO FIXXX
     [self dismissKeyboard];
+
     isLanguageFrom = NO;
 
-    [self performSegueWithIdentifier:(NSString *) IDENTIFIER_SEGUE_CHOOSE_LANGUAGE sender:nil];
+    [self movementChooseLanguageWithUpdateDirections];
 }
 
 - (IBAction)buttonTranslate_click:(id)sender {  // TODO FIXXX
@@ -207,37 +194,6 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 }
 
 
-// MARK: --
-// MARK: Memory
-
-- (void)saveToHistoryOfTranslate:(NSString *)textTranslate sourceText:(NSString *)sourceText {
-//    NSMutableString *directionTranslate = [self extractionDirectionTranslation];
-//
-//    NSDictionary *infoOfTranslate = @{
-//            @"direction": directionTranslate,
-//            @"beforeTranslation": sourceText,
-//            @"afterTranslation": textTranslate
-//    };
-//
-//    NSString *keyHistory = @"history";
-//
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSArray *collectionInfoOfTranslate = @[infoOfTranslate];
-//
-//    if (![defaults objectForKey:keyHistory]) {
-//        [defaults setObject:collectionInfoOfTranslate forKey:keyHistory];
-//        return;
-//    }
-//
-//    NSMutableArray *content = [[defaults objectForKey:keyHistory] mutableCopy];
-//
-//    [content addObject:infoOfTranslate];
-//    [defaults setObject:content forKey:keyHistory];
-
-// TODO FIXXX
-}
-
-
 // Mark: --
 // Mark: Services
 
@@ -276,6 +232,25 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
 - (void)showActivityIndicator {
     [[self activityIndicator] setHidden:NO];
+}
+
+- (void)movementChooseLanguageWithUpdateDirections {
+    [self showActivityIndicator];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([ExtractForTranslate directionsCount] == 0) {
+            @synchronized (self) {
+                ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
+                [extractForTranslate extractionDirectionsOfTranslate];
+            }
+        }
+
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self hideActivityIndicator];
+
+            [self performSegueWithIdentifier:(NSString *) IDENTIFIER_SEGUE_CHOOSE_LANGUAGE sender:nil];
+        });
+    });
 }
 
 
