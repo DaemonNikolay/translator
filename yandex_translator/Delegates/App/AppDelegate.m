@@ -49,8 +49,6 @@
 
 #pragma mark - Core Data stack
 
-@synthesize persistentContainer = _persistentContainer;
-
 - (NSPersistentContainer *)persistentContainer {
     @synchronized (self) {
         if (_persistentContainer == nil) {
@@ -71,6 +69,45 @@
     if ([context hasChanges] && ![context save:&error]) {
         [self saveContext];
     }
+}
+
+
+- (NSManagedObjectContext *)mainQueueContext {
+    if (!_context) {
+        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        _context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator;
+    }
+
+    return _context;
+}
+
+- (NSManagedObjectContext *)privateQueueContext {
+    if (!_context) {
+        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator;
+    }
+
+    return _context;
+}
+
+- (void)contextDidSavePrivateQueueContext:(NSNotification *)notification {
+    @synchronized (self) {
+        [self.mainQueueContext performBlock:^{
+            [self.mainQueueContext mergeChangesFromContextDidSaveNotification:notification];
+        }];
+    }
+}
+
+- (void)contextDidSaveMainQueueContext:(NSNotification *)notification {
+    @synchronized (self) {
+        [self.privateQueueContext performBlock:^{
+            [self.privateQueueContext mergeChangesFromContextDidSaveNotification:notification];
+        }];
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
