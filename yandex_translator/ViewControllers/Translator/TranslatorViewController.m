@@ -112,14 +112,16 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
 
-    [[self activityIndicator] setHidden:NO];
+    [self showActivityIndicator];
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @synchronized (self) {
             [extractForTranslate extractionDirectionsOfTranslate];
         }
 
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [[self activityIndicator] setHidden:YES];
+            [self hideActivityIndicator];
+
             [self performSegueWithIdentifier:@"chooseLanguage" sender:nil];
         });
     });
@@ -140,11 +142,15 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
         return;
     }
 
+    [self showActivityIndicator];
+
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *translatedContent = [extractForTranslate extractionTranslatedContent:textToTranslate];
 
         dispatch_sync(dispatch_get_main_queue(), ^{
+            [self hideActivityIndicator];
+
             self.textViewTranslateContent.text = translatedContent;
         });
     });
@@ -262,6 +268,14 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
 - (void)clearTranslatedTextView {
     self.textViewTranslateContent.text = @"";
+}
+
+- (void)hideActivityIndicator {
+    [[self activityIndicator] setHidden:YES];
+}
+
+- (void)showActivityIndicator {
+    [[self activityIndicator] setHidden:NO];
 }
 
 

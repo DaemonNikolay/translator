@@ -13,7 +13,7 @@
 // MARK: --
 // MARK: Public methods
 
-- (void)extractionDirectionsOfTranslate {
+- (void)extractionDirectionsOfTranslate { // TODO: Внедрить асинхронику, в том числе и для сохранения в CoreData
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
     NSString *shortLanguageNameFrom = [userDefaults getShortLanguageNameFrom];
     NSString *shortLanguageNameTo = [userDefaults getShortLanguageNameTo];
