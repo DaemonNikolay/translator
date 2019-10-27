@@ -15,8 +15,6 @@
 
 + (UIAlertController *)alertErrorTranslate;
 
-+ (UIAlertController *)alertErrorNetworkConnection;
-
 + (UIAlertController *)alertError:(NSString *)message;
 
 @end

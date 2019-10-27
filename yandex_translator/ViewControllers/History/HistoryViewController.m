@@ -53,8 +53,6 @@
     NSUInteger sectionIndex = (NSUInteger) indexPath.section;
     NSUInteger rowIndex = (NSUInteger) indexPath.row;
 
-    NSString *cc = contents[sectionIndex][rowIndex];
-
     cell.textLabel.text = contents[sectionIndex][rowIndex];
 
     return cell;
@@ -65,8 +63,6 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *fds = sections[(NSUInteger) section];
-
     return sections[(NSUInteger) section];
 }
 
@@ -110,17 +106,6 @@
         [contents addObject:contentTranslate];
     }
 }
-
-//- (NSArray *)extractionHistoryTranslates {
-////    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-////    NSArray *translates = [defaults objectForKey:@"history"];
-////
-////    return translates;
-//
-//
-//    Core
-//
-//}
 
 - (void)initInfoOfTranslation {
     sections = [@[] mutableCopy];

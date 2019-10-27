@@ -14,8 +14,7 @@
 #import "EnumEntities.h"
 
 #import "TranslateDirectionsViewController.h"
-
-@class Alert;
+#import "Alert.h"
 
 
 @interface TranslatorViewController : UIViewController
@@ -35,8 +34,6 @@
 
 // MARK: -
 // MARK: Actions
-
-@property(nonatomic, strong) id name;
 
 - (IBAction)buttonTranslationFrom_click:(id)sender;
 

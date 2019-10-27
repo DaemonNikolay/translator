@@ -71,18 +71,6 @@
     }
 }
 
-
-- (NSManagedObjectContext *)mainQueueContext {
-    @synchronized (self) {
-        if (!_context) {
-            _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-            _context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator;
-        }
-    }
-
-    return _context;
-}
-
 - (NSManagedObjectContext *)privateQueueContext {
     @synchronized (self) {
         if (!_context) {
@@ -92,22 +80,6 @@
     }
 
     return _context;
-}
-
-- (void)contextDidSavePrivateQueueContext:(NSNotification *)notification {
-    @synchronized (self) {
-        [self.mainQueueContext performBlock:^{
-            [self.mainQueueContext mergeChangesFromContextDidSaveNotification:notification];
-        }];
-    }
-}
-
-- (void)contextDidSaveMainQueueContext:(NSNotification *)notification {
-    @synchronized (self) {
-        [self.privateQueueContext performBlock:^{
-            [self.privateQueueContext mergeChangesFromContextDidSaveNotification:notification];
-        }];
-    }
 }
 
 - (void)dealloc {

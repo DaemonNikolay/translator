@@ -16,6 +16,9 @@ NSString *baseUrl = @"https://translate.yandex.net/api/v1.5/tr.json";
 NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889cf7c9a0d6dfb330619ddf07a9389";
 
 
+// MARK: --
+// MARK: Public methods
+
 + (NSDictionary *)translateText:(NSString *)content lang:(NSString *)language {
     content = [content stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
 
@@ -61,6 +64,16 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
     return json;
 }
 
++ (Boolean)checkInternetConnection {
+    NSString *contentOfUrl = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://www.google.com"]];
+
+    return contentOfUrl != nil;
+}
+
+
+// MARK: --
+// MARK: Private methods
+
 + (NSDictionary *)sendSynchronousRequest:(NSURLRequest *)request
                        returningResponse:(NSURLResponse **)response
                                    error:(NSError **)error {
@@ -92,12 +105,5 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
 
     return json;
 }
-
-+ (Boolean)checkInternetConnection {
-    NSString *contentOfUrl = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://www.google.com"]];
-
-    return contentOfUrl != nil;
-}
-
 
 @end

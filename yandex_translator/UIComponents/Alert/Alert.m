@@ -42,16 +42,6 @@
     return alert;
 }
 
-+ (UIAlertController *)alertErrorNetworkConnection {
-    NSString *message = @"Error internet connection";
-    NSString *titleAlert = @"Internet connection";
-    NSString *buttonCancelTitle = @"Understand";
-
-    UIAlertController *alert = [self templateAlertError:message title:titleAlert buttonCancelTitle:buttonCancelTitle];
-
-    return alert;
-}
-
 + (UIAlertController *)alertError:(NSString *)message {
     NSString *titleAlert = @"Error";
     NSString *buttonCancelTitle = @"Understand";

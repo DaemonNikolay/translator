@@ -7,7 +7,6 @@
 //
 
 #import "TranslatorViewController.h"
-#import "Alert.h"
 
 @interface TranslatorViewController () {
     Boolean isLanguageFrom;
@@ -22,8 +21,6 @@
 // MARK: Constants
 
 const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
-
-
 
 
 // MARK: --

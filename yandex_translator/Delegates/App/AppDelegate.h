@@ -13,12 +13,10 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property(strong, nonatomic) UIWindow *window;
-@property(readwrite, strong) NSPersistentContainer *persistentContainer;
+@property(readwrite, strong, nonatomic) NSPersistentContainer *persistentContainer;
 @property(readwrite, strong) NSManagedObjectContext *context;
 
 - (void)saveContext:(NSManagedObjectContext *)context;
-
-- (NSManagedObjectContext *)mainQueueContext;
 
 - (NSManagedObjectContext *)privateQueueContext;
 

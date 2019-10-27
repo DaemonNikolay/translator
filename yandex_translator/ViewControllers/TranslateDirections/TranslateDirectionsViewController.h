@@ -14,8 +14,6 @@
 #import "EnumEntities.h"
 #import "EnumTranslationDirections.h"
 
-@class Alert;
-
 
 @interface TranslateDirectionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

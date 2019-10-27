@@ -28,24 +28,12 @@
     self.tableViewDirections.dataSource = self;
     self.tableViewDirections.delegate = self;
 
-    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
-
-    NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
-    NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
-
-    NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
-    NSArray *languagesCoreData = [coreDataManaged getValues:entityName];
-
-    NSArray *sourceLanguageFullNames = [languagesCoreData valueForKey:attributeFullName];
-    languagesFullNames = [ExtractForTranslate clean:sourceLanguageFullNames];
-
-    NSArray *sourceLanguageShortNames = [languagesCoreData valueForKey:attributeShortName];
-    languagesShortNames = [ExtractForTranslate clean:sourceLanguageShortNames];
+    [self initDirectionLanguages];
 }
 
 
 // MARK: --
-// MARK: Table view
+// MARK: UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return languagesFullNames.count;
@@ -66,15 +54,7 @@
                                          langFullName:languageFullName];
         }
         @catch (NSException *) {
-            UserDefaults *userDefaults = [[UserDefaults alloc] init];
-
-            NSMutableString *errorMessage = [[NSMutableString alloc] init];
-            [errorMessage appendString:@"Internet error connection\n"];
-            [errorMessage appendString:@"Language '"];
-            [errorMessage appendString:languageFullName];
-            [errorMessage appendString:@"' cannot be selected"];
-
-            [userDefaults setError:errorMessage];
+            [self saveErrorChangedCurrentDirection:languageFullName];
         }
     });
 }
@@ -89,6 +69,38 @@
     cell.textLabel.text = languagesFullNames[(NSUInteger) indexPath.item];
 
     return cell;
+}
+
+
+// MARK: --
+// MARK: Services
+
+- (void)saveErrorChangedCurrentDirection:(NSString *)languageFullName {
+    UserDefaults *userDefaults = [[UserDefaults alloc] init];
+
+    NSMutableString *errorMessage = [[NSMutableString alloc] init];
+    [errorMessage appendString:@"Internet error connection\n"];
+    [errorMessage appendString:@"Language '"];
+    [errorMessage appendString:languageFullName];
+    [errorMessage appendString:@"' cannot be selected"];
+
+    [userDefaults setError:errorMessage];
+}
+
+- (void)initDirectionLanguages {
+    CoreDataManaged *coreDataManaged = [[CoreDataManaged alloc] init];
+
+    NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
+    NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
+
+    NSString *entityName = [EnumEntities getEntityName:TranslationDirections];
+    NSArray *languagesCoreData = [coreDataManaged getValues:entityName];
+
+    NSArray *sourceLanguageFullNames = [languagesCoreData valueForKey:attributeFullName];
+    languagesFullNames = [ExtractForTranslate clean:sourceLanguageFullNames];
+
+    NSArray *sourceLanguageShortNames = [languagesCoreData valueForKey:attributeShortName];
+    languagesShortNames = [ExtractForTranslate clean:sourceLanguageShortNames];
 }
 
 
