@@ -56,8 +56,76 @@
                                     <action selector="buttonTranslationTo_click:" destination="9pv-A4-QxB" eventType="touchUpInside" id="d2y-2B-wC2"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="foS-CD-6Ha">
+                                <rect key="frame" x="20" y="429.5" width="374" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="foS-CD-6Ha" secondAttribute="height" multiplier="374:397" constant="339.14357682619647" id="agn-Aa-l3g"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBG-Ch-5to">
+                                <rect key="frame" x="20" y="136" width="374" height="677"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OLV-Yx-WHA" userLabel="TextViewSourceContent">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="320"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="320" id="ZaK-Lu-w0u"/>
+                                            <constraint firstAttribute="width" constant="374" id="neD-3b-TaL"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" smartInsertDeleteType="yes"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MTl-oP-XU2" userLabel="TextViewTranslateContent">
+                                        <rect key="frame" x="0.0" y="357" width="374" height="320"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="320" id="KNz-hw-0BP"/>
+                                            <constraint firstAttribute="width" constant="374" id="X9S-nk-XFj"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="editable" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MTl-oP-XU2" firstAttribute="top" secondItem="OLV-Yx-WHA" secondAttribute="bottom" constant="37" id="0hG-dc-EAZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="OLV-Yx-WHA" secondAttribute="bottom" constant="357" id="Kot-vd-4tA"/>
+                                    <constraint firstItem="OLV-Yx-WHA" firstAttribute="top" secondItem="ANS-6G-Ku9" secondAttribute="top" id="NUg-Zr-yLJ"/>
+                                    <constraint firstItem="MTl-oP-XU2" firstAttribute="bottom" secondItem="JG8-Nr-etY" secondAttribute="bottom" id="Nfk-03-raF"/>
+                                    <constraint firstItem="MTl-oP-XU2" firstAttribute="leading" secondItem="ANS-6G-Ku9" secondAttribute="leading" id="Rlw-Ky-ro1"/>
+                                    <constraint firstItem="OLV-Yx-WHA" firstAttribute="leading" secondItem="MTl-oP-XU2" secondAttribute="leading" id="WWk-Ew-LVT"/>
+                                    <constraint firstItem="MTl-oP-XU2" firstAttribute="top" secondItem="OLV-Yx-WHA" secondAttribute="bottom" constant="37" id="XkS-Ld-KzH"/>
+                                    <constraint firstAttribute="trailing" secondItem="OLV-Yx-WHA" secondAttribute="trailing" id="ceo-Fh-0wh"/>
+                                    <constraint firstItem="OLV-Yx-WHA" firstAttribute="centerX" secondItem="hBG-Ch-5to" secondAttribute="centerX" id="dks-4u-ZgE"/>
+                                    <constraint firstItem="OLV-Yx-WHA" firstAttribute="trailing" secondItem="ANS-6G-Ku9" secondAttribute="trailing" id="e8s-l3-NDj"/>
+                                    <constraint firstItem="MTl-oP-XU2" firstAttribute="trailing" secondItem="ANS-6G-Ku9" secondAttribute="trailing" id="eBK-5l-U0i"/>
+                                    <constraint firstItem="OLV-Yx-WHA" firstAttribute="leading" secondItem="ANS-6G-Ku9" secondAttribute="leading" id="lom-Z6-nNu"/>
+                                    <constraint firstAttribute="width" secondItem="hBG-Ch-5to" secondAttribute="height" multiplier="374:677" id="qfK-O4-kzA"/>
+                                    <constraint firstItem="OLV-Yx-WHA" firstAttribute="top" secondItem="ANS-6G-Ku9" secondAttribute="top" id="rAp-iA-go0"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="ANS-6G-Ku9"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="JG8-Nr-etY"/>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-5j-CM9" userLabel="ButtonTranslate">
-                                <rect key="frame" x="179" y="67" width="56" height="54"/>
+                                <rect key="frame" x="180" y="67" width="54" height="54"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" image="translateButton">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,75 +134,29 @@
                                     <action selector="buttonTranslate_click:" destination="9pv-A4-QxB" eventType="touchUpInside" id="YkL-uw-QaH"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OLV-Yx-WHA" userLabel="TextViewSourceContent">
-                                <rect key="frame" x="20" y="126" width="374" height="320"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="320" id="ZaK-Lu-w0u"/>
-                                    <constraint firstAttribute="width" constant="374" id="neD-3b-TaL"/>
-                                </constraints>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" smartInsertDeleteType="yes"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MTl-oP-XU2" userLabel="TextViewTranslateContent">
-                                <rect key="frame" x="20" y="478" width="374" height="320"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="320" id="KNz-hw-0BP"/>
-                                    <constraint firstAttribute="width" constant="374" id="X9S-nk-XFj"/>
-                                </constraints>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="editable" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </textView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="foS-CD-6Ha">
-                                <rect key="frame" x="20" y="249.5" width="374" height="397"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="foS-CD-6Ha" secondAttribute="height" multiplier="374:397" id="agn-Aa-l3g"/>
-                                </constraints>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="MTl-oP-XU2" secondAttribute="bottom" constant="15" id="1be-Vz-6IY"/>
+                            <constraint firstItem="zu2-5j-CM9" firstAttribute="centerX" secondItem="foS-CD-6Ha" secondAttribute="centerX" id="1Hu-jt-slx"/>
                             <constraint firstItem="V9q-Nm-9Q8" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="1qH-6k-OtO"/>
-                            <constraint firstItem="foS-CD-6Ha" firstAttribute="leading" secondItem="OLV-Yx-WHA" secondAttribute="leading" id="Aq7-ER-qsH"/>
-                            <constraint firstItem="OLV-Yx-WHA" firstAttribute="top" secondItem="zu2-5j-CM9" secondAttribute="bottom" constant="5" id="Bhj-Jo-l8Q"/>
-                            <constraint firstItem="zu2-5j-CM9" firstAttribute="centerY" secondItem="V9q-Nm-9Q8" secondAttribute="centerY" id="DBe-mW-eZG"/>
+                            <constraint firstItem="hBG-Ch-5to" firstAttribute="top" secondItem="zu2-5j-CM9" secondAttribute="bottom" constant="15" id="3gk-3H-XkD"/>
+                            <constraint firstItem="zu2-5j-CM9" firstAttribute="leading" secondItem="eEU-cD-GeE" secondAttribute="trailing" constant="20" id="3nf-hk-8Py"/>
+                            <constraint firstItem="hBG-Ch-5to" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="20" id="C3F-LX-B9o"/>
+                            <constraint firstItem="zu2-5j-CM9" firstAttribute="centerY" secondItem="eEU-cD-GeE" secondAttribute="centerY" id="I8f-oT-77u"/>
                             <constraint firstItem="V9q-Nm-9Q8" firstAttribute="width" secondItem="eEU-cD-GeE" secondAttribute="width" id="IkB-MI-W2e"/>
-                            <constraint firstItem="zu2-5j-CM9" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="23" id="M5N-I5-Lu8"/>
-                            <constraint firstItem="OLV-Yx-WHA" firstAttribute="trailing" secondItem="V9q-Nm-9Q8" secondAttribute="trailing" id="Nlf-1b-Bx1"/>
+                            <constraint firstItem="hBG-Ch-5to" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="KvO-ZW-bAk"/>
+                            <constraint firstItem="foS-CD-6Ha" firstAttribute="leading" secondItem="eEU-cD-GeE" secondAttribute="leading" id="PBb-Z2-GaW"/>
+                            <constraint firstItem="hBG-Ch-5to" firstAttribute="top" secondItem="zu2-5j-CM9" secondAttribute="bottom" constant="15" id="R7C-o0-5Np"/>
                             <constraint firstItem="eEU-cD-GeE" firstAttribute="bottom" secondItem="V9q-Nm-9Q8" secondAttribute="bottom" id="XeL-B7-i48"/>
-                            <constraint firstItem="OLV-Yx-WHA" firstAttribute="leading" secondItem="eEU-cD-GeE" secondAttribute="leading" id="YHX-ke-e5M"/>
-                            <constraint firstItem="OLV-Yx-WHA" firstAttribute="leading" secondItem="MTl-oP-XU2" secondAttribute="leading" id="bKf-7l-PYC"/>
-                            <constraint firstItem="MTl-oP-XU2" firstAttribute="top" secondItem="OLV-Yx-WHA" secondAttribute="bottom" constant="32" id="c3a-h4-6T6"/>
-                            <constraint firstItem="OLV-Yx-WHA" firstAttribute="trailing" secondItem="MTl-oP-XU2" secondAttribute="trailing" id="cU0-aq-0mb"/>
+                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="hBG-Ch-5to" secondAttribute="trailing" constant="20" id="bt6-Ka-qGS"/>
                             <constraint firstItem="eEU-cD-GeE" firstAttribute="top" secondItem="V9q-Nm-9Q8" secondAttribute="top" id="gLJ-Uz-VcL"/>
-                            <constraint firstItem="MTl-oP-XU2" firstAttribute="width" secondItem="OLV-Yx-WHA" secondAttribute="width" id="gLS-qn-S1M"/>
-                            <constraint firstItem="V9q-Nm-9Q8" firstAttribute="leading" secondItem="zu2-5j-CM9" secondAttribute="trailing" constant="19" id="lyZ-4L-Thf"/>
+                            <constraint firstItem="V9q-Nm-9Q8" firstAttribute="leading" secondItem="zu2-5j-CM9" secondAttribute="trailing" constant="20" id="kZG-og-JzE"/>
                             <constraint firstItem="foS-CD-6Ha" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="m7m-XQ-YbK"/>
                             <constraint firstItem="V9q-Nm-9Q8" firstAttribute="leading" secondItem="eEU-cD-GeE" secondAttribute="trailing" constant="94" id="nfU-FC-1LU"/>
-                            <constraint firstItem="foS-CD-6Ha" firstAttribute="trailing" secondItem="OLV-Yx-WHA" secondAttribute="trailing" id="rft-6R-s9a"/>
-                            <constraint firstItem="OLV-Yx-WHA" firstAttribute="centerX" secondItem="zu2-5j-CM9" secondAttribute="centerX" id="tx4-uI-1UL"/>
+                            <constraint firstItem="hBG-Ch-5to" firstAttribute="top" secondItem="V9q-Nm-9Q8" secondAttribute="bottom" constant="22" id="ppI-qL-R8l"/>
+                            <constraint firstItem="hBG-Ch-5to" firstAttribute="top" secondItem="eEU-cD-GeE" secondAttribute="bottom" constant="22" id="vcB-zQ-D9H"/>
                             <constraint firstItem="eEU-cD-GeE" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="xPE-Tu-1LX"/>
+                            <constraint firstItem="zu2-5j-CM9" firstAttribute="leading" secondItem="eEU-cD-GeE" secondAttribute="trailing" constant="20" id="ylR-dB-YqQ"/>
                             <constraint firstItem="eEU-cD-GeE" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="30" id="z6v-Gx-4zW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
