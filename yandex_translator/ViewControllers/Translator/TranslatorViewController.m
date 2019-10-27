@@ -42,17 +42,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    [defaults removeObserver:self
-                  forKeyPath:[EnumConstants getConstant:FullLangNameFrom]
-                     context:NULL
-    ];
-
-    [defaults removeObserver:self
-                  forKeyPath:[EnumConstants getConstant:FullLangNameTo]
-                     context:NULL
-    ];
+    [self removeObserversForUserDefault];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -66,12 +56,31 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     if ([keyPath isEqualToString:fullLangNameFrom]) {
         ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
 
+        [self showActivityIndicator];
+
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             dispatch_sync(dispatch_get_main_queue(), ^{
-                @synchronized (self) {
-                    [extractForTranslate extractionDirectionsOfTranslate];
-                    [self initButtonsTitle];
+                @try {
+                    @synchronized (self) {
+                        [extractForTranslate extractionDirectionsOfTranslate];
+                    }
                 }
+                @catch (NSException *) {
+                    [self removeObserversForUserDefault];
+
+                    [UserDefaults saveCurrentLanguageDirections:extractForTranslate];
+
+                    [self hideActivityIndicator];
+                    [self showAlertErrorUpdateTitles];
+
+                    [self observingOnChangeLanguageTitles];
+
+                    return;
+                }
+
+
+                [self initButtonsTitle];
+                [self hideActivityIndicator];
             });
         });
     } else if ([keyPath isEqualToString:fullLangNameTo]) {
@@ -89,7 +98,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
 
 // MARK: --
-// MARK: Additional UI
+// MARK: Alerts error
 
 - (UIAlertController *)createAlertDialog:(NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
@@ -99,7 +108,50 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     return alert;
 }
 
+- (UIAlertController *)templateAlertError:(NSString *)message
+                                    title:(NSString *)title
+                        buttonCancelTitle:(NSString *)buttonCancelTitle {
 
+    UIAlertController *alert = [self createAlertDialog:message];
+    [alert setTitle:title];
+
+    UIAlertAction *buttonUnderstand = [UIAlertAction actionWithTitle:buttonCancelTitle
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+    [alert addAction:buttonUnderstand];
+
+    return alert;
+}
+
+- (void)showAlertErrorCreateDirectionsList {
+    NSString *message = @"Error create directions list";
+    NSString *titleAlert = @"Directions list";
+    NSString *buttonCancelTitle = @"Understand";
+
+    UIAlertController *alert = [self templateAlertError:message title:titleAlert buttonCancelTitle:buttonCancelTitle];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)showAlertErrorUpdateTitles {
+    NSString *message = @"Error update languages";
+    NSString *titleAlert = @"Languages";
+    NSString *buttonCancelTitle = @"Understand";
+
+    UIAlertController *alert = [self templateAlertError:message title:titleAlert buttonCancelTitle:buttonCancelTitle];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)showAlertErrorTranslate {
+    NSString *message = @"Error translate content";
+    NSString *titleAlert = @"Translate";
+    NSString *buttonCancelTitle = @"Understand";
+
+    UIAlertController *alert = [self templateAlertError:message title:titleAlert buttonCancelTitle:buttonCancelTitle];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 
 // MARK: --
@@ -134,7 +186,17 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
     ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *translatedContent = [extractForTranslate extractionTranslatedContent:textToTranslate];
+        NSString *translatedContent;
+        @try {
+            translatedContent = [extractForTranslate extractionTranslatedContent:textToTranslate];
+        }
+        @catch (NSException *) {
+            [self hideActivityIndicator];
+            [self showAlertErrorTranslate];
+
+            return;
+        }
+
 
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self hideActivityIndicator];
@@ -161,8 +223,8 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 }
 
 
-// Mark: --
-// Mark: Services
+// MARK: --
+// MARK: Services
 
 - (void)dismissKeyboardByClicking {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -189,10 +251,6 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
                   context:NULL];
 }
 
-- (void)clearTranslatedTextView {
-    self.textViewTranslateContent.text = @"";
-}
-
 - (void)hideActivityIndicator {
     [[self activityIndicator] setHidden:YES];
 }
@@ -208,7 +266,17 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
         if ([ExtractForTranslate directionsCount] == 0) {
             @synchronized (self) {
                 ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
-                [extractForTranslate extractionDirectionsOfTranslate];
+
+                @try {
+                    [extractForTranslate extractionDirectionsOfTranslate];
+                }
+                @catch (NSException *) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [self hideActivityIndicator];
+                        [self showAlertErrorCreateDirectionsList];
+                    });
+                    return;
+                }
             }
         }
 
@@ -220,5 +288,18 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     });
 }
 
+- (void)removeObserversForUserDefault {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    [defaults removeObserver:self
+                  forKeyPath:[EnumConstants getConstant:FullLangNameFrom]
+                     context:NULL
+    ];
+
+    [defaults removeObserver:self
+                  forKeyPath:[EnumConstants getConstant:FullLangNameTo]
+                     context:NULL
+    ];
+}
 
 @end

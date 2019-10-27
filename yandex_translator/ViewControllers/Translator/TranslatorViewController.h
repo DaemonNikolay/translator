@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Api.h"
-#import "CoreDataManaged.h"
 #import "ExtractForTranslate.h"
+#import "UserDefaults.h"
 
 #import "EnumTranslationDirections.h"
 #import "EnumEntities.h"

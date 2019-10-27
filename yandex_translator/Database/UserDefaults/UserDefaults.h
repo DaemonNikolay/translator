@@ -4,7 +4,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EnumConstants.h"
+//#import "EnumConstants.h"
+
+@class ExtractForTranslate;
+@class EnumConstants;
 
 
 @interface UserDefaults : NSObject
@@ -24,5 +27,7 @@
 - (NSString *)getFullLanguageNameFrom;
 
 - (NSString *)getFullLanguageNameTo;
+
++ (void)saveCurrentLanguageDirections:(ExtractForTranslate *)extractForTranslate;
 
 @end

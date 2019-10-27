@@ -20,6 +20,8 @@
 
 - (NSString *)extractionTranslatedContent:(NSString *)sourceContent;
 
+- (NSDictionary *)currentLanguageDirections;
+
 + (NSArray *)clean:(NSArray *)value;
 
 + (NSUInteger)directionsCount;

@@ -4,6 +4,7 @@
 //
 
 #import "UserDefaults.h"
+#import "ExtractForTranslate.h"
 
 @interface UserDefaults () {
     NSUserDefaults *defaults;
@@ -78,6 +79,21 @@
     NSString *name = [defaults objectForKey:[EnumConstants getConstant:FullLangNameTo]];
 
     return [self filterName:name defaultName:defaultFullLanguageNameTo];
+}
+
++ (void)saveCurrentLanguageDirections:(ExtractForTranslate *)extractForTranslate { // TODO нужно пофксить, тянешь не то
+    UserDefaults *userDefaults = [[UserDefaults alloc] init];
+    NSDictionary *currentLanguageDirections = [extractForTranslate currentLanguageDirections];
+
+    NSString *keyShortLangNameFrom = [EnumTranslationDirections getAttributeTranslationDirection:(EnumAttributesTranslationDirections) ShortLangNameFrom];
+    NSString *keyShortLangNameTo = [EnumTranslationDirections getAttributeTranslationDirection:(EnumAttributesTranslationDirections) ShortLangNameTo];
+    NSString *keyFullLangNameFrom = [EnumTranslationDirections getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameFrom];
+    NSString *keyFullLangNameTo = [EnumTranslationDirections getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameTo];
+
+    [userDefaults setShortLanguageNameFrom:currentLanguageDirections[keyShortLangNameFrom]];
+    [userDefaults setShortLanguageNameTo:currentLanguageDirections[keyShortLangNameTo]];
+    [userDefaults setFullNameLanguageFrom:currentLanguageDirections[keyFullLangNameFrom]];
+    [userDefaults setFullNameLanguageTo:currentLanguageDirections[keyFullLangNameTo]];
 }
 
 

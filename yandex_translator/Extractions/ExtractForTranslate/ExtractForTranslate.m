@@ -13,7 +13,7 @@
 // MARK: --
 // MARK: Public methods
 
-- (void)extractionDirectionsOfTranslate { // TODO: Внедрить асинхронику, в том числе и для сохранения в CoreData
+- (void)extractionDirectionsOfTranslate {
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
     NSString *shortLanguageNameFrom = [userDefaults getShortLanguageNameFrom];
     NSString *shortLanguageNameTo = [userDefaults getShortLanguageNameTo];
@@ -26,9 +26,6 @@
     @try {
         NSDictionary *languages = [self getLanguagesList:shortLanguageNameFrom];
 
-        [userDefaults setFullNameLanguageFrom:[self getNewFullLangName:shortLanguageNameFrom languages:languages]];
-        [userDefaults setFullNameLanguageTo:[self getNewFullLangName:shortLanguageNameTo languages:languages]];
-
         NSString *attributeFullName = [EnumTranslationDirections getAttributeTranslationDirection:fullName];
         NSString *attributeShortName = [EnumTranslationDirections getAttributeTranslationDirection:shortName];
 
@@ -36,10 +33,14 @@
                                     entityName:entityName
                             attributeShortName:attributeShortName
                              attributeFullName:attributeFullName];
+
+        [userDefaults setFullNameLanguageFrom:[self getNewFullLangName:shortLanguageNameFrom languages:languages]];
+        [userDefaults setFullNameLanguageTo:[self getNewFullLangName:shortLanguageNameTo languages:languages]];
     } @catch (NSException *exception) {
-        [NSException raise:@"error extraction languages" format:@"%@", exception];
+        [NSException raise:@"Error extraction languages" format:@"%@", exception];
     }
 }
+
 
 - (NSString *)extractionTranslatedContent:(NSString *)sourceContent {
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
@@ -56,6 +57,26 @@
                               userDefaults:userDefaults];
 
     return translatedContent;
+}
+
+- (NSDictionary *)currentLanguageDirections {
+    UserDefaults *userDefaults = [[UserDefaults alloc] init];
+
+    NSString *keyShortLangNameTo = [EnumConstants getConstant:ShortLangNameTo];
+    NSString *keyShortLangNameFrom = [EnumConstants getConstant:ShortLangNameTo];
+    NSString *keyFullLangNameTo = [EnumConstants getConstant:ShortLangNameTo];
+    NSString *keyFullLangNameFrom = [EnumConstants getConstant:ShortLangNameTo];
+
+    NSLog(@"%@", [userDefaults getShortLanguageNameFrom]);
+
+    NSDictionary *result = @{
+            keyShortLangNameFrom: [userDefaults getShortLanguageNameFrom],
+            keyShortLangNameTo: [userDefaults getShortLanguageNameTo],
+            keyFullLangNameFrom: [userDefaults getFullLanguageNameFrom],
+            keyFullLangNameTo: [userDefaults getFullLanguageNameTo]
+    };
+
+    return result;
 }
 
 + (NSUInteger)directionsCount {

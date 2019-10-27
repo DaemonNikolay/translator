@@ -25,7 +25,6 @@
         }
 
         if (!context) {
-//            context = appDelegate.persistentContainer.viewContext;
             context = appDelegate.privateQueueContext;
         }
     }
