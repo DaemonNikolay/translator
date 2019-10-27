@@ -70,7 +70,7 @@
 
             NSMutableString *errorMessage = [[NSMutableString alloc] init];
             [errorMessage appendString:@"Internet error connection\n"];
-            [errorMessage appendString:@"City '"];
+            [errorMessage appendString:@"Language '"];
             [errorMessage appendString:languageFullName];
             [errorMessage appendString:@"' cannot be selected"];
 
