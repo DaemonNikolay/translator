@@ -56,12 +56,16 @@
                                     <action selector="buttonTranslationTo_click:" destination="9pv-A4-QxB" eventType="touchUpInside" id="d2y-2B-wC2"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="foS-CD-6Ha">
-                                <rect key="frame" x="20" y="429.5" width="374" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="foS-CD-6Ha" secondAttribute="height" multiplier="374:397" constant="339.14357682619647" id="agn-Aa-l3g"/>
-                                </constraints>
-                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-5j-CM9" userLabel="ButtonTranslate">
+                                <rect key="frame" x="180" y="67" width="54" height="54"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" image="translateButton">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonTranslate_click:" destination="9pv-A4-QxB" eventType="touchUpInside" id="YkL-uw-QaH"/>
+                                </connections>
+                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBG-Ch-5to">
                                 <rect key="frame" x="20" y="136" width="374" height="677"/>
                                 <subviews>
@@ -124,16 +128,12 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="ANS-6G-Ku9"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="JG8-Nr-etY"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-5j-CM9" userLabel="ButtonTranslate">
-                                <rect key="frame" x="180" y="67" width="54" height="54"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" image="translateButton">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonTranslate_click:" destination="9pv-A4-QxB" eventType="touchUpInside" id="YkL-uw-QaH"/>
-                                </connections>
-                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="foS-CD-6Ha">
+                                <rect key="frame" x="20" y="429.5" width="374" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="foS-CD-6Ha" secondAttribute="height" multiplier="374:397" constant="339.14357682619647" id="agn-Aa-l3g"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
