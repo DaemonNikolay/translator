@@ -17,7 +17,7 @@
 #import "Alert.h"
 
 
-@interface TranslatorViewController : UIViewController
+@interface TranslatorViewController : UIViewController <UITextViewDelegate>
 
 
 // MARK: -

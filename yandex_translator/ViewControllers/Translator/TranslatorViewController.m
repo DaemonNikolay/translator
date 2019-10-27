@@ -35,6 +35,8 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     CGColorRef colorGray = [[UIColor grayColor] CGColor];
     self.textViewSourceContent.layer.borderColor = colorGray;
     self.textViewTranslateContent.layer.borderColor = colorGray;
+
+    self.textViewSourceContent.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -93,6 +95,15 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
         TranslateDirectionsViewController *translateDirectionsViewController = [segue destinationViewController];
         translateDirectionsViewController.isLanguageFrom = isLanguageFrom;
     }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+
+    return YES;
 }
 
 
