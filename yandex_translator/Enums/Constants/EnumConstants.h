@@ -15,7 +15,9 @@ typedef NS_ENUM(NSUInteger, Constants) {
     ShortLangNameTo = 3,
 
     FullLangNameFrom = 4,
-    FullLangNameTo = 5
+    FullLangNameTo = 5,
+
+    CustomError = 6
 };
 
 @interface EnumConstants : NSObject <EnumAttributeNames>

@@ -15,7 +15,8 @@
             @(ShortLangNameFrom): @"ShortLangNameFrom",
             @(ShortLangNameTo): @"ShortLangNameTo",
             @(FullLangNameFrom): @"FullLangNameFrom",
-            @(FullLangNameTo): @"FullLangNameTo"
+            @(FullLangNameTo): @"FullLangNameTo",
+            @(CustomError): @"CustomError"
     };
 }
 

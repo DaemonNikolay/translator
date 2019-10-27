@@ -7,6 +7,7 @@
 //
 
 #import "TranslatorViewController.h"
+#import "Alert.h"
 
 @interface TranslatorViewController () {
     Boolean isLanguageFrom;
@@ -38,7 +39,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self observingOnChangeLanguageTitles];
+    [self observingUserDefaults];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -52,6 +53,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
     NSString *fullLangNameFrom = [EnumConstants getConstant:FullLangNameFrom];
     NSString *fullLangNameTo = [EnumConstants getConstant:FullLangNameTo];
+    NSString *error = [EnumConstants getConstant:CustomError];
 
     if ([keyPath isEqualToString:fullLangNameFrom]) {
         ExtractForTranslate *extractForTranslate = [[ExtractForTranslate alloc] init];
@@ -66,18 +68,11 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
                     }
                 }
                 @catch (NSException *) {
-                    [self removeObserversForUserDefault];
-
-                    [UserDefaults saveCurrentLanguageDirections:extractForTranslate];
-
                     [self hideActivityIndicator];
-                    [self showAlertErrorUpdateTitles];
-
-                    [self observingOnChangeLanguageTitles];
+                    [self presentViewController:[Alert alertErrorUpdateTitles] animated:YES completion:nil];
 
                     return;
                 }
-
 
                 [self initButtonsTitle];
                 [self hideActivityIndicator];
@@ -86,6 +81,11 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     } else if ([keyPath isEqualToString:fullLangNameTo]) {
         [self initButtonsTitle];
         [[self buttonTranslate] sendActionsForControlEvents:UIControlEventTouchUpInside];
+    } else if ([keyPath isEqualToString:error]) {
+        UserDefaults *userDefaults = [[UserDefaults alloc] init];
+        NSString *message = [userDefaults getError];
+
+        [self presentViewController:[Alert alertError:message] animated:YES completion:nil];
     }
 }
 
@@ -94,63 +94,6 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
         TranslateDirectionsViewController *translateDirectionsViewController = [segue destinationViewController];
         translateDirectionsViewController.isLanguageFrom = isLanguageFrom;
     }
-}
-
-
-// MARK: --
-// MARK: Alerts error
-
-- (UIAlertController *)createAlertDialog:(NSString *)message {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-
-    return alert;
-}
-
-- (UIAlertController *)templateAlertError:(NSString *)message
-                                    title:(NSString *)title
-                        buttonCancelTitle:(NSString *)buttonCancelTitle {
-
-    UIAlertController *alert = [self createAlertDialog:message];
-    [alert setTitle:title];
-
-    UIAlertAction *buttonUnderstand = [UIAlertAction actionWithTitle:buttonCancelTitle
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:nil];
-    [alert addAction:buttonUnderstand];
-
-    return alert;
-}
-
-- (void)showAlertErrorCreateDirectionsList {
-    NSString *message = @"Error create directions list";
-    NSString *titleAlert = @"Directions list";
-    NSString *buttonCancelTitle = @"Understand";
-
-    UIAlertController *alert = [self templateAlertError:message title:titleAlert buttonCancelTitle:buttonCancelTitle];
-
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)showAlertErrorUpdateTitles {
-    NSString *message = @"Error update languages";
-    NSString *titleAlert = @"Languages";
-    NSString *buttonCancelTitle = @"Understand";
-
-    UIAlertController *alert = [self templateAlertError:message title:titleAlert buttonCancelTitle:buttonCancelTitle];
-
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)showAlertErrorTranslate {
-    NSString *message = @"Error translate content";
-    NSString *titleAlert = @"Translate";
-    NSString *buttonCancelTitle = @"Understand";
-
-    UIAlertController *alert = [self templateAlertError:message title:titleAlert buttonCancelTitle:buttonCancelTitle];
-
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
@@ -165,7 +108,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     [self movementChooseLanguageWithUpdateDirections];
 }
 
-- (IBAction)buttonTranslationTo_click:(id)sender { // TODO FIXXX
+- (IBAction)buttonTranslationTo_click:(id)sender {
     [self dismissKeyboard];
 
     isLanguageFrom = NO;
@@ -173,7 +116,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     [self movementChooseLanguageWithUpdateDirections];
 }
 
-- (IBAction)buttonTranslate_click:(id)sender {  // TODO FIXXX
+- (IBAction)buttonTranslate_click:(id)sender {
     [self dismissKeyboard];
 
     NSCharacterSet *whiteSpace = [NSCharacterSet whitespaceCharacterSet];
@@ -192,11 +135,10 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
         }
         @catch (NSException *) {
             [self hideActivityIndicator];
-            [self showAlertErrorTranslate];
+            [self presentViewController:[Alert alertErrorTranslate] animated:YES completion:nil];
 
             return;
         }
-
 
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self hideActivityIndicator];
@@ -237,7 +179,7 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
     [self.view endEditing:YES];
 }
 
-- (void)observingOnChangeLanguageTitles {
+- (void)observingUserDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     [defaults addObserver:self
@@ -247,6 +189,11 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
     [defaults addObserver:self
                forKeyPath:[EnumConstants getConstant:FullLangNameTo]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+
+    [defaults addObserver:self
+               forKeyPath:[EnumConstants getConstant:CustomError]
                   options:NSKeyValueObservingOptionNew
                   context:NULL];
 }
@@ -273,8 +220,9 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
                 @catch (NSException *) {
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         [self hideActivityIndicator];
-                        [self showAlertErrorCreateDirectionsList];
+                        [self presentViewController:[Alert alertErrorCreateDirectionsList] animated:YES completion:nil];
                     });
+
                     return;
                 }
             }
@@ -298,6 +246,11 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
 
     [defaults removeObserver:self
                   forKeyPath:[EnumConstants getConstant:FullLangNameTo]
+                     context:NULL
+    ];
+
+    [defaults removeObserver:self
+                  forKeyPath:[EnumConstants getConstant:CustomError]
                      context:NULL
     ];
 }

@@ -54,22 +54,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *languageShortName = languagesShortNames[(NSUInteger) indexPath.item];
     NSString *languageFullName = languagesFullNames[(NSUInteger) indexPath.item];
-    UserDefaults *userDefaults = [[UserDefaults alloc] init];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
         });
 
-        if ([self isLanguageFrom]) {
-            [userDefaults setShortLanguageNameFrom:languageShortName];
-            [userDefaults setFullNameLanguageFrom:languageFullName];
-
-            return;
+        @try {
+            [UserDefaults saveChangedCurrentDirection:[self isLanguageFrom]
+                                        langShortName:languageShortName
+                                         langFullName:languageFullName];
         }
+        @catch (NSException *) {
+            UserDefaults *userDefaults = [[UserDefaults alloc] init];
 
-        [userDefaults setShortLanguageNameTo:languageShortName];
-        [userDefaults setFullNameLanguageTo:languageFullName];
+            NSMutableString *errorMessage = [[NSMutableString alloc] init];
+            [errorMessage appendString:@"Internet error connection\n"];
+            [errorMessage appendString:@"City '"];
+            [errorMessage appendString:languageFullName];
+            [errorMessage appendString:@"' cannot be selected"];
+
+            [userDefaults setError:errorMessage];
+        }
     });
 }
 

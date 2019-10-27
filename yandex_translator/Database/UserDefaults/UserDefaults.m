@@ -5,6 +5,7 @@
 
 #import "UserDefaults.h"
 #import "ExtractForTranslate.h"
+#import "Api.h"
 
 @interface UserDefaults () {
     NSUserDefaults *defaults;
@@ -53,6 +54,10 @@
     [defaults setObject:languageName forKey:[EnumConstants getConstant:FullLangNameTo]];
 }
 
+- (void)setError:(NSString *)message {
+    [defaults setObject:message forKey:[EnumConstants getConstant:CustomError]];
+}
+
 
 // MARK: --
 // MARK: Getters
@@ -81,19 +86,35 @@
     return [self filterName:name defaultName:defaultFullLanguageNameTo];
 }
 
-+ (void)saveCurrentLanguageDirections:(ExtractForTranslate *)extractForTranslate { // TODO нужно пофксить, тянешь не то
+- (NSString *)getError {
+    NSString *message = [defaults objectForKey:[EnumConstants getConstant:CustomError]];
+
+    return message;
+}
+
+
+// MARK: --
+// MARK: Save
+
++ (void)saveChangedCurrentDirection:(Boolean)isLanguageFrom
+                      langShortName:(NSString *)languageShortName
+                       langFullName:(NSString *)languageFullName {
+
+    if (![Api checkInternetConnection]) {
+        [NSException raise:@"Internet error connection" format:@""];
+    }
+
     UserDefaults *userDefaults = [[UserDefaults alloc] init];
-    NSDictionary *currentLanguageDirections = [extractForTranslate currentLanguageDirections];
 
-    NSString *keyShortLangNameFrom = [EnumTranslationDirections getAttributeTranslationDirection:(EnumAttributesTranslationDirections) ShortLangNameFrom];
-    NSString *keyShortLangNameTo = [EnumTranslationDirections getAttributeTranslationDirection:(EnumAttributesTranslationDirections) ShortLangNameTo];
-    NSString *keyFullLangNameFrom = [EnumTranslationDirections getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameFrom];
-    NSString *keyFullLangNameTo = [EnumTranslationDirections getAttributeTranslationDirection:(EnumAttributesTranslationDirections) FullLangNameTo];
+    if (isLanguageFrom) {
+        [userDefaults setShortLanguageNameFrom:languageShortName];
+        [userDefaults setFullNameLanguageFrom:languageFullName];
 
-    [userDefaults setShortLanguageNameFrom:currentLanguageDirections[keyShortLangNameFrom]];
-    [userDefaults setShortLanguageNameTo:currentLanguageDirections[keyShortLangNameTo]];
-    [userDefaults setFullNameLanguageFrom:currentLanguageDirections[keyFullLangNameFrom]];
-    [userDefaults setFullNameLanguageTo:currentLanguageDirections[keyFullLangNameTo]];
+        return;
+    }
+
+    [userDefaults setShortLanguageNameTo:languageShortName];
+    [userDefaults setFullNameLanguageTo:languageFullName];
 }
 
 

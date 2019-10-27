@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Api.h"
 #import "ExtractForTranslate.h"
 #import "UserDefaults.h"
 
@@ -16,6 +15,8 @@
 
 #import "TranslateDirectionsViewController.h"
 
+@class Alert;
+
 
 @interface TranslatorViewController : UIViewController
 
@@ -23,11 +24,11 @@
 // MARK: -
 // MARK: Properties
 
-@property (weak, nonatomic) IBOutlet UITextView *textViewSourceContent;
-@property (weak, nonatomic) IBOutlet UITextView *textViewTranslateContent;
+@property(weak, nonatomic) IBOutlet UITextView *textViewSourceContent;
+@property(weak, nonatomic) IBOutlet UITextView *textViewTranslateContent;
 
-@property (weak, nonatomic) IBOutlet UIButton *buttonTranslationTo;
-@property (weak, nonatomic) IBOutlet UIButton *buttonTranslationFrom;
+@property(weak, nonatomic) IBOutlet UIButton *buttonTranslationTo;
+@property(weak, nonatomic) IBOutlet UIButton *buttonTranslationFrom;
 @property(weak, nonatomic) IBOutlet UIButton *buttonTranslate;
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
@@ -38,7 +39,9 @@
 @property(nonatomic, strong) id name;
 
 - (IBAction)buttonTranslationFrom_click:(id)sender;
+
 - (IBAction)buttonTranslationTo_click:(id)sender;
+
 - (IBAction)buttonTranslate_click:(id)sender;
 
 

@@ -13,5 +13,7 @@
 
 + (NSDictionary *)translateText:(NSString *)content lang:(NSString *)language;
 
++ (Boolean)checkInternetConnection;
+
 @end
 

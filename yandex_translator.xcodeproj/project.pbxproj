@@ -18,6 +18,7 @@
 		73C2B6EA233FBCB100058FC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2B6E9233FBCB100058FC2 /* main.m */; };
 		73E863662361759400BAC81B /* TranslateDirectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E863652361759400BAC81B /* TranslateDirectionsViewController.m */; };
 		7434F04A10E1F101D7754C3F /* EnumTranslationHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F408751DD720E18DB787 /* EnumTranslationHistory.m */; };
+		7434F1E57EF53E27D1B4303C /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F1ABC37C86815EE61110 /* Alert.m */; };
 		7434F4049042B80619C8F2F6 /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F34C892B3C1F447DDF47 /* UserDefaults.m */; };
 		7434F7BEC65F66EF18D699D9 /* EnumEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F4CECB2B75B1EDF43002 /* EnumEntities.m */; };
 		7434F81CC14A1A8CE4DB47C8 /* ExtractForTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7434F4DD4968EB6B02C1F795 /* ExtractForTranslate.m */; };
@@ -72,8 +73,10 @@
 		73C2B6E9233FBCB100058FC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		73E863642361759400BAC81B /* TranslateDirectionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TranslateDirectionsViewController.h; sourceTree = "<group>"; };
 		73E863652361759400BAC81B /* TranslateDirectionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TranslateDirectionsViewController.m; sourceTree = "<group>"; };
+		7434F049E7ADE1E9E8BADB36 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alert.h; sourceTree = "<group>"; };
 		7434F070AB41E958939547BD /* EnumTranslationDirections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumTranslationDirections.m; sourceTree = "<group>"; };
 		7434F166BA4A403D430DE323 /* ExtractNameFromLangsApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractNameFromLangsApi.h; sourceTree = "<group>"; };
+		7434F1ABC37C86815EE61110 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alert.m; sourceTree = "<group>"; };
 		7434F2BBE4737716FCD87308 /* Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
 		7434F34C892B3C1F447DDF47 /* UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaults.m; sourceTree = "<group>"; };
 		7434F3D51E7DB73C230C90D2 /* EnumEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumEntities.h; sourceTree = "<group>"; };
@@ -221,6 +224,7 @@
 				73C2B6E9233FBCB100058FC2 /* main.m */,
 				7434FC28637873A0C88F0741 /* Protocols */,
 				7434F397867D74CB38E8BA6D /* Extractions */,
+				7434F0A579B3B14E5DE846BD /* UIComponents */,
 			);
 			path = yandex_translator;
 			sourceTree = "<group>";
@@ -249,6 +253,14 @@
 				7434FE7F26E1997000D15A70 /* CoreDataManaged.h */,
 			);
 			path = Managed;
+			sourceTree = "<group>";
+		};
+		7434F0A579B3B14E5DE846BD /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				7434FEC500251A0555271AD1 /* Alert */,
+			);
+			path = UIComponents;
 			sourceTree = "<group>";
 		};
 		7434F16D02AE4EC711522FF8 /* ExtractForTranslate */ = {
@@ -339,6 +351,15 @@
 				7434F79E3368B29733400746 /* Api.m */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		7434FEC500251A0555271AD1 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7434F1ABC37C86815EE61110 /* Alert.m */,
+				7434F049E7ADE1E9E8BADB36 /* Alert.h */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		7434FF46B25481EEE4E6B869 /* Constants */ = {
@@ -439,6 +460,7 @@
 				7434F81CC14A1A8CE4DB47C8 /* ExtractForTranslate.m in Sources */,
 				7434FD34DF2450C4C56A8D46 /* ExtractNameFromLangsApi.m in Sources */,
 				7434FE2512582805981A7E62 /* ExtractHistoryTranslations.m in Sources */,
+				7434F1E57EF53E27D1B4303C /* Alert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

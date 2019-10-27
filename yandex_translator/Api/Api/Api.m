@@ -70,14 +70,14 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
     NSURLResponse __block *resp;
 
     [[[NSURLSession sharedSession] dataTaskWithRequest:request
-                                     completionHandler:^(NSData * _Nullable _data,
-                                                         NSURLResponse * _Nullable _response,
-                                                         NSError * _Nullable _error) {
-        resp = _response;
-        err = _error;
-        data = _data;
-        reqProcessed = true;
-    }] resume];
+                                     completionHandler:^(NSData *_Nullable _data,
+                                             NSURLResponse *_Nullable _response,
+                                             NSError *_Nullable _error) {
+                                         resp = _response;
+                                         err = _error;
+                                         data = _data;
+                                         reqProcessed = true;
+                                     }] resume];
 
     while (!reqProcessed) {
         [NSThread sleepForTimeInterval:0];
@@ -91,6 +91,12 @@ NSString *apiToken = @"trnsl.1.1.20171112T154849Z.fc55bd1bcb9d8d6c.0c15c5d09889c
                        options:(NSJSONReadingOptions) kNilOptions error:error];
 
     return json;
+}
+
++ (Boolean)checkInternetConnection {
+    NSString *contentOfUrl = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://www.google.com"]];
+
+    return contentOfUrl != nil;
 }
 
 

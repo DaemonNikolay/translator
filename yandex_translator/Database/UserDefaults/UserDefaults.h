@@ -4,13 +4,17 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "EnumConstants.h"
 
 @class ExtractForTranslate;
 @class EnumConstants;
+@class Api;
 
 
 @interface UserDefaults : NSObject
+
+
+// MARK: --
+// MARK: Setters
 
 - (void)setShortLanguageNameFrom:(NSString *)languageName;
 
@@ -20,6 +24,12 @@
 
 - (void)setFullNameLanguageTo:(NSString *)languageName;
 
+- (void)setError:(NSString *)message;
+
+
+// MARK: --
+// MARK: Getters
+
 - (NSString *)getShortLanguageNameFrom;
 
 - (NSString *)getShortLanguageNameTo;
@@ -28,6 +38,14 @@
 
 - (NSString *)getFullLanguageNameTo;
 
-+ (void)saveCurrentLanguageDirections:(ExtractForTranslate *)extractForTranslate;
+- (NSString *)getError;
+
+
+// MARK: --
+// MARK: Save
+
++ (void)saveChangedCurrentDirection:(Boolean)isLanguageFrom
+                      langShortName:(NSString *)languageShortName
+                       langFullName:(NSString *)languageFullName;
 
 @end

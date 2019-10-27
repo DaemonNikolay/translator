@@ -69,11 +69,16 @@
 
     NSLog(@"%@", [userDefaults getShortLanguageNameFrom]);
 
+    NSString *shortLangNameFrom = [userDefaults getShortLanguageNameFrom];
+    NSString *shortLangNameTo = [userDefaults getShortLanguageNameTo];
+    NSString *fullLangNameFrom = [userDefaults getFullLanguageNameFrom];
+    NSString *fullLangNameTo = [userDefaults getFullLanguageNameTo];
+
     NSDictionary *result = @{
-            keyShortLangNameFrom: [userDefaults getShortLanguageNameFrom],
-            keyShortLangNameTo: [userDefaults getShortLanguageNameTo],
-            keyFullLangNameFrom: [userDefaults getFullLanguageNameFrom],
-            keyFullLangNameTo: [userDefaults getFullLanguageNameTo]
+            keyShortLangNameFrom: shortLangNameFrom,
+            keyShortLangNameTo: shortLangNameTo,
+            keyFullLangNameFrom: fullLangNameFrom,
+            keyFullLangNameTo: fullLangNameTo
     };
 
     return result;
