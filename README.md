@@ -19,9 +19,7 @@
 
 # Примечание
 
-- Приложение тестировалось на iPhone 11.
+Приложение тестировалось на: 
 
-
-
-2019-10-26 15:01:04.005797+0700 Yandex Translator[1354:1256679] [error] error: Serious application error.  Exception was caught during Core Data change processing.  This is usually a bug within an observer of NSManagedObjectContextObjectsDidChangeNotification.  *** Collection <__NSCFSet: 0x2836dab20> was mutated while being enumerated. with userInfo (null)
-CoreData: error: Serious application error.  Exception was caught during Core Data change processing.  This is usually a bug within an observer of NSManagedObjectContextObjectsDidChangeNotification.  *** Collection <__NSCFSet: 0x2836dab20> was mutated while being enumerated. with userInfo (null)
+* iPhone 11;
+* iPhone 8;
