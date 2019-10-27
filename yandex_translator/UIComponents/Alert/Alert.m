@@ -53,7 +53,7 @@
 }
 
 + (UIAlertController *)alertError:(NSString *)message {
-    NSString *titleAlert = @"CustomError";
+    NSString *titleAlert = @"Error";
     NSString *buttonCancelTitle = @"Understand";
 
     UIAlertController *alert = [self templateAlertError:message title:titleAlert buttonCancelTitle:buttonCancelTitle];

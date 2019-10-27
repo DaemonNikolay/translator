@@ -134,8 +134,10 @@ const NSString *IDENTIFIER_SEGUE_CHOOSE_LANGUAGE = @"chooseLanguage";
             translatedContent = [extractForTranslate extractionTranslatedContent:textToTranslate];
         }
         @catch (NSException *) {
-            [self hideActivityIndicator];
-            [self presentViewController:[Alert alertErrorTranslate] animated:YES completion:nil];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideActivityIndicator];
+                [self presentViewController:[Alert alertErrorTranslate] animated:YES completion:nil];
+            });
 
             return;
         }
